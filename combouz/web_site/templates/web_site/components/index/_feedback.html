@@ -1,0 +1,11 @@
+<section class="feedback">
+  <div class="container">
+    <h2 class="feedback__title">Есть вопросы, мы вам поможем?</h2>
+    <p class="feedback__descr">Оставьте номер телефона, и мы вам перезвоним в ближашее время.</p>
+    <form class="feedback__form" action="{% url 'send_email' %}" method="post">
+      {% csrf_token %}
+      <input class="feedback__input" type="number" placeholder="Номер телефона" name="phone_number" />
+      <button class="feedback__btn darkBlueHover">Отправить</button>
+    </form>
+  </div>
+</section>

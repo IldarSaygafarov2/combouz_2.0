@@ -1,0 +1,13 @@
+{% load static %}
+
+<div class="container">
+  <h2 class="our-clients__title">Наши клиенты</h2>
+  <p class="our-clients__descr">Среди наших клиентов, такие уважаемые компании</p>
+  <div class="our-clients__cards">
+    {% for client in clients %}
+      <div class="our-clients__item">
+        <img src="{{ client.image.url }}" alt="Combo.uz {{ client }}" />
+      </div>
+    {% endfor %}
+  </div>
+</div>

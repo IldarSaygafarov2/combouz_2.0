@@ -1,0 +1,12 @@
+.best-curtains__background {
+    height: 397px;
+    object-fit: cover;
+}
+
+.roll-curtains:not(:first-child) {
+    margin-top: 30px;
+}
+
+.cassette-combo__custom {
+    margin-top: 61px;
+}

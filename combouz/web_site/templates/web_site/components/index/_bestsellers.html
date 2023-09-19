@@ -1,0 +1,10 @@
+<section class="cassette-combo cassette-combo__custom">
+  <div class="container">
+    <h2 class="cassette-combo__title">Хит продаж</h2>
+    <div class="cassette-combo__cards">
+      {% for product in bestsellers.products.all %}
+        {% include './_cassette-combo-item.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

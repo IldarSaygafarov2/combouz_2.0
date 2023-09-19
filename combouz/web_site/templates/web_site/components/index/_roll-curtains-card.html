@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="roll-curtains__card">
+  <a class="roll-curtains__img" href="{{ product.get_absolute_url }}">
+    <img src="{{ product.get_first_img }}" alt="{{ product.name }} Combo.uz" loading="lazy" />
+    {% if product.discount %}
+      <span class="roll-curtains__discount-abs">СКИДКА {{ product.discount }}%</span>
+    {% endif %}
+  </a>
+  <div class="roll-curtains__text">
+    <span class="roll-curtains__discount">Скидка до 15%</span>
+    <div class="roll-curtains__sep">
+      <h3 class="roll-curtains__name">{{ product.name }}</h3><strong class="roll-curtains__price">От {{ product.uzs_price }} сум за м <sup>2</sup></strong>
+    </div>
+  </div>
+</div>

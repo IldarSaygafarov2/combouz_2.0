@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="container">
+  <div class="about__content">
+    <div class="about__left">
+      <h3 class="about__title">О компании COMBO.UZ</h3>
+      <p class="about__descr">Компания Combo.uz является производителем жалюзи и рулонных штор.Мы занимаемся изготовлением и установкой жалюзи с 1997г.</p>
+    </div>
+    <div class="about__right">
+      <div class="about__slider">
+        <div class="swiper-wrapper about__wrapper">
+          {% for project in projects %}
+            <div class="swiper-slide about__slide">
+              <img src="{{ project.image.url }}" alt="Combo.uz {{ project.title }}" />
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

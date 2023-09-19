@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Главная страница
+{% endblock %}
+
+{% block content %}
+  {% include './components/index/_best-curtains.html' %}
+  {% include './components/index/_roll-curtains.html' %}
+  {% include './components/index/_bestsellers.html' %}
+  {% include './components/index/_gallery-projects.html' %}
+  {% include './components/index/_questions.html' %}
+  {% include './components/index/_reviews.html' %}
+  {% include './components/index/_feedback.html' %}
+{% endblock %}

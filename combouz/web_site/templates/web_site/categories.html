@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Категории
+{% endblock %}
+
+{% block content %}
+  <div class="breadcrumbs">
+    {% include './components/categories/_breadcrumbs.html' %}
+  </div>
+  <section class="goods-filters">
+    <div class="container">
+      <h2 class="goods-filters__title">Рулонные кассетные COMBO</h2>
+      <h3 class="goods-filters__name">Фильтры</h3>
+      <div class="goods-filters__content">
+        {% include './components/categories/_filters-left.html' %}
+        <div class="goods-filters__right">
+          {% include './components/categories/_categories-sort.html' %}
+          <div class="goods-filters__cards">
+            {% for product in products %}
+              {% include './components/categories/_cassete-item.html' %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% include './components/categories/_pagination.html' %}
+    </div>
+  </section>
+{% endblock %}

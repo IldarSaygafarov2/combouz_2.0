@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Combo.uz busket order page
+{% endblock %}
+
+{% block content %}
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="breadcrumbs__content">
+        <div class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="#!"><span>Главная</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
+        </div>
+        <div class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="#!"><span>Руллоные шторы</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
+        </div>
+        <div class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="#!"><span>NEW O V - 33</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
+        </div>
+        <div class="breadcrumbs__item">
+          <span class="breadcrumbs__line"></span><a class="breadcrumbs__link active" href="#!"><span>Корзина</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="busket" action="" method="POST">
+    <div class="container">
+      <div class="busket-top">
+        <div class="busket-top__sep">
+          <h3 class="busket-top__title">Корзина</h3>
+          <p class="busket-top__excerpt">Изделия на заказ по размерам покупателя, предоплата от 20%</p>
+        </div>
+        <div class="busket-top__table">
+          <div class="busket-top__slugs">
+            <strong>Наименование товара</strong><strong>Количество</strong><strong>Цена</strong><strong>Итого</strong>
+          </div>
+          <div class="busket-top__items">
+            <div class="busket-top__elem">
+              <p class="busket-top__name">Рулонные шторы День-Ночь Уни2 стандарт белый 225</p>
+              <div class="busket-top__controls">
+                <a class="busket-top__minus" href="#!"><img src="{% static 'images/icons/minus.svg' %}" alt="" /></a><output class="busket-top__count">2</output><a class="busket-top__plus" href="#!"><img src="{% static 'images/icons/plus.svg' %}" alt="" /></a>
+              </div>
+              <p class="busket-top__control price">100 000 сум</p>
+              <p class="busket-top__control total">200 000 сум</p><a class="busket-top__remove" href="#!"><img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon" /></a>
+            </div>
+            <div class="busket-top__elem">
+              <p class="busket-top__name">Рулонные шторы День-Ночь Уни2 стандарт белый 225</p>
+              <div class="busket-top__controls">
+                <a class="busket-top__minus" href="#!"><img src="{% static 'images/icons/minus.svg' %}" alt="" /></a><output class="busket-top__count">2</output><a class="busket-top__plus" href="#!"><img src="{% static 'images/icons/plus.svg' %}" alt="" /></a>
+              </div>
+              <p class="busket-top__control price">100 000 сум</p>
+              <p class="busket-top__control total">200 000 сум</p><a class="busket-top__remove" href="#!"><img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="busket-middle">
+      <div class="container">
+        <div class="busket-middle__content">
+          <div class="busket-middle__ways">
+            <strong>Варианты доставки</strong><select class="busket-middle__select" name="busket-delivery">
+              <option value="pickup" selected="selected">Самовывоз - 0 сум</option>
+              <option value="takeaway">Доставка курьером</option>
+            </select>
+          </div>
+          <div class="busket-middle__total">
+            Общая сумма заказа -&nbsp;<output>400 000</output>сум
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="busket-bottom">
+        <h3 class="busket-bottom__title busket-top__title">Для покупки заполните форму</h3>
+        <div class="busket-bottom__data">
+          <div class="busket-bottom__sep">
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Фамилия</span><input class="busket-bottom__input" name="busket-surname" />
+            </div>
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Имя</span><input class="busket-bottom__input" name="busket-name" required />
+            </div>
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Почта</span><input class="busket-bottom__input" type="email" name="busket-email" required />
+            </div>
+          </div>
+          <div class="busket-bottom__sep">
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Телефон</span><input class="busket-bottom__input" type="number" name="busket-phone" required />
+            </div>
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Тип монтажа</span><input class="busket-bottom__input" name="busket-montage" />
+            </div>
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Адрес</span><input class="busket-bottom__input" name="busket-address" required />
+            </div>
+          </div>
+          <div class="busket-bottom__sep">
+            <div class="busket-bottom__item">
+              <span class="busket-bottom__info">Комментарии</span><input class="busket-bottom__input busket-bottom__textarea" name="busket-comment" />
+            </div>
+          </div>
+        </div>
+        <h3 class="busket-bottom__title busket-top__title">Тип доставки</h3>
+        <div class="busket-bottom__delivery">
+          <label class="busket-bottom__label"><input type="radio" name="busket-delivery-type" value="install,size,delivery" required /><span class="busket-bottom__check"></span><span>Установка, размер, доставка</span></label><label class="busket-bottom__label"><input type="radio" name="busket-delivery-type" value="install,delivery" required /><span class="busket-bottom__check"></span><span>Доставка и установка</span></label><label class="busket-bottom__label"><input type="radio" name="busket-delivery-type" value="delivery-tashkent" required /><span class="busket-bottom__check"></span><span>Доставка по городу Ташкент</span></label><button class="busket-bottom__btn darkBlueHover" type="submit">Купить</button>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

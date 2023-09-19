@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="reviews__item">
+  <p class="reviews__descr">{{ review.body }}</p>
+  <div class="reviews__author">
+    <img src="{{ review.author_avatar.url }}" alt="Combo.uz {{ review.body }}" />
+    <div class="reviews__text">
+      <h4 class="reviews__name">{{ review.author }}</h4>
+      <p class="reviews__company">{{ review.company_name }}</p>
+    </div>
+  </div>
+</div>

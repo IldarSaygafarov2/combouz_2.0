@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Combouz страница портфолио
+{% endblock %}
+
+{% block content %}
+  <div class="portfolio">
+    <div class="container">
+      <div class="portfolio__cards">
+        {% for idx, project in projects %}
+          {% include './components/portfolio/_portfolio-item.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
