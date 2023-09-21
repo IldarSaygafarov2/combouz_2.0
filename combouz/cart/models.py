@@ -1,5 +1,6 @@
 from accounts.models import CustomUser
 from django.db import models
+from helpers.functions import format_price
 from web_site.models import Product
 
 
@@ -35,8 +36,8 @@ class Order(models.Model):
     def get_cart_total_price(self):
         order_products = self.orderproduct_set.all()
         total = sum([item.get_total_price for item in order_products])
-        # return format_price(total)
-        return total
+        return format_price(total)
+        # return total
 
     @property
     def get_cart_total_quantity(self):
@@ -54,4 +55,4 @@ class OrderProduct(models.Model):
 
     @property
     def get_total_price(self):
-        return int(self.product.converted_price) * self.quantity
+        return int(self.product.uzs_price) * self.quantity

@@ -176,6 +176,15 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})
 
+    def add_to_cart(self):
+        return reverse("cart:to_cart", kwargs={"product_id": self.pk, "action": "add"})
+
+    def remove_from_cart(self):
+        return reverse(
+            "cart:to_cart",
+            kwargs={"product_id": self.pk, "action": "delete"},
+        )
+
     def get_first_img(self):
         images = self.images.all()
         if images:

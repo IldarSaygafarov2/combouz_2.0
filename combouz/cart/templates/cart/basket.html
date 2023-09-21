@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static custom_tags %}
 
 {% block title %}
   Combo.uz busket order page
@@ -36,22 +36,20 @@
             <strong>Наименование товара</strong><strong>Количество</strong><strong>Цена</strong><strong>Итого</strong>
           </div>
           <div class="busket-top__items">
-            <div class="busket-top__elem">
-              <p class="busket-top__name">Рулонные шторы День-Ночь Уни2 стандарт белый 225</p>
-              <div class="busket-top__controls">
-                <a class="busket-top__minus" href="#!"><img src="{% static 'images/icons/minus.svg' %}" alt="" /></a><output class="busket-top__count">2</output><a class="busket-top__plus" href="#!"><img src="{% static 'images/icons/plus.svg' %}" alt="" /></a>
+            {% for cart_product in products %}
+              {% convert_price cart_product.product.uzs_price as product_price %}
+              {% convert_price cart_product.get_total_price as total_price %}
+              <div class="busket-top__elem">
+                <p class="busket-top__name">{{ cart_product.product.name }}</p>
+                <div class="busket-top__controls">
+                  <a class="busket-top__minus" href="{{ cart_product.product.remove_from_cart }}"><img src="{% static 'images/icons/minus.svg' %}" alt="" /></a>
+                  <output class="busket-top__count">{{ cart_product.quantity }}</output>
+                  <a class="busket-top__plus" href="{{ cart_product.product.add_to_cart }}"><img src="{% static 'images/icons/plus.svg' %}" alt="" /></a>
+                </div>
+                <p class="busket-top__control price">{{ product_price }} сум</p>
+                <p class="busket-top__control total">{{ total_price }} сум</p><a class="busket-top__remove" href="#!"><img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon" /></a>
               </div>
-              <p class="busket-top__control price">100 000 сум</p>
-              <p class="busket-top__control total">200 000 сум</p><a class="busket-top__remove" href="#!"><img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon" /></a>
-            </div>
-            <div class="busket-top__elem">
-              <p class="busket-top__name">Рулонные шторы День-Ночь Уни2 стандарт белый 225</p>
-              <div class="busket-top__controls">
-                <a class="busket-top__minus" href="#!"><img src="{% static 'images/icons/minus.svg' %}" alt="" /></a><output class="busket-top__count">2</output><a class="busket-top__plus" href="#!"><img src="{% static 'images/icons/plus.svg' %}" alt="" /></a>
-              </div>
-              <p class="busket-top__control price">100 000 сум</p>
-              <p class="busket-top__control total">200 000 сум</p><a class="busket-top__remove" href="#!"><img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon" /></a>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -66,7 +64,7 @@
             </select>
           </div>
           <div class="busket-middle__total">
-            Общая сумма заказа -&nbsp;<output>400 000</output>сум
+            Общая сумма заказа -&nbsp;<output>{{ cart_total_price }}</output>сум
           </div>
         </div>
       </div>
