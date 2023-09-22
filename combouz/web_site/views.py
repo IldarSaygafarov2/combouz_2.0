@@ -16,6 +16,7 @@ from .models import (
     Subcategory,
     Comment,
     CommentItem,
+    Question,
 )
 
 # Create your views here.
@@ -27,6 +28,11 @@ def home_view(request):
     home_categories = Category.objects.filter(show_on_homepage=True)
     bestsellers = Category.objects.filter(make_bestseller=True).first()
     reviews = Feedback.objects.all()
+    videos = Question.objects.all()
+    correct_videos = [
+        video.video_link.replace("youtu.be", "www.youtube.com/embed")
+        for video in videos
+    ]
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
@@ -35,6 +41,7 @@ def home_view(request):
         "reviews": reviews,
         "home_categories": home_categories,
         "bestsellers": bestsellers,
+        "videos": correct_videos,
     }
     return render(request, "web_site/index.html", context)
 
