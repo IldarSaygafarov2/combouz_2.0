@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-22 15:57+0500\n"
+"POT-Creation-Date: 2023-09-22 18:57+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,6 +37,11 @@ msgstr "from"
 msgid "до"
 msgstr "to"
 
+#: .\templates\components\_footer.html:23
+#: .\web_site\templates\web_site\contacts.html:24
+msgid "Почта"
+msgstr "Email"
+
 #: .\templates\components\_footer.html:29
 #: .\web_site\templates\web_site\contacts.html:24
 msgid "Отдел продаж"
@@ -51,6 +56,11 @@ msgstr "Address"
 #: .\web_site\templates\web_site\contacts.html:21
 msgid "г.Ташкент, Алмазарский район, ул.Сагбан 37/1"
 msgstr "Tashkent city, Almazar district, Sagban street 37/1"
+
+#: .\templates\components\_footer.html:43
+#: .\web_site\templates\web_site\contacts.html:16
+msgid "Офис"
+msgstr "Office"
 
 #: .\templates\components\_footer.html:48
 #: .\web_site\templates\web_site\contacts.html:36
@@ -127,15 +137,16 @@ msgstr "Categories"
 msgid "Фильтры"
 msgstr "Filters"
 
-#: .\web_site\templates\web_site\components\categories\_categories-sort.html:5
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:7
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:12
 msgid "По цене"
 msgstr "By price"
 
-#: .\web_site\templates\web_site\components\categories\_categories-sort.html:9
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:17
 msgid "Новинки"
 msgstr "Newest"
 
-#: .\web_site\templates\web_site\components\categories\_categories-sort.html:13
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:21
 msgid "По наименованию"
 msgstr "By name"
 
@@ -151,11 +162,11 @@ msgstr "All"
 msgid "Цвет"
 msgstr "Color"
 
-#: .\web_site\templates\web_site\components\categories\_filters-left.html:43
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:44
 msgid "Затемнение"
 msgstr "Dimming"
 
-#: .\web_site\templates\web_site\components\categories\_filters-left.html:57
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:59
 msgid "Производитель"
 msgstr "Manufacturer"
 
@@ -166,14 +177,6 @@ msgstr "Contact Information"
 #: .\web_site\templates\web_site\contacts.html:14
 msgid "Описание для этой страницы"
 msgstr "Description for this page"
-
-#: .\web_site\templates\web_site\contacts.html:16
-msgid "Офис"
-msgstr "Office"
-
-#: .\web_site\templates\web_site\contacts.html:24
-msgid "Почта"
-msgstr "Email"
 
 #: .\web_site\templates\web_site\contacts.html:36
 msgid "Пн-Пт"

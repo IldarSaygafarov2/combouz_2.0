@@ -1,6 +1,7 @@
 import requests as req
 from django.shortcuts import redirect, render
-from web_site.models import Product
+
+from accounts.forms import CustomUserCreationForm, CustomUserAuthenticationForm
 
 from combouz import settings
 
@@ -56,7 +57,7 @@ def basket_view(request):
             )
         )
 
-    category = cart_info["products"].last()
+    category = cart_info["products"]
     category = category.product.category if category else None
     last_product = cart_info["products"].last().product if category else None
     context = {
@@ -66,5 +67,7 @@ def basket_view(request):
         "products": cart_info["products"],
         "category": category,
         "last_product": last_product,
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
     }
     return render(request, "cart/basket.html", context)
