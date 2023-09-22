@@ -1,6 +1,7 @@
 {% load static custom_tags %}
 
 {% get_categories as categories_data %}
+{% get_cart_qty request as cart_total %}
 
 <header class="header-top">
   <a class="logo" href="/"><img src="{% static 'images/icons/logo.svg' %}" alt="combo.uz logo" /></a>
@@ -44,7 +45,7 @@
         <a class="header__link-se" href="#!"><img src="{% static 'images/icons/heart-white.svg' %}" alt="combo.uz favorites" /></a>
       </li>
       <li class="header__list-se-item">
-        <a class="header__link-se" href="{% url 'cart:cart' %}"><img src="{% static 'images/icons/work-white.svg' %}" alt="combo.uz busket goods" /><span class="header__busket-notify have-goods">2</span></a>
+        <a class="header__link-se" href="{% url 'cart:cart' %}"><img src="{% static 'images/icons/work-white.svg' %}" alt="combo.uz busket goods" /><span class="header__busket-notify have-goods">{{ cart_total }}</span></a>
       </li>
       <li class="header__list-se-item">
         <div class="header__lang">

@@ -7,6 +7,9 @@ SECRET_KEY = "django-insecure-3ne8dybq!dxbz3da9=4ss9##z=h0n!i=a51fdt$0@+vd$66l&^
 DEBUG = True
 
 ALLOWED_HOSTS = []
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,6 +22,12 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "web_site.apps.WebSiteConfig",
     "cart.apps.CartConfig",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
 ]
 
 MIDDLEWARE = [
@@ -75,9 +84,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tashkent"
 
 USE_I18N = True
 
@@ -107,3 +116,15 @@ CHANNEL_ID = -1001965630465
 CHANNEL_API_LINK = (
     "https://api.telegram.org/bot{token}/sendMessage?chat_id={channel_id}&text={text}"
 )
+CART_SESSION_ID = "cart"
+ACCOUNT_UNIQUE_EMAIL = False
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = "/"
+SITE_ID = 1
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"

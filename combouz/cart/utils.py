@@ -19,7 +19,6 @@ class CartForAuthenticatedUser:
         order_products = order.orderproduct_set.all()
         cart_total_quantity = order.get_cart_total_quantity
         cart_total_price = order.get_cart_total_price
-        print(cart_total_price)
 
         return {
             "cart_total_quantity": cart_total_quantity,

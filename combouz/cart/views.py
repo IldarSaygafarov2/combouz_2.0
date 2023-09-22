@@ -15,12 +15,15 @@ def to_cart(request, product_id, action):
 
 def basket_view(request):
     cart_info = get_cart_data(request)
+    category = cart_info["products"].last()
+    category = category.product.category if category else None
+    last_product = cart_info["products"].last().product if category else None
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
         "order": cart_info["order"],
         "products": cart_info["products"],
-        # "category": category,
-        # "last_product": last_product,
+        "category": category,
+        "last_product": last_product,
     }
     return render(request, "cart/basket.html", context)

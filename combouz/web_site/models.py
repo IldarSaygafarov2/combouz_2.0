@@ -165,6 +165,7 @@ class Product(models.Model):
         verbose_name="Подкатегория",
         default=None,
         null=True,
+        related_name="products",
     )
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now=True)
     slug = models.SlugField(
@@ -394,3 +395,18 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author}: {self.product}"
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+
+
+class CommentItem(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    img = models.ImageField(
+        verbose_name="Фото",
+        upload_to="comments/",
+        blank=True,
+        null=True,
+    )

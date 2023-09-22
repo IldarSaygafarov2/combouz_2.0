@@ -1,6 +1,7 @@
 {% load static custom_tags %}
 
 {% get_categories as categories %}
+{% get_all_products_count as total_count %}
 
 <aside class="goods-filters__left">
   <div class="goods-filters__accordion">
@@ -8,6 +9,7 @@
       <h4 class="goods-filters__accordion-name"><span>Каталог</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" /></h4>
       <div class="goods-filters__accordion-content">
         <ul class="goods-filters__accordion-list">
+          <a class="goods-filters__accordion-link" href="{% url 'category_detail' 'all' %}"><span>Все</span><span>({{ total_count }})</span></a>
           {% for category in categories %}
             <li class="goods-filters__accordion-elem">
               <a class="goods-filters__accordion-link" href="{{ category.get_absolute_url }}"><span>{{ category }}</span><span>({{ category.count_products }})</span></a>

@@ -14,7 +14,13 @@ from .models import (
     ProjectsGallery,
     Question,
     Subcategory,
+    Comment,
 )
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Category)

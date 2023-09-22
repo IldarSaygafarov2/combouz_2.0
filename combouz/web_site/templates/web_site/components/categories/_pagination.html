@@ -1,17 +1,26 @@
-<ul class="goods-filters__pagination">
-  <li class="goods-filters__pagination-item">
-    <a class="goods-filters__pagination-btn" href="#!">prev</a>
-  </li>
-  <li class="goods-filters__pagination-item">
-    <a class="goods-filters__pagination-btn active" href="#!">1</a>
-  </li>
-  <li class="goods-filters__pagination-item">
-    <a class="goods-filters__pagination-btn" href="#!">2</a>
-  </li>
-  <li class="goods-filters__pagination-item">
-    <a class="goods-filters__pagination-btn" href="#!">3</a>
-  </li>
-  <li class="goods-filters__pagination-item">
-    <a class="goods-filters__pagination-btn" href="#!">next</a>
-  </li>
-</ul>
+{% if products.has_other_pages %}
+  <ul class="goods-filters__pagination">
+    {% if products.has_previous %}
+      <li class="goods-filters__pagination-item">
+        <a class="goods-filters__pagination-btn" href="?page={{ products.previous_page_number }}">prev</a>
+      </li>
+    {% endif %}
+    {% for i in products.paginator.page_range %}
+      {% if products.number == i %}
+        <li class="goods-filters__pagination-item">
+          <a class="goods-filters__pagination-btn active" href="?={{ i }}">{{ i }}</a>
+        </li>
+      {% else %}
+        <li class="goods-filters__pagination-item">
+          <a class="goods-filters__pagination-btn" href="?page={{ i }}">{{ i }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    {% if products.has_next %}
+      <li class="goods-filters__pagination-item">
+        <a class="goods-filters__pagination-btn" href="?page={{ products.next_page_number }}">next</a>
+      </li>
+    {% endif %}
+  </ul>
+{% endif %}

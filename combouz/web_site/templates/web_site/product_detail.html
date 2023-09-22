@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Combo.uz Страница товара
+  Combo.uz Страница товара {{ product.name }}
 {% endblock %}
 
 {% block content %}
@@ -103,22 +103,37 @@
       </div>
       <section class="single-comments">
         <h3 class="single-comments__title">Комментарии</h3>
-        <div class="single-comments__content">
-          <form class="single-comments__form" action="">
-            <div class="single-comments__user">
-              <img class="single-comments__avatar" src="/assets/images/single-item/user.png" alt="user-avatar" /><strong class="single-comments__fullname">Игорь Зубарев</strong>
-            </div>
-            <textarea class="single-comments__textarea" name="user-comment" placeholder="Оставьте комментарий"></textarea><button class="single-comments__btn darkBlueHover">Отправить</button>
-          </form>
-          <div class="single-comments__block">
-            <div class="single-comments__item">
+        {% if request.user.is_authenticated %}
+          <div class="single-comments__content">
+            <form class="single-comments__form" action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="single-comments__user">
-                <img class="single-comments__avatar" src="/assets/images/single-item/user-2.png" alt="user-avatar" /><strong class="single-comments__fullname">Игорь Зубарев</strong>
+                <strong class="single-comments__fullname">{{ request.user }}</strong>
               </div>
-              <p class="single-comments__descr">I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!</p>
-            </div>
-          </div><a class="single-comments__loadmore" href="#!">Загрузить еще</a>
-        </div>
+              <textarea class="single-comments__textarea" name="user-comment" placeholder="Оставьте комментарий"></textarea><button class="single-comments__btn darkBlueHover">Отправить</button>
+              <p style="margin: 15px 0;">Прикрепите фотографию нашей работы</p>
+              <input type="file" name="img" multiple="" accept="image/*" id="id_img" />
+            </form>
+            <div class="single-comments__block">
+              {% for comment in comments %}
+                <div class="single-comments__item">
+                  <div class="single-comments__user">
+                    <strong class="single-comments__fullname">{{ comment.author.email }}</strong>
+                  </div>
+                  <p class="single-comments__descr">{{ comment.body }}</p>
+
+                  <div class="single-comments__photos">
+                    {% for comment_item in comment.commentitem_set.all %}
+                      <div class="single-comments__photo">
+                        <img src="{{ comment_item.img.url }}" alt="" />
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div><a class="single-comments__loadmore" href="#!">Загрузить еще</a>
+          </div>
+        {% endif %}
       </section>
     </div>
   </section>

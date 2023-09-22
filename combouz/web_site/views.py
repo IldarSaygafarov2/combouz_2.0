@@ -1,10 +1,22 @@
 import requests as req
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
+from django.core.paginator import Paginator
 from django.shortcuts import HttpResponse, redirect, render
 
 from combouz import settings
 
-from .models import Category, Client, Feedback, HeroGallery, Product, ProjectsGallery
+from .models import (
+    Category,
+    Client,
+    Comment,
+    Feedback,
+    HeroGallery,
+    Product,
+    ProjectsGallery,
+    Subcategory,
+    Comment,
+    CommentItem,
+)
 
 # Create your views here.
 
@@ -33,39 +45,84 @@ def about_view(request):
     context = {
         "projects": projects,
         "clients": clients,
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
     }
     return render(request, "web_site/about.html", context)
 
 
 def contacts_view(request):
-    return render(request, "web_site/contacts.html")
+    context = {
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+    }
+    return render(request, "web_site/contacts.html", context)
 
 
 def portfolio_view(request):
     projects = enumerate(ProjectsGallery.objects.all(), start=1)
     context = {
         "projects": projects,
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
     }
     return render(request, "web_site/portfolio.html", context)
 
 
 def category_products(request, category_slug):
-    category = Category.objects.get(slug=category_slug)
-    products = category.products.all()
+    category = Category.objects.filter(slug=category_slug).first()
+    if category is None:
+        products = Product.objects.all()
+    else:
+        products = category.products.all()
+
+    paginator = Paginator(products, 1)
+    page = request.GET.get("page")
+    qs = paginator.get_page(page)
+
     context = {
-        "products": products,
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+        "products": qs,
         "category": category,
     }
     return render(request, "web_site/categories.html", context)
 
 
 def subcategory_products(request, subcategory_slug):
-    return render(request, "web_site/categories.html")
+    subcategory = Subcategory.objects.get(slug=subcategory_slug)
+    products = subcategory.products.all()
+    context = {
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+        "products": products,
+        "category": subcategory.category,
+    }
+    return render(request, "web_site/categories.html", context)
 
 
 def product_detail(request, product_slug):
     product = Product.objects.get(slug=product_slug)
+    comments = product.comments.all()[0:2]
+    if request.method == "POST":
+        data = request.POST
+        images = request.FILES.getlist("img")
+
+        comment = Comment.objects.create(
+            author=request.user,
+            product=product,
+            body=data["user-comment"],
+        )
+        comment.save()
+
+        for image in images:
+            comment_item = CommentItem.objects.create(comment=comment, img=image)
+            comment_item.save()
+        return redirect("product_detail", product_slug=product_slug)
     context = {
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+        "comments": comments,
         "product": product,
     }
     return render(request, "web_site/product_detail.html", context)
