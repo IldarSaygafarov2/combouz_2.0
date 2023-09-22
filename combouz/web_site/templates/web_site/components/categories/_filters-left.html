@@ -1,104 +1,74 @@
-{% load static custom_tags %}
+{% load static custom_tags i18n %}
 
 {% get_categories as categories %}
 {% get_all_products_count as total_count %}
+{% get_sort_fields as fields %}
+
 
 <aside class="goods-filters__left">
-  <div class="goods-filters__accordion">
-    <div class="goods-filters__accordion-item open">
-      <h4 class="goods-filters__accordion-name"><span>Каталог</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" /></h4>
-      <div class="goods-filters__accordion-content">
-        <ul class="goods-filters__accordion-list">
-          <a class="goods-filters__accordion-link" href="{% url 'category_detail' 'all' %}"><span>Все</span><span>({{ total_count }})</span></a>
-          {% for category in categories %}
-            <li class="goods-filters__accordion-elem">
-              <a class="goods-filters__accordion-link" href="{{ category.get_absolute_url }}"><span>{{ category }}</span><span>({{ category.count_products }})</span></a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+    <div class="goods-filters__accordion">
+        <div class="goods-filters__accordion-item open">
+            <h4 class="goods-filters__accordion-name"><span>{% trans 'Каталог' %}</span><img
+                    src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/></h4>
+            <div class="goods-filters__accordion-content">
+                <ul class="goods-filters__accordion-list">
+                    <li class="goods-filters__accordion-elem">
+                        <a class="goods-filters__accordion-link" href="{% url 'category_detail' 'all' %}">
+                            <span>{% trans 'Все' %}</span><span>({{ total_count }})</span>
+                        </a>
+                    </li>
+                    {% for category in categories %}
+                    <li class="goods-filters__accordion-elem">
+                        <a class="goods-filters__accordion-link" href="{{ category.get_absolute_url }}"><span>{{ category }}</span><span>({{ category.count_products }})</span></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="goods-filters__accordion-item">
+            <h4 class="goods-filters__accordion-name">
+                <span>{% trans 'Цвет' %}</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+            </h4>
+            <div class="goods-filters__accordion-content">
+                <ul class="goods-filters__accordion-list">
+                    {% for color in fields.colors %}
+                    {% count_products_by_color color as color_products_count %}
+                    <li class="goods-filters__accordion-elem">
+                        <a class="goods-filters__accordion-link" href="#!"><span>{{ color }}</span><span>{{ color_products_count }}</span></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="goods-filters__accordion-item">
+            <h4 class="goods-filters__accordion-name"><span>{% trans 'Затемнение' %}</span>
+                <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+            </h4>
+            <div class="goods-filters__accordion-content">
+                <ul class="goods-filters__accordion-list">
+                    {% for dimming in fields.dimming %}
+                    {% count_products_by_dimming dimming as dimming_products_count %}
+                    <li class="goods-filters__accordion-elem">
+                        <a class="goods-filters__accordion-link" href="#!"><span>{{ dimming }}</span><span>{{ dimming_products_count }}</span></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="goods-filters__accordion-item">
+            <h4 class="goods-filters__accordion-name"><span>{% trans 'Производитель' %}</span>
+                <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+            </h4>
+            <div class="goods-filters__accordion-content">
+                <ul class="goods-filters__accordion-list">
+                    {% for country in fields.countries %}
+                    {% count_products_by_country country as country_products_count %}
+                    <li class="goods-filters__accordion-elem">
+                        <a class="goods-filters__accordion-link" href="#!"><span>{{ country }}</span><span>{{ country_products_count }}</span></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="goods-filters__accordion-item">
-      <h4 class="goods-filters__accordion-name"><span>Цвет</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" /></h4>
-      <div class="goods-filters__accordion-content">
-        <ul class="goods-filters__accordion-list">
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="goods-filters__accordion-item">
-      <h4 class="goods-filters__accordion-name"><span>Затемнение</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" /></h4>
-      <div class="goods-filters__accordion-content">
-        <ul class="goods-filters__accordion-list">
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="goods-filters__accordion-item">
-      <h4 class="goods-filters__accordion-name"><span>Производитель</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" /></h4>
-      <div class="goods-filters__accordion-content">
-        <ul class="goods-filters__accordion-list">
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="goods-filters__accordion-item">
-      <h4 class="goods-filters__accordion-name"><span>Сортировка</span><img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" /></h4>
-      <div class="goods-filters__accordion-content">
-        <ul class="goods-filters__accordion-list">
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-          <li class="goods-filters__accordion-elem">
-            <a class="goods-filters__accordion-link" href="#!"><span>Exclusive</span><span>Кол-во(31)</span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </aside>

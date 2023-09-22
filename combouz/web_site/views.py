@@ -1,14 +1,13 @@
 import requests as req
-from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from django.core.paginator import Paginator
-from django.shortcuts import HttpResponse, redirect, render
+from django.shortcuts import redirect
+from django.shortcuts import render
 
+from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
-
 from .models import (
     Category,
     Client,
-    Comment,
     Feedback,
     HeroGallery,
     Product,
@@ -18,6 +17,7 @@ from .models import (
     CommentItem,
     Question,
 )
+
 
 # Create your views here.
 
@@ -99,10 +99,13 @@ def category_products(request, category_slug):
 def subcategory_products(request, subcategory_slug):
     subcategory = Subcategory.objects.get(slug=subcategory_slug)
     products = subcategory.products.all()
+    paginator = Paginator(products, 1)
+    page = request.GET.get("page")
+    qs = paginator.get_page(page)
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
-        "products": products,
+        "products": qs,
         "category": subcategory.category,
     }
     return render(request, "web_site/categories.html", context)

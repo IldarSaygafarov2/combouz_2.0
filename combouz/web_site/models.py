@@ -148,7 +148,8 @@ class Product(models.Model):
         null=True,
     )
     discount = models.SmallIntegerField(
-        verbose_name="Размер скидки", default=0, null=True
+        verbose_name="Размер скидки", default=0, null=True,
+        blank=True
     )
 
     category = models.ForeignKey(

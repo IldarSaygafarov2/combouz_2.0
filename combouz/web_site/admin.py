@@ -1,4 +1,6 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
+
 
 from .models import (
     Category,
@@ -24,14 +26,14 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ("pk", "name")
     list_display_links = ("pk", "name")
     prepopulated_fields = {"slug": ("name",)}
 
 
 @admin.register(Subcategory)
-class SubcategoryAdmin(admin.ModelAdmin):
+class SubcategoryAdmin(TranslationAdmin):
     list_display = ("pk", "name", "category")
     list_display_links = ("pk", "name")
     list_filter = ("category",)
@@ -59,12 +61,12 @@ class ProductWidthItemAdmin(admin.TabularInline):
 
 
 @admin.register(ProductColorItem)
-class ProductColorItemAdmin(admin.ModelAdmin):
+class ProductColorItemAdmin(TranslationAdmin):
     pass
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     inlines = [
         ProductLengthItemAdmin,
         ProductWidthItemAdmin,
@@ -87,25 +89,22 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(HeroGallery)
-class HeroGalleryAdmin(admin.ModelAdmin):
+class HeroGalleryAdmin(TranslationAdmin):
     list_display = ("pk", "title", "body", "img_preview")
     list_display_links = ("pk", "title")
     list_editable = ("body",)
 
 
 @admin.register(ProjectsGallery)
-class ProjectsGalleryAdmin(admin.ModelAdmin):
+class ProjectsGalleryAdmin(TranslationAdmin):
     list_display = ("pk", "title", "subtitle", "img_preview")
     list_display_links = ("pk", "title")
     list_editable = ("subtitle",)
 
 
 @admin.register(Feedback)
-class FeedbackAdmin(admin.ModelAdmin):
+class FeedbackAdmin(TranslationAdmin):
     list_display = ("pk", "author", "company_name", "img_preview")
-    # readonly_fields = [
-    #     "img_preview",
-    # ]
     list_editable = (
         "author",
         "company_name",

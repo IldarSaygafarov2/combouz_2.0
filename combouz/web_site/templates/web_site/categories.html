@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-  Категории
+  {% trans 'Категории' %}
 {% endblock %}
 
 {% block content %}
@@ -10,8 +11,12 @@
   </div>
   <section class="goods-filters">
     <div class="container">
-      <h2 class="goods-filters__title">Рулонные кассетные COMBO</h2>
-      <h3 class="goods-filters__name">Фильтры</h3>
+      {% if not category %}
+      <h2 class="goods-filters__title">Все продукты COMBO</h2>
+      {% else %}
+      <h2 class="goods-filters__title">{{ category }} COMBO</h2>
+      {% endif %}
+      <h3 class="goods-filters__name">{% trans 'Фильтры' %}</h3>
       <div class="goods-filters__content">
         {% include './components/categories/_filters-left.html' %}
         <div class="goods-filters__right">

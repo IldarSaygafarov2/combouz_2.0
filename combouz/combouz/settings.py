@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,6 +14,7 @@ INTERNAL_IPS = [
 
 INSTALLED_APPS = [
     "jazzmin",
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -102,15 +105,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-LANGUAGES = (
-    ("ru", "Russian"),
-    ("en", "English"),
-)
 
-LOCALE_PATHS = (
-    "locale",
-    # os.path.join(PROJECT_DIR, 'locale'),
-)
 
 BOT_TOKEN = "6651100598:AAE0CSIZJ4D9JX-DRnGk_qTYdJ2WX-bzrb8"
 CHANNEL_ID = -1001965630465
@@ -242,5 +237,15 @@ JAZZMIN_SETTINGS = {
         "auth.group": "vertical_tabs",
     },
     # Add a language dropdown into the admin
-    "language_chooser": False,
+    "language_chooser": True,
 }
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('ru', gettext('Russia')),
+    ('en', gettext('English')),
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)

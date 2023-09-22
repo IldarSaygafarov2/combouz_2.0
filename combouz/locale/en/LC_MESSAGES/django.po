@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-22 15:57+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\components\_footer.html:11
+#: .\web_site\templates\web_site\contacts.html:30
+msgid "Телефоны"
+msgstr "Phone numbers"
+
+#: .\templates\components\_footer.html:17
+#: .\templates\components\_footer.html:51
+#: .\web_site\templates\web_site\contacts.html:30
+#: .\web_site\templates\web_site\contacts.html:39
+msgid "с"
+msgstr "from"
+
+#: .\templates\components\_footer.html:17
+#: .\templates\components\_footer.html:51
+#: .\web_site\templates\web_site\contacts.html:30
+#: .\web_site\templates\web_site\contacts.html:39
+msgid "до"
+msgstr "to"
+
+#: .\templates\components\_footer.html:29
+#: .\web_site\templates\web_site\contacts.html:24
+msgid "Отдел продаж"
+msgstr "Sales department"
+
+#: .\templates\components\_footer.html:35
+#: .\web_site\templates\web_site\contacts.html:16
+msgid "Адрес"
+msgstr "Address"
+
+#: .\templates\components\_footer.html:40
+#: .\web_site\templates\web_site\contacts.html:21
+msgid "г.Ташкент, Алмазарский район, ул.Сагбан 37/1"
+msgstr "Tashkent city, Almazar district, Sagban street 37/1"
+
+#: .\templates\components\_footer.html:48
+#: .\web_site\templates\web_site\contacts.html:36
+msgid "Режим работы"
+msgstr "Operating mode"
+
+#: .\templates\components\_footer.html:60
+msgid "Ссылки"
+msgstr "Links"
+
+#: .\templates\components\_footer.html:63
+#: .\templates\components\_header.html:16
+#: .\web_site\templates\web_site\about.html:5
+msgid "О компании"
+msgstr "About company"
+
+#: .\templates\components\_footer.html:66
+#: .\templates\components\_footer.html:143
+#: .\templates\components\_header.html:19
+#: .\web_site\templates\web_site\contacts.html:5
+msgid "Контакты"
+msgstr "Contacts"
+
+#: .\templates\components\_footer.html:71
+msgid "Появились вопросы?"
+msgstr "There are questions?"
+
+#: .\templates\components\_footer.html:72
+msgid "Позвони"
+msgstr "Call"
+
+#: .\templates\components\_footer.html:76
+msgid "Разработано"
+msgstr "Developed"
+
+#: .\templates\components\_footer.html:134
+msgid "Остальные"
+msgstr "Others"
+
+#: .\templates\components\_footer.html:137
+msgid "О нас"
+msgstr "About Us"
+
+#: .\templates\components\_footer.html:140
+#: .\templates\components\_header.html:22
+msgid "Портфолио"
+msgstr "Portfolio"
+
+#: .\templates\components\_footer.html:146
+msgid "Дилерам"
+msgstr "For dealers"
+
+#: .\templates\components\_footer.html:151
+msgid "Виды"
+msgstr "Kinds"
+
+#: .\templates\components\_header.html:39
+msgid "Заказать звонок"
+msgstr "Request a call"
+
+#: .\templates\components\_header.html:43
+msgid "Авторизация / Регистрация"
+msgstr "Authorization / Registration"
+
+#: .\templates\components\_header.html:45
+msgid "Выйти"
+msgstr "Go out"
+
+#: .\web_site\templates\web_site\categories.html:5
+msgid "Категории"
+msgstr "Categories"
+
+#: .\web_site\templates\web_site\categories.html:19
+msgid "Фильтры"
+msgstr "Filters"
+
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:5
+msgid "По цене"
+msgstr "By price"
+
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:9
+msgid "Новинки"
+msgstr "Newest"
+
+#: .\web_site\templates\web_site\components\categories\_categories-sort.html:13
+msgid "По наименованию"
+msgstr "By name"
+
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:11
+msgid "Каталог"
+msgstr "Catalog"
+
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:17
+msgid "Все"
+msgstr "All"
+
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:30
+msgid "Цвет"
+msgstr "Color"
+
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:43
+msgid "Затемнение"
+msgstr "Dimming"
+
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:57
+msgid "Производитель"
+msgstr "Manufacturer"
+
+#: .\web_site\templates\web_site\contacts.html:11
+msgid "Контактная информация"
+msgstr "Contact Information"
+
+#: .\web_site\templates\web_site\contacts.html:14
+msgid "Описание для этой страницы"
+msgstr "Description for this page"
+
+#: .\web_site\templates\web_site\contacts.html:16
+msgid "Офис"
+msgstr "Office"
+
+#: .\web_site\templates\web_site\contacts.html:24
+msgid "Почта"
+msgstr "Email"
+
+#: .\web_site\templates\web_site\contacts.html:36
+msgid "Пн-Пт"
+msgstr "Mon-Fri"
