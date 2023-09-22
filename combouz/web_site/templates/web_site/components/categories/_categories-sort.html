@@ -2,16 +2,23 @@
 
 
 <div class="goods-filters__sort">
-  <a class="goods-filters__sort-link active" href="?sort=price">
-    <span>{% trans 'По цене' %}</span>
-    <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" />
-  </a>
-  <a class="goods-filters__sort-link" href="#!">
-    <span>{% trans 'Новинки' %}</span>
-    <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" />
-  </a>
-  <a class="goods-filters__sort-link" href="#!">
-    <span>{% trans 'По наименованию' %}</span>
-    <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" />
-  </a>
+    {% if 'price'  in request.META.QUERY_STRING %}
+    <a class="goods-filters__sort-link active" href="?sort=price">
+        <span>{% trans 'По цене' %}</span>
+        <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+    </a>
+    {% elif '-price' in request.META.QUERY_STRING %}
+    <a class="goods-filters__sort-link active" href="?sort=-price">
+        <span>{% trans 'По цене' %}</span>
+        <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+    </a>
+    {% endif %}
+    <a class="goods-filters__sort-link" href="#!">
+        <span>{% trans 'Новинки' %}</span>
+        <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+    </a>
+    <a class="goods-filters__sort-link" href="#!">
+        <span>{% trans 'По наименованию' %}</span>
+        <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/>
+    </a>
 </div>

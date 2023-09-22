@@ -78,6 +78,7 @@ def portfolio_view(request):
 
 def category_products(request, category_slug):
     category = Category.objects.filter(slug=category_slug).first()
+    print(request.__dict__["META"])
     if category is None:
         products = Product.objects.all()
     else:
