@@ -1,8 +1,8 @@
-{% load static %}
+{% load static i18n %}
 
 <div class="container">
-  <h2 class="our-clients__title">Наши клиенты</h2>
-  <p class="our-clients__descr">Среди наших клиентов, такие уважаемые компании</p>
+  <h2 class="our-clients__title">{% trans 'Наши клиенты' %}</h2>
+  <p class="our-clients__descr">{% trans 'Среди наших клиентов, такие уважаемые компании' %}</p>
   <div class="our-clients__cards">
     {% for client in clients %}
       <div class="our-clients__item">

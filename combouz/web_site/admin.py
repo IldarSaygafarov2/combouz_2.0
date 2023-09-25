@@ -37,6 +37,7 @@ class SubcategoryAdmin(TranslationAdmin):
     list_display = ("pk", "name", "category")
     list_display_links = ("pk", "name")
     list_filter = ("category",)
+    list_editable = ("category",)
     prepopulated_fields = {"slug": ("name",)}
 
 

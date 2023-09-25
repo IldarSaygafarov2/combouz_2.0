@@ -117,8 +117,8 @@
                 {% if category.subcategories.all %}
                 <ul class="footer-se__list">
                     <li class="footer-se__list-item footer-se__list-item-sp">
-                        <a class="footer-se__link footer-se__link-sp" href="{{ category.get_absolute_url }}">{{ category
-                            }}</a>
+                        <a class="footer-se__link footer-se__link-sp" href="{{ category.get_absolute_url }}">
+                            {{ category }}</a>
                     </li>
                     {% for subcategory in category.subcategories.all %}
                     <li class="footer-se__list-item">

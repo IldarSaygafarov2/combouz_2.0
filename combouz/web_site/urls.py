@@ -13,6 +13,9 @@ urlpatterns = [
         views.category_products,
         name="category_detail",
     ),
+    path("categories/colors/<str:color>/", views.sort_products_by_color, name="sort_colors"),
+    path("categories/dimming/<str:dimming>/", views.sort_products_by_dimming, name="sort_dimming"),
+    path("categories/country/<str:country>/", views.sort_products_by_country, name="sort_country"),
     path(
         "categories/subcategories/<slug:subcategory_slug>/",
         views.subcategory_products,

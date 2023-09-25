@@ -34,7 +34,7 @@
                     {% for color in fields.colors %}
                     {% count_products_by_color color as color_products_count %}
                     <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link" href="#!"><span>{{ color }}</span><span>{{ color_products_count }}</span></a>
+                        <a class="goods-filters__accordion-link" href="{% url 'sort_colors' color %}"><span>{{ color }}</span><span>{{ color_products_count }}</span></a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -49,7 +49,7 @@
                     {% for dimming in fields.dimming %}
                     {% count_products_by_dimming dimming as dimming_products_count %}
                     <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link" href="#!"><span>{{ dimming }}</span><span>{{ dimming_products_count }}</span></a>
+                        <a class="goods-filters__accordion-link" href="{% url 'sort_dimming' dimming %}"><span>{{ dimming }}</span><span>{{ dimming_products_count }}</span></a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -64,7 +64,7 @@
                     {% for country in fields.countries %}
                     {% count_products_by_country country as country_products_count %}
                     <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link" href="#!"><span>{{ country }}</span><span>{{ country_products_count }}</span></a>
+                        <a class="goods-filters__accordion-link" href="{% url 'sort_country' country %}"><span>{{ country }}</span><span>{{ country_products_count }}</span></a>
                     </li>
                     {% endfor %}
                 </ul>

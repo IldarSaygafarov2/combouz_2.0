@@ -1,6 +1,8 @@
+{% load i18n %}
+
 <section class="reviews">
   <div class="container">
-    <h2 class="reviews__title">Что говорят о нас</h2>
+    <h2 class="reviews__title">{% trans 'Что говорят о нас' %}</h2>
     <div class="reviews__items">
       {% for review in reviews %}
         {% include './_review-item.html' %}

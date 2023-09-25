@@ -1,7 +1,6 @@
 import requests as req
 from django.core.paginator import Paginator
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
@@ -16,10 +15,15 @@ from .models import (
     Comment,
     CommentItem,
     Question,
+    ProductColorItem
 )
 
 
-# Create your views here.
+def __create_paginated_products(request, qs):
+    paginator = Paginator(qs, 3)
+    page = request.GET.get("page")
+    qs = paginator.get_page(page)
+    return qs
 
 
 def home_view(request):
@@ -78,15 +82,12 @@ def portfolio_view(request):
 
 def category_products(request, category_slug):
     category = Category.objects.filter(slug=category_slug).first()
-    print(request.__dict__["META"])
     if category is None:
         products = Product.objects.all()
     else:
         products = category.products.all()
 
-    paginator = Paginator(products, 1)
-    page = request.GET.get("page")
-    qs = paginator.get_page(page)
+    qs = __create_paginated_products(request, products)
 
     context = {
         "registration_form": CustomUserCreationForm(),
@@ -100,9 +101,7 @@ def category_products(request, category_slug):
 def subcategory_products(request, subcategory_slug):
     subcategory = Subcategory.objects.get(slug=subcategory_slug)
     products = subcategory.products.all()
-    paginator = Paginator(products, 1)
-    page = request.GET.get("page")
-    qs = paginator.get_page(page)
+    qs = __create_paginated_products(request, products)
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
@@ -149,3 +148,39 @@ def send_phone_number_to_telegram(request):
     )
 
     return redirect("home")
+
+
+def sort_products_by_color(request, color):
+    color_obj = ProductColorItem.objects.get(color=color)
+    products = Product.objects.filter(color=color_obj)
+
+    qs = __create_paginated_products(request, products)
+
+    context = {
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+        "products": qs
+    }
+    return render(request, "web_site/categories.html", context)
+
+
+def sort_products_by_dimming(request, dimming):
+    products = Product.objects.filter(dimming=dimming)
+    qs = __create_paginated_products(request, products)
+    context = {
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+        "products": qs
+    }
+    return render(request, "web_site/categories.html", context)
+
+
+def sort_products_by_country(request, country):
+    products = Product.objects.filter(manufacturer_country=country)
+    qs = __create_paginated_products(request, products)
+    context = {
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+        "products": qs
+    }
+    return render(request, "web_site/categories.html", context)

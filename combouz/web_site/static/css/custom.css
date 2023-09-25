@@ -99,3 +99,7 @@
 .header__list-se-item input[type='submit'] {
     display: none;
 }
+
+.about__left {
+    max-width: 370px;
+}

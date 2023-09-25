@@ -1,27 +1,32 @@
+{% load i18n %}
+
 <section class="gallery-projects">
-  <div class="container">
-    <div class="gallery-projects__items">
-      <div class="gallery-projects__left">
-        <h2 class="gallery-projects__title">Галерея проектов</h2>
-        <p class="gallery-projects__descr">Здесь вы можете посмотреть проекты, которые выполнены с нашими жалюзями</p>
-      </div>
-      <div class="gallery-projects__right">
-        <div class="gallery-projects__slider">
-          <div class="swiper-wrapper gallery-projects__wrapper">
-            {% for idx, project in projects %}
-              {% include './_gallery-projects-slide.html' %}
-            {% endfor %}
-          </div>
-          <div class="gallery-projects__pagination"></div>
-          <div class="gallery-projects__next">
-            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="icon / outlined / directions / chevron / down">
-                <path id="Vector" d="M14.25 28.5L23.75 19L14.25 9.5" stroke="#0F9ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </g>
-            </svg>
-          </div>
+    <div class="container">
+        <div class="gallery-projects__items">
+            <div class="gallery-projects__left">
+                <h2 class="gallery-projects__title">{% trans 'Галерея проектов' %}</h2>
+                <p class="gallery-projects__descr">
+                    {% trans 'Здесь вы можете посмотреть проекты, которые выполнены с нашими жалюзями' %}
+                </p>
+            </div>
+            <div class="gallery-projects__right">
+                <div class="gallery-projects__slider">
+                    <div class="swiper-wrapper gallery-projects__wrapper">
+                        {% for idx, project in projects %}
+                        {% include './_gallery-projects-slide.html' %}
+                        {% endfor %}
+                    </div>
+                    <div class="gallery-projects__pagination"></div>
+                    <div class="gallery-projects__next">
+                        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="icon / outlined / directions / chevron / down">
+                                <path id="Vector" d="M14.25 28.5L23.75 19L14.25 9.5" stroke="#0F9ED8" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>

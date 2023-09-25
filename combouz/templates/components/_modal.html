@@ -1,23 +1,23 @@
-{% load static socialaccount %}
+{% load static socialaccount i18n %}
 
 {% comment %} {% providers_media_js %} {% endcomment %}
 
 <div class="modal">
   <div class="modal__content">
     <div class="modal__tabs">
-      <a class="modal__tabs-link active" href="#">Войти</a>
-      <a class="modal__tabs-link" href="#">Регистрация</a>
+      <a class="modal__tabs-link active" href="#">{% trans 'Войти' %}</a>
+      <a class="modal__tabs-link" href="#">{% trans 'Регистрация' %}</a>
     </div>
     <div class="modal__items">
       <div class="modal__items-elem modal__form-signin active">
         <form class="modal__form" action="{% url 'accounts:login' %}" method="POST">
           {% csrf_token %}
           <div class="modal__form-item">
-            <p class="modal__form-name">Номер телефона или почта</p>
+            <p class="modal__form-name">{% trans 'Номер телефона или почта' %}</p>
             {{ login_form.username }}
           </div>
           <div class="modal__form-item">
-            <p class="modal__form-name">Пароль</p>
+            <p class="modal__form-name">{% trans 'Пароль' %}</p>
             <div class="modal__form-sep">
               {{ login_form.password }}
               <div class="modal__form-hide">
@@ -26,22 +26,22 @@
             </div>
           </div>
           <a class="modal__form-lost" href="#">Забыли пароль?</a>
-          <button class="modal__form-btn darkBlueHover" type="submit" disabled="disabled">Войти</button>
+          <button class="modal__form-btn darkBlueHover" type="submit" disabled="disabled">{% trans 'Войти' %}</button>
         </form>
       </div>
       <div class="modal__items-elem modal__form-register">
         <form class="modal__form" action="{% url 'accounts:register' %}" method="POST">
           {% csrf_token %}
           <div class="modal__form-item">
-            <p class="modal__form-name">Почта</p>
+            <p class="modal__form-name">{% trans 'Почта' %}</p>
             {{ registration_form.email }}
           </div>
           <div class="modal__form-item">
-            <p class="modal__form-name">Номер телефона</p>
+            <p class="modal__form-name">{% trans 'Номер телефона' %}</p>
             {{ registration_form.phone_number }}
           </div>
           <div class="modal__form-item">
-            <p class="modal__form-name">Пароль</p>
+            <p class="modal__form-name">{% trans 'Пароль' %}</p>
             <div class="modal__form-sep">
               {{ registration_form.password1 }}
               <div class="modal__form-hide">
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="modal__form-item">
-            <p class="modal__form-name">Повторите пароль</p>
+            <p class="modal__form-name">{% trans 'Повторите пароль' %}</p>
             <div class="modal__form-sep">
               {{ registration_form.password2 }}
               <div class="modal__form-hide">
@@ -58,14 +58,14 @@
               </div>
             </div>
           </div>
-          <button class="modal__form-btn modal__form-reg-btn darkBlueHover" type="submit">Регистрация</button>
+          <button class="modal__form-btn modal__form-reg-btn darkBlueHover" type="submit">{% trans 'Регистрация' %}</button>
           <a class="modal__form-login" href="{% provider_login_url 'google' %}?next=/">
             <img src="{% static 'images/icons/google-logo.svg' %}" alt="google logo" />
-            <span>Войти через Google</span>
+            <span>{% trans 'Войти через Google' %}</span>
           </a>
           <a class="modal__form-login" href="">
             <img src="{% static 'images/icons/facebook-logo.svg' %}" alt="google logo" />
-            <span>Войти через Facebook</span>
+            <span>{% trans 'Войти через Facebook' %}</span>
           </a>
         </form>
       </div>

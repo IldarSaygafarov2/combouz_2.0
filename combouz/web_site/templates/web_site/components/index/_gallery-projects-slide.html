@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="swiper-slide gallery-projects__slide">
-  <img src="{% static 'images/main-page/gallery-projects01.png' %}" alt="Combo.uz gallery projects" />
+  <img src="{{ project.image.url }}" alt="Combo.uz gallery projects" />
   <div class="gallery-projects__text">
     <p class="gallery-projects__excerpt">{{ idx }} - {{ project.title }}</p>
     <h4 class="gallery-projects__name">{{ project.subtitle }}</h4>

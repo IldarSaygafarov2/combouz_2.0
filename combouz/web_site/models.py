@@ -7,6 +7,7 @@ from helpers.functions import convert_price
 
 from . import choices
 
+
 # Create your models here.
 
 
@@ -213,7 +214,7 @@ class ProductWidthItem(models.Model):
     """ProductWidthItem model"""
 
     width = models.CharField(
-        verbose_name="Ширина", max_length=100, default="", unique=True
+        verbose_name="Ширина", max_length=100, default="",
     )
     product = models.ForeignKey(
         Product,
@@ -237,7 +238,7 @@ class ProductLengthItem(models.Model):
         verbose_name="Длина",
         max_length=100,
         default="",
-        unique=True,
+
     )
     product = models.ForeignKey(
         Product,
@@ -280,7 +281,7 @@ class ProductOptionItem(models.Model):
         related_name="options",
     )
     title = models.CharField(
-        verbose_name="Название характеристики", max_length=100, unique=True
+        verbose_name="Название характеристики", max_length=100,
     )
     descr = models.TextField(verbose_name="Описание характеристики")
 

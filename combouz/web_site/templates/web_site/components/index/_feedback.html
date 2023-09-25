@@ -1,11 +1,13 @@
+{% load i18n %}
+
 <section class="feedback">
   <div class="container">
-    <h2 class="feedback__title">Есть вопросы, мы вам поможем?</h2>
-    <p class="feedback__descr">Оставьте номер телефона, и мы вам перезвоним в ближашее время.</p>
+    <h2 class="feedback__title">{% trans 'Есть вопросы, мы вам поможем?' %}</h2>
+    <p class="feedback__descr">{% trans 'Оставьте номер телефона, и мы вам перезвоним в ближашее время.' %}</p>
     <form class="feedback__form" action="{% url 'send_email' %}" method="post">
       {% csrf_token %}
-      <input class="feedback__input" type="number" placeholder="Номер телефона" name="phone_number" />
-      <button class="feedback__btn darkBlueHover">Отправить</button>
+      <input class="feedback__input" type="number" placeholder="{% trans 'Номер телефона' %}" name="phone_number" />
+      <button class="feedback__btn darkBlueHover">{% trans 'Отправить' %}</button>
     </form>
   </div>
 </section>

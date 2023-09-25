@@ -1,6 +1,8 @@
+{% load i18n %}
+
 <section class="have-questions">
   <div class="container">
-    <h2 class="have-questions__title">Есть вопросы, мы вам поможем?</h2>
+    <h2 class="have-questions__title">{% trans 'Есть вопросы, мы вам поможем?' %}</h2>
   </div>
   <div class="have-questions__grid">
     {% for url in videos %}
