@@ -100,17 +100,19 @@ class CartForAnonymousUser:
                 product_quantity = self.cart[key]["quantity"]
                 cart_total_quantity += product_quantity
                 product = Product.objects.get(pk=key)
-                get_total_price = product.price * product_quantity
+                get_total_price = product.uzs_price * product_quantity
 
                 cart_product = {
                     "pk": product.pk,
                     "product": {
                         "pk": product.pk,
                         "name": product.name,
-                        "price": product.price,
-                        "get_first_photo": product.get_first_photo(),
+                        "uzs_price": product.uzs_price,
+                        "get_first_photo": product.get_first_img(),
                         "quantity": product.quantity,
                         "get_absolute_url": product.get_absolute_url(),
+                        "add_to_cart": product.add_to_cart(),
+                        "remove_from_cart": product.remove_from_cart(),
                     },
                     "quantity": product_quantity,
                     "get_total_price": get_total_price,

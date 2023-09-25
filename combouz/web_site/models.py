@@ -3,10 +3,10 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils.html import mark_safe
+from django.utils.translation import gettext as _
 from helpers.functions import convert_price
 
 from . import choices
-
 
 # Create your models here.
 
@@ -15,10 +15,10 @@ class Category(models.Model):
     """Category model."""
 
     name = models.CharField(
-        verbose_name="Название категории", max_length=255, unique=True
+        verbose_name=_("Название категории"), max_length=255, unique=True
     )
     slug = models.SlugField(
-        verbose_name="Ссылка категории",
+        verbose_name=_("Ссылка категории"),
         default="",
         help_text="Данное поле заполнять не нужно.",
     )
@@ -149,8 +149,7 @@ class Product(models.Model):
         null=True,
     )
     discount = models.SmallIntegerField(
-        verbose_name="Размер скидки", default=0, null=True,
-        blank=True
+        verbose_name="Размер скидки", default=0, null=True, blank=True
     )
 
     category = models.ForeignKey(
@@ -214,7 +213,9 @@ class ProductWidthItem(models.Model):
     """ProductWidthItem model"""
 
     width = models.CharField(
-        verbose_name="Ширина", max_length=100, default="",
+        verbose_name="Ширина",
+        max_length=100,
+        default="",
     )
     product = models.ForeignKey(
         Product,
@@ -238,7 +239,6 @@ class ProductLengthItem(models.Model):
         verbose_name="Длина",
         max_length=100,
         default="",
-
     )
     product = models.ForeignKey(
         Product,
@@ -281,7 +281,8 @@ class ProductOptionItem(models.Model):
         related_name="options",
     )
     title = models.CharField(
-        verbose_name="Название характеристики", max_length=100,
+        verbose_name="Название характеристики",
+        max_length=100,
     )
     descr = models.TextField(verbose_name="Описание характеристики")
 

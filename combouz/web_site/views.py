@@ -15,7 +15,7 @@ from .models import (
     Comment,
     CommentItem,
     Question,
-    ProductColorItem
+    ProductColorItem,
 )
 
 
@@ -82,12 +82,17 @@ def portfolio_view(request):
 
 def category_products(request, category_slug):
     category = Category.objects.filter(slug=category_slug).first()
+    sort = request.GET.get("sort")
+
     if category is None:
         products = Product.objects.all()
     else:
         products = category.products.all()
 
-    qs = __create_paginated_products(request, products)
+    if sort:
+        qs = __create_paginated_products(request, products.order_by(sort))
+    else:
+        qs = __create_paginated_products(request, products)
 
     context = {
         "registration_form": CustomUserCreationForm(),
@@ -159,7 +164,7 @@ def sort_products_by_color(request, color):
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
-        "products": qs
+        "products": qs,
     }
     return render(request, "web_site/categories.html", context)
 
@@ -170,7 +175,7 @@ def sort_products_by_dimming(request, dimming):
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
-        "products": qs
+        "products": qs,
     }
     return render(request, "web_site/categories.html", context)
 
@@ -181,6 +186,6 @@ def sort_products_by_country(request, country):
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
-        "products": qs
+        "products": qs,
     }
     return render(request, "web_site/categories.html", context)

@@ -3,7 +3,7 @@
 <div class="container">
   <div class="breadcrumbs__content">
     <div class="breadcrumbs__item">
-      <a class="breadcrumbs__link" href="#!"><span>{% trans 'Главная' %}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
+      <a class="breadcrumbs__link" href="{% url 'home' %}"><span>{% trans 'Главная' %}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
     </div>
     <div class="breadcrumbs__item">
       <a class="breadcrumbs__link" href="{{ product.category.get_absolute_url }}"><span>{{ product.category }}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>

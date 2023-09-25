@@ -1,5 +1,6 @@
 from accounts.models import CustomUser
 from django.db import models
+from django.utils.translation import gettext as _
 from helpers.functions import format_price
 from web_site.models import Product
 
@@ -9,16 +10,18 @@ class Customer(models.Model):
     user = models.OneToOneField(
         CustomUser, on_delete=models.SET_NULL, blank=True, null=True
     )
-    first_name = models.CharField(verbose_name="Имя", max_length=150)
-    last_name = models.CharField(verbose_name="Фамилия", max_length=150)
-    email = models.EmailField(verbose_name="Почта")
-    phone_number = models.CharField(verbose_name="Номер телефона", max_length=15)
-    mounting_type = models.CharField(verbose_name="Тип монтажа", max_length=255)
-    address = models.CharField(verbose_name="Адрес", max_length=255)
-    comment = models.CharField(verbose_name="Комментарий", max_length=1000, default="")
-    delivery_type = models.CharField(verbose_name="Тип доставки", max_length=150)
+    first_name = models.CharField(verbose_name=_("Имя"), max_length=150)
+    last_name = models.CharField(verbose_name=_("Фамилия"), max_length=150)
+    email = models.EmailField(verbose_name=_("Почта"))
+    phone_number = models.CharField(verbose_name=_("Номер телефона"), max_length=15)
+    mounting_type = models.CharField(verbose_name=_("Тип монтажа"), max_length=255)
+    address = models.CharField(verbose_name=_("Адрес"), max_length=255)
+    comment = models.CharField(
+        verbose_name=_("Комментарий"), max_length=1000, default=""
+    )
+    delivery_type = models.CharField(verbose_name=_("Тип доставки"), max_length=150)
     delivery_option = models.CharField(
-        verbose_name="Вариант доставки",
+        verbose_name=_("Вариант доставки"),
         max_length=150,
         default="",
     )

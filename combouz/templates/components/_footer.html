@@ -3,166 +3,158 @@
 {% get_categories as categories %}
 
 <footer class="footer">
+  <div class="container">
+    <div class="footer__content">
+      <div class="footer__top">
+        <ul class="footer__list">
+          <li class="footer__list-item">
+            <img src="{% static 'images/icons/call-dark.svg' %}" alt="combo.uz phone numbers" /><strong>{% trans 'Телефоны' %}</strong>
+          </li>
+          <li class="footer__list-item">
+            <a class="footer__list-link-se" href="tel:+998951423313">+998 (95) 142 - 33 - 13</a>
+          </li>
+          <li class="footer__list-item">
+            <span>({% trans 'с ' %}8:00{% trans ' до ' %}21:00)</span>
+          </li>
+        </ul>
+        <ul class="footer__list">
+          <li class="footer__list-item">
+            <img src="{% static 'images/icons/message-dark.svg' %}" alt="combo.uz mailbox" /><strong>{% trans 'Почта' %}</strong>
+          </li>
+          <li class="footer__list-item">
+            <a class="footer__list-link" href="mailto:info@combo.uz">info@combo.uz</a>
+          </li>
+          <li class="footer__list-item">
+            <span>{% trans 'Отдел продаж' %}</span>
+          </li>
+        </ul>
+        <ul class="footer__list">
+          <li class="footer__list-item">
+            <img src="{% static 'images/icons/location.svg' %}" alt="combo.uz location" /><strong>{% trans 'Адрес' %}</strong>
+          </li>
+          <li class="footer__list-item">
+            <a class="footer__list-link" href="https://www.google.com/maps/search/%D0%B3.%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82,+%D0%90%D0%BB%D0%BC%D0%B0%D0%B7%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%B9+%D1%80%D0%B0%D0%B9%D0%BE%D0%BD,+%D1%83%D0%BB.%D0%A1%D0%B0%D0%B3%D0%B1%D0%B0%D0%BD+37%2F1/@41.3305483,69.2321323,17z/data=!3m1!4b1?entry=ttu" target="_blank">{% trans 'г.Ташкент, Алмазарский район, ул.Сагбан 37/1' %}</a>
+          </li>
+          <li class="footer__list-item">
+            <span>{% trans 'Офис' %}</span>
+          </li>
+        </ul>
+        <ul class="footer__list">
+          <li class="footer__list-item">
+            <img src="{% static 'images/icons/clock.svg' %}" alt="combo.uz work times" /><strong>{% trans 'Режим работы' %}</strong>
+          </li>
+          <li class="footer__list-item">
+            <div class="footer__list-link-se">
+              {% trans 'с ' %}9:00{% trans ' до ' %}19:00
+            </div>
+          </li>
+          <li class="footer__list-item">
+            <span>{% trans 'Пн-Пт' %}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__middle">
+        <div class="footer__middle-left">
+          <p class="footer__middle-excerpt">
+            {% trans 'Ссылки' %}
+          </p>
+          <ul class="footer__middle-list">
+            <li class="footer__middle-list-item">
+              <a class="footer__middle-link" href="{% url 'about' %}">{% trans 'О компании' %}</a>
+            </li>
+            <li class="footer__middle-list-item">
+              <a class="footer__middle-link" href="{% url 'contacts' %}">{% trans 'Контакты' %}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__middle-right">
+          <h3 class="footer__middle-questions">{% trans 'Появились вопросы?' %}</h3><a class="footer__list-link" href="tel:+998951423313">{% trans 'Позвони' %}</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__bottom-descr">
+          {% trans 'Разработано' %}:Creative Agency
+        </p>
+        <ul class="footer__bottom-list">
+          <li class="footer__bottom-list-item">
+            <a class="footer__bottom-link" href="#!" target="_blank">
+              <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8" />
+                <path d="M25.001 22C24.2053 22 23.4423 22.3161 22.8797 22.8787C22.317 23.4413 22.001 24.2044 22.001 25C22.001 25.7956 22.317 26.5587 22.8797 27.1213C23.4423 27.6839 24.2053 28 25.001 28C25.7966 28 26.5597 27.6839 27.1223 27.1213C27.6849 26.5587 28.001 25.7956 28.001 25C28.001 24.2044 27.6849 23.4413 27.1223 22.8787C26.5597 22.3161 25.7966 22 25.001 22ZM25.001 20C26.3271 20 27.5988 20.5268 28.5365 21.4645C29.4742 22.4021 30.001 23.6739 30.001 25C30.001 26.3261 29.4742 27.5979 28.5365 28.5355C27.5988 29.4732 26.3271 30 25.001 30C23.6749 30 22.4031 29.4732 21.4654 28.5355C20.5278 27.5979 20.001 26.3261 20.001 25C20.001 23.6739 20.5278 22.4021 21.4654 21.4645C22.4031 20.5268 23.6749 20 25.001 20ZM31.501 19.75C31.501 20.0815 31.3693 20.3995 31.1349 20.6339C30.9004 20.8683 30.5825 21 30.251 21C29.9195 21 29.6015 20.8683 29.3671 20.6339C29.1327 20.3995 29.001 20.0815 29.001 19.75C29.001 19.4185 29.1327 19.1005 29.3671 18.8661C29.6015 18.6317 29.9195 18.5 30.251 18.5C30.5825 18.5 30.9004 18.6317 31.1349 18.8661C31.3693 19.1005 31.501 19.4185 31.501 19.75ZM25.001 17C22.527 17 22.123 17.007 20.972 17.058C20.188 17.095 19.662 17.2 19.174 17.39C18.7656 17.5399 18.3964 17.7803 18.094 18.093C17.781 18.3954 17.5403 18.7646 17.39 19.173C17.2 19.663 17.095 20.188 17.059 20.971C17.007 22.075 17 22.461 17 25C17 27.475 17.007 27.878 17.058 29.029C17.095 29.812 17.2 30.339 17.389 30.826C17.559 31.261 17.759 31.574 18.091 31.906C18.428 32.242 18.741 32.443 19.171 32.609C19.665 32.8 20.191 32.906 20.971 32.942C22.075 32.994 22.461 33 25 33C27.475 33 27.878 32.993 29.029 32.942C29.811 32.905 30.337 32.8 30.826 32.611C31.234 32.4603 31.603 32.2201 31.906 31.908C32.243 31.572 32.444 31.259 32.61 30.828C32.8 30.336 32.906 29.81 32.942 29.028C32.994 27.925 33 27.538 33 25C33 22.526 32.993 22.122 32.942 20.971C32.905 20.189 32.799 19.661 32.61 19.173C32.4592 18.765 32.219 18.396 31.907 18.093C31.6047 17.7798 31.2355 17.5392 30.827 17.389C30.337 17.199 29.811 17.094 29.029 17.058C27.926 17.006 27.541 17 25.001 17ZM25.001 15C27.718 15 28.057 15.01 29.124 15.06C30.188 15.11 30.914 15.277 31.551 15.525C32.211 15.779 32.767 16.123 33.323 16.678C33.8315 17.1779 34.2249 17.7826 34.476 18.45C34.723 19.087 34.891 19.813 34.941 20.878C34.988 21.944 35.001 22.283 35.001 25C35.001 27.717 34.991 28.056 34.941 29.122C34.891 30.187 34.723 30.912 34.476 31.55C34.2256 32.2178 33.8321 32.8226 33.323 33.322C32.8229 33.8303 32.2183 34.2238 31.551 34.475C30.914 34.722 30.188 34.89 29.124 34.94C28.057 34.987 27.718 35 25.001 35C22.284 35 21.945 34.99 20.878 34.94C19.814 34.89 19.089 34.722 18.451 34.475C17.7833 34.2245 17.1785 33.8309 16.679 33.322C16.1704 32.8222 15.7769 32.2175 15.526 31.55C15.278 30.913 15.111 30.187 15.061 29.122C15.013 28.056 15.001 27.717 15.001 25C15.001 22.283 15.011 21.944 15.061 20.878C15.111 19.812 15.278 19.088 15.526 18.45C15.7762 17.7822 16.1698 17.1773 16.679 16.678C17.1786 16.1692 17.7834 15.7757 18.451 15.525C19.088 15.277 19.813 15.11 20.878 15.06C21.945 15.013 22.284 15 25.001 15Z" fill="#0F9ED8" />
+              </svg>
+            </a>
+          </li>
+          <li class="footer__bottom-list-item">
+            <a class="footer__bottom-link" href="#!" target="_blank">
+              <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8" />
+                <path d="M27.2 15.875C25.9734 15.875 24.797 16.3623 23.9296 17.2296C23.0623 18.097 22.575 19.2734 22.575 20.5V23.075H20.1C19.976 23.075 19.875 23.175 19.875 23.3V26.7C19.875 26.824 19.975 26.925 20.1 26.925H22.575V33.9C22.575 34.024 22.675 34.125 22.8 34.125H26.2C26.324 34.125 26.425 34.025 26.425 33.9V26.925H28.922C29.025 26.925 29.115 26.855 29.14 26.755L29.99 23.355C29.9984 23.3218 29.9991 23.2872 29.992 23.2537C29.985 23.2202 29.9704 23.1888 29.9494 23.1618C29.9283 23.1348 29.9014 23.1129 29.8707 23.0979C29.84 23.0829 29.8062 23.075 29.772 23.075H26.425V20.5C26.425 20.3982 26.445 20.2974 26.484 20.2034C26.5229 20.1094 26.58 20.024 26.652 19.952C26.724 19.88 26.8094 19.8229 26.9034 19.784C26.9974 19.745 27.0982 19.725 27.2 19.725H29.8C29.924 19.725 30.025 19.625 30.025 19.5V16.1C30.025 15.976 29.925 15.875 29.8 15.875H27.2Z" fill="#0F9ED8" />
+              </svg>
+            </a>
+          </li>
+          <li class="footer__bottom-list-item">
+            <a class="footer__bottom-link" href="#!" target="_blank">
+              <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8" />
+                <path d="M32.5522 15.997C32.3115 16.0145 32.0751 16.071 31.8525 16.1643H31.8495C31.6357 16.249 30.6195 16.6765 29.0745 17.3245L23.538 19.6563C19.5652 21.3288 15.66 22.9758 15.66 22.9758L15.7065 22.9578C15.7065 22.9578 15.4372 23.0463 15.156 23.239C14.9822 23.3496 14.8327 23.4943 14.7165 23.6643C14.5785 23.8668 14.4675 24.1765 14.5087 24.4968C14.5762 25.0383 14.9272 25.363 15.1792 25.5423C15.4342 25.7238 15.6772 25.8085 15.6772 25.8085H15.6832L19.3455 27.0423C19.5097 27.5695 20.4615 30.6985 20.6902 31.4193C20.8252 31.8498 20.9565 32.119 21.1207 32.3245C21.2002 32.4295 21.2932 32.5173 21.405 32.5878C21.4631 32.6216 21.525 32.6483 21.5895 32.6673L21.552 32.6583C21.5632 32.6613 21.5722 32.6703 21.5805 32.6733C21.6105 32.6815 21.6307 32.6845 21.669 32.6905C22.2487 32.866 22.7145 32.506 22.7145 32.506L22.7407 32.485L24.903 30.5163L28.527 33.2965L28.6095 33.3318C29.3647 33.6633 30.1297 33.4788 30.534 33.1533C30.9412 32.8255 31.0995 32.4063 31.0995 32.4063L31.1257 32.3388L33.9262 17.992C34.0057 17.638 34.026 17.3065 33.9382 16.9848C33.8477 16.6592 33.6388 16.3791 33.3525 16.1995C33.112 16.0534 32.8332 15.9828 32.5522 15.997ZM32.4765 17.5345C32.4735 17.5818 32.4825 17.5765 32.4615 17.6673V17.6755L29.6872 31.873C29.6752 31.8933 29.655 31.9375 29.5995 31.9818C29.541 32.0283 29.4945 32.0575 29.2507 31.9608L24.8182 28.5625L22.1407 31.003L22.7032 27.4105L29.9452 20.6605C30.2437 20.383 30.144 20.3245 30.144 20.3245C30.165 19.984 29.6932 20.2248 29.6932 20.2248L20.5612 25.882L20.5582 25.867L16.1812 24.3933V24.3903L16.17 24.388C16.1776 24.3855 16.1852 24.3825 16.1925 24.379L16.2165 24.367L16.2397 24.3588C16.2397 24.3588 20.148 22.7118 24.1207 21.0393C26.1097 20.2015 28.1137 19.3578 29.655 18.7068C30.569 18.322 31.484 17.9395 32.4 17.5593C32.4615 17.5353 32.4322 17.5345 32.4765 17.5345Z" fill="#0F9ED8" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-se">
+    <div class="footer-se__top"></div>
     <div class="container">
-        <div class="footer__content">
-            <div class="footer__top">
-                <ul class="footer__list">
-                    <li class="footer__list-item">
-                        <img src="{% static 'images/icons/call-dark.svg' %}" alt="combo.uz phone numbers"/><strong>{% trans 'Телефоны' %}</strong>
-                    </li>
-                    <li class="footer__list-item">
-                        <a class="footer__list-link-se" href="tel:+998951423313">+998 (95) 142 - 33 - 13</a>
-                    </li>
-                    <li class="footer__list-item">
-                        <span>({% trans 'с' %} 8:00 {% trans 'до' %} 21:00)</span>
-                    </li>
-                </ul>
-                <ul class="footer__list">
-                    <li class="footer__list-item">
-                        <img src="{% static 'images/icons/message-dark.svg' %}"
-                             alt="combo.uz mailbox"/><strong>{% trans 'Почта' %}</strong>
-                    </li>
-                    <li class="footer__list-item">
-                        <a class="footer__list-link" href="mailto:info@combo.uz">info@combo.uz</a>
-                    </li>
-                    <li class="footer__list-item">
-                        <span>{% trans 'Отдел продаж' %}</span>
-                    </li>
-                </ul>
-                <ul class="footer__list">
-                    <li class="footer__list-item">
-                        <img src="{% static 'images/icons/location.svg' %}"
-                             alt="combo.uz location"/><strong>{% trans 'Адрес' %}</strong>
-                    </li>
-                    <li class="footer__list-item">
-                        <a class="footer__list-link"
-                           href="https://www.google.com/maps/search/%D0%B3.%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82,+%D0%90%D0%BB%D0%BC%D0%B0%D0%B7%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%B9+%D1%80%D0%B0%D0%B9%D0%BE%D0%BD,+%D1%83%D0%BB.%D0%A1%D0%B0%D0%B3%D0%B1%D0%B0%D0%BD+37%2F1/@41.3305483,69.2321323,17z/data=!3m1!4b1?entry=ttu"
-                           target="_blank">{% trans 'г.Ташкент, Алмазарский район, ул.Сагбан 37/1' %}</a>
-                    </li>
-                    <li class="footer__list-item">
-                        <span>{% trans 'Офис' %}</span>
-                    </li>
-                </ul>
-                <ul class="footer__list">
-                    <li class="footer__list-item">
-                        <img src="{% static 'images/icons/clock.svg' %}" alt="combo.uz work times"/><strong>{% trans 'Режим работы' %}</strong>
-                    </li>
-                    <li class="footer__list-item">
-                        <div class="footer__list-link-se">{% trans 'с' %} 9:00 {% trans 'до' %} 19:00</div>
-                    </li>
-                    <li class="footer__list-item">
-                        <span>Пн-Пт</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer__middle">
-                <div class="footer__middle-left">
-                    <p class="footer__middle-excerpt">{% trans 'Ссылки' %}</p>
-                    <ul class="footer__middle-list">
-                        <li class="footer__middle-list-item">
-                            <a class="footer__middle-link" href="{% url 'about' %}">{% trans 'О компании' %}</a>
-                        </li>
-                        <li class="footer__middle-list-item">
-                            <a class="footer__middle-link" href="{% url 'contacts' %}">{% trans 'Контакты' %}</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer__middle-right">
-                    <h3 class="footer__middle-questions">{% trans 'Появились вопросы?' %}</h3><a class="footer__list-link"
-                                                                                   href="tel:+998951423313">{% trans 'Позвони' %}</a>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p class="footer__bottom-descr">{% trans 'Разработано' %}:Creative Agency</p>
-                <ul class="footer__bottom-list">
-                    <li class="footer__bottom-list-item">
-                        <a class="footer__bottom-link" href="#!" target="_blank">
-                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8"/>
-                                <path d="M25.001 22C24.2053 22 23.4423 22.3161 22.8797 22.8787C22.317 23.4413 22.001 24.2044 22.001 25C22.001 25.7956 22.317 26.5587 22.8797 27.1213C23.4423 27.6839 24.2053 28 25.001 28C25.7966 28 26.5597 27.6839 27.1223 27.1213C27.6849 26.5587 28.001 25.7956 28.001 25C28.001 24.2044 27.6849 23.4413 27.1223 22.8787C26.5597 22.3161 25.7966 22 25.001 22ZM25.001 20C26.3271 20 27.5988 20.5268 28.5365 21.4645C29.4742 22.4021 30.001 23.6739 30.001 25C30.001 26.3261 29.4742 27.5979 28.5365 28.5355C27.5988 29.4732 26.3271 30 25.001 30C23.6749 30 22.4031 29.4732 21.4654 28.5355C20.5278 27.5979 20.001 26.3261 20.001 25C20.001 23.6739 20.5278 22.4021 21.4654 21.4645C22.4031 20.5268 23.6749 20 25.001 20ZM31.501 19.75C31.501 20.0815 31.3693 20.3995 31.1349 20.6339C30.9004 20.8683 30.5825 21 30.251 21C29.9195 21 29.6015 20.8683 29.3671 20.6339C29.1327 20.3995 29.001 20.0815 29.001 19.75C29.001 19.4185 29.1327 19.1005 29.3671 18.8661C29.6015 18.6317 29.9195 18.5 30.251 18.5C30.5825 18.5 30.9004 18.6317 31.1349 18.8661C31.3693 19.1005 31.501 19.4185 31.501 19.75ZM25.001 17C22.527 17 22.123 17.007 20.972 17.058C20.188 17.095 19.662 17.2 19.174 17.39C18.7656 17.5399 18.3964 17.7803 18.094 18.093C17.781 18.3954 17.5403 18.7646 17.39 19.173C17.2 19.663 17.095 20.188 17.059 20.971C17.007 22.075 17 22.461 17 25C17 27.475 17.007 27.878 17.058 29.029C17.095 29.812 17.2 30.339 17.389 30.826C17.559 31.261 17.759 31.574 18.091 31.906C18.428 32.242 18.741 32.443 19.171 32.609C19.665 32.8 20.191 32.906 20.971 32.942C22.075 32.994 22.461 33 25 33C27.475 33 27.878 32.993 29.029 32.942C29.811 32.905 30.337 32.8 30.826 32.611C31.234 32.4603 31.603 32.2201 31.906 31.908C32.243 31.572 32.444 31.259 32.61 30.828C32.8 30.336 32.906 29.81 32.942 29.028C32.994 27.925 33 27.538 33 25C33 22.526 32.993 22.122 32.942 20.971C32.905 20.189 32.799 19.661 32.61 19.173C32.4592 18.765 32.219 18.396 31.907 18.093C31.6047 17.7798 31.2355 17.5392 30.827 17.389C30.337 17.199 29.811 17.094 29.029 17.058C27.926 17.006 27.541 17 25.001 17ZM25.001 15C27.718 15 28.057 15.01 29.124 15.06C30.188 15.11 30.914 15.277 31.551 15.525C32.211 15.779 32.767 16.123 33.323 16.678C33.8315 17.1779 34.2249 17.7826 34.476 18.45C34.723 19.087 34.891 19.813 34.941 20.878C34.988 21.944 35.001 22.283 35.001 25C35.001 27.717 34.991 28.056 34.941 29.122C34.891 30.187 34.723 30.912 34.476 31.55C34.2256 32.2178 33.8321 32.8226 33.323 33.322C32.8229 33.8303 32.2183 34.2238 31.551 34.475C30.914 34.722 30.188 34.89 29.124 34.94C28.057 34.987 27.718 35 25.001 35C22.284 35 21.945 34.99 20.878 34.94C19.814 34.89 19.089 34.722 18.451 34.475C17.7833 34.2245 17.1785 33.8309 16.679 33.322C16.1704 32.8222 15.7769 32.2175 15.526 31.55C15.278 30.913 15.111 30.187 15.061 29.122C15.013 28.056 15.001 27.717 15.001 25C15.001 22.283 15.011 21.944 15.061 20.878C15.111 19.812 15.278 19.088 15.526 18.45C15.7762 17.7822 16.1698 17.1773 16.679 16.678C17.1786 16.1692 17.7834 15.7757 18.451 15.525C19.088 15.277 19.813 15.11 20.878 15.06C21.945 15.013 22.284 15 25.001 15Z"
-                                      fill="#0F9ED8"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="footer__bottom-list-item">
-                        <a class="footer__bottom-link" href="#!" target="_blank">
-                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8"/>
-                                <path d="M27.2 15.875C25.9734 15.875 24.797 16.3623 23.9296 17.2296C23.0623 18.097 22.575 19.2734 22.575 20.5V23.075H20.1C19.976 23.075 19.875 23.175 19.875 23.3V26.7C19.875 26.824 19.975 26.925 20.1 26.925H22.575V33.9C22.575 34.024 22.675 34.125 22.8 34.125H26.2C26.324 34.125 26.425 34.025 26.425 33.9V26.925H28.922C29.025 26.925 29.115 26.855 29.14 26.755L29.99 23.355C29.9984 23.3218 29.9991 23.2872 29.992 23.2537C29.985 23.2202 29.9704 23.1888 29.9494 23.1618C29.9283 23.1348 29.9014 23.1129 29.8707 23.0979C29.84 23.0829 29.8062 23.075 29.772 23.075H26.425V20.5C26.425 20.3982 26.445 20.2974 26.484 20.2034C26.5229 20.1094 26.58 20.024 26.652 19.952C26.724 19.88 26.8094 19.8229 26.9034 19.784C26.9974 19.745 27.0982 19.725 27.2 19.725H29.8C29.924 19.725 30.025 19.625 30.025 19.5V16.1C30.025 15.976 29.925 15.875 29.8 15.875H27.2Z"
-                                      fill="#0F9ED8"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="footer__bottom-list-item">
-                        <a class="footer__bottom-link" href="#!" target="_blank">
-                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8"/>
-                                <path d="M32.5522 15.997C32.3115 16.0145 32.0751 16.071 31.8525 16.1643H31.8495C31.6357 16.249 30.6195 16.6765 29.0745 17.3245L23.538 19.6563C19.5652 21.3288 15.66 22.9758 15.66 22.9758L15.7065 22.9578C15.7065 22.9578 15.4372 23.0463 15.156 23.239C14.9822 23.3496 14.8327 23.4943 14.7165 23.6643C14.5785 23.8668 14.4675 24.1765 14.5087 24.4968C14.5762 25.0383 14.9272 25.363 15.1792 25.5423C15.4342 25.7238 15.6772 25.8085 15.6772 25.8085H15.6832L19.3455 27.0423C19.5097 27.5695 20.4615 30.6985 20.6902 31.4193C20.8252 31.8498 20.9565 32.119 21.1207 32.3245C21.2002 32.4295 21.2932 32.5173 21.405 32.5878C21.4631 32.6216 21.525 32.6483 21.5895 32.6673L21.552 32.6583C21.5632 32.6613 21.5722 32.6703 21.5805 32.6733C21.6105 32.6815 21.6307 32.6845 21.669 32.6905C22.2487 32.866 22.7145 32.506 22.7145 32.506L22.7407 32.485L24.903 30.5163L28.527 33.2965L28.6095 33.3318C29.3647 33.6633 30.1297 33.4788 30.534 33.1533C30.9412 32.8255 31.0995 32.4063 31.0995 32.4063L31.1257 32.3388L33.9262 17.992C34.0057 17.638 34.026 17.3065 33.9382 16.9848C33.8477 16.6592 33.6388 16.3791 33.3525 16.1995C33.112 16.0534 32.8332 15.9828 32.5522 15.997ZM32.4765 17.5345C32.4735 17.5818 32.4825 17.5765 32.4615 17.6673V17.6755L29.6872 31.873C29.6752 31.8933 29.655 31.9375 29.5995 31.9818C29.541 32.0283 29.4945 32.0575 29.2507 31.9608L24.8182 28.5625L22.1407 31.003L22.7032 27.4105L29.9452 20.6605C30.2437 20.383 30.144 20.3245 30.144 20.3245C30.165 19.984 29.6932 20.2248 29.6932 20.2248L20.5612 25.882L20.5582 25.867L16.1812 24.3933V24.3903L16.17 24.388C16.1776 24.3855 16.1852 24.3825 16.1925 24.379L16.2165 24.367L16.2397 24.3588C16.2397 24.3588 20.148 22.7118 24.1207 21.0393C26.1097 20.2015 28.1137 19.3578 29.655 18.7068C30.569 18.322 31.484 17.9395 32.4 17.5593C32.4615 17.5353 32.4322 17.5345 32.4765 17.5345Z"
-                                      fill="#0F9ED8"/>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-se">
-        <div class="footer-se__top"></div>
-        <div class="container">
-            <div class="footer-se__items">
-                {% for category in categories %}
-                {% if category.subcategories.all %}
-                <ul class="footer-se__list">
-                    <li class="footer-se__list-item footer-se__list-item-sp">
-                        <a class="footer-se__link footer-se__link-sp" href="{{ category.get_absolute_url }}">
-                            {{ category }}</a>
-                    </li>
-                    {% for subcategory in category.subcategories.all %}
-                    <li class="footer-se__list-item">
-                        <a class="footer-se__link" href="{{ subcategory.get_absolute_url }}">{{ subcategory }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                {% endfor %}
+      <div class="footer-se__items">
+        {% for category in categories %}
+          {% if category.subcategories.all %}
+            <ul class="footer-se__list">
+              <li class="footer-se__list-item footer-se__list-item-sp">
+                <a class="footer-se__link footer-se__link-sp" href="{{ category.get_absolute_url }}">{{ category }}</a>
+              </li>
+              {% for subcategory in category.subcategories.all %}
+                <li class="footer-se__list-item">
+                  <a class="footer-se__link" href="{{ subcategory.get_absolute_url }}">{{ subcategory }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
 
-                <ul class="footer-se__list">
-                    <li class="footer-se__list-item footer-se__list-item-sp">
-                        <a class="footer-se__link footer-se__link-sp" href="#!">{% trans 'Остальные' %}</a>
-                    </li>
-                    <li class="footer-se__list-item">
-                        <a class="footer-se__link" href="{% url 'about' %}">{% trans 'О нас' %}</a>
-                    </li>
-                    <li class="footer-se__list-item">
-                        <a class="footer-se__link" href="{% url 'portfolio' %}">{% trans 'Портфолио' %}</a>
-                    </li>
-                    <li class="footer-se__list-item">
-                        <a class="footer-se__link" href="{% url 'contacts' %}">{% trans 'Контакты' %}</a>
-                    </li>
-                    <li class="footer-se__list-item">
-                        <a class="footer-se__link" href="#!">{% trans 'Дилерам' %}</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-se__kinds">
-                <h3 class="footer-se__kinds-title">{% trans 'Виды' %}</h3>
-                <ul class="footer-se__kinds-list">
-                    {% for category in categories %}
-                    <li class="footer-se__kinds-list-item">
-                        <a class="footer-se__link" href="{{ category.get_absolute_url }}">{{ category }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+        <ul class="footer-se__list">
+          <li class="footer-se__list-item footer-se__list-item-sp">
+            <a class="footer-se__link footer-se__link-sp" href="#!">{% trans 'Остальные' %}</a>
+          </li>
+          <li class="footer-se__list-item">
+            <a class="footer-se__link" href="{% url 'about' %}">{% trans 'О нас' %}</a>
+          </li>
+          <li class="footer-se__list-item">
+            <a class="footer-se__link" href="{% url 'portfolio' %}">{% trans 'Портфолио' %}</a>
+          </li>
+          <li class="footer-se__list-item">
+            <a class="footer-se__link" href="{% url 'contacts' %}">{% trans 'Контакты' %}</a>
+          </li>
+          <li class="footer-se__list-item">
+            <a class="footer-se__link" href="#!">{% trans 'Дилерам' %}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-se__kinds">
+        <h3 class="footer-se__kinds-title">{% trans 'Виды' %}</h3>
+        <ul class="footer-se__kinds-list">
+          {% for category in categories %}
+            <li class="footer-se__kinds-list-item">
+              <a class="footer-se__link" href="{{ category.get_absolute_url }}">{{ category }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
+  </div>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 {% include 'components/_modal.html' %}
