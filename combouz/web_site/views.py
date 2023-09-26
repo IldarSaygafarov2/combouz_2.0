@@ -118,7 +118,15 @@ def subcategory_products(request, subcategory_slug):
 
 def product_detail(request, product_slug):
     product = Product.objects.get(slug=product_slug)
+
+    next_num = request.GET.get('next')
+    comments_total = product.comments.count()
     comments = product.comments.all()[0:2]
+
+    if next_num:
+        next_num = int(next_num)
+        comments = product.comments.all()[:next_num + next_num]
+
     if request.method == "POST":
         data = request.POST
         images = request.FILES.getlist("img")
@@ -139,6 +147,7 @@ def product_detail(request, product_slug):
         "login_form": CustomUserAuthenticationForm(),
         "comments": comments,
         "product": product,
+        "comments_total": comments_total
     }
     return render(request, "web_site/product_detail.html", context)
 

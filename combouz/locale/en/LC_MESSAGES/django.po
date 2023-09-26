@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 01:35+0500\n"
+"POT-Creation-Date: 2023-09-26 11:42+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr "Quantity"
 #: .\cart\templates\cart\basket.html:41
 #: .\web_site\templates\web_site\components\categories\_cassete-item.html:14
 #: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:21
-#: .\web_site\templates\web_site\product_detail.html:125
+#: .\web_site\templates\web_site\product_detail.html:136
 msgid "Цена"
 msgstr "Price"
 
@@ -107,7 +107,7 @@ msgid "Адрес"
 msgstr "Address"
 
 #: .\cart\templates\cart\basket.html:115
-#: .\web_site\templates\web_site\product_detail.html:136
+#: .\web_site\templates\web_site\product_detail.html:147
 msgid "Комментарии"
 msgstr "Comments"
 
@@ -292,7 +292,11 @@ msgid "Наши преимущества"
 msgstr "Our advantages"
 
 #: .\web_site\templates\web_site\components\about\_our-advantages.html:11
-
+#, fuzzy, python-format
+#| msgid ""
+#| "На сегодняшний день 40%% наших клиентов – это те, кто пришел к нам "
+#| "повторно, или те, кого к нам направили по рекомендации наши «старые» "
+#| "заказчики."
 msgid ""
 "На сегодняшний день 40%% наших клиентов – это те, кто пришел к нам повторно, "
 "или те, кого к нам направили по рекомендации наши «старые» заказчики."
@@ -335,14 +339,14 @@ msgstr "Color"
 
 #: .\web_site\templates\web_site\components\categories\_cassete-item.html:12
 #: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:15
-#: .\web_site\templates\web_site\product_detail.html:122
+#: .\web_site\templates\web_site\product_detail.html:130
 msgid "Свойство"
 msgstr "Property"
 
 #: .\web_site\templates\web_site\components\categories\_cassete-item.html:13
 #: .\web_site\templates\web_site\components\categories\_filters-left.html:44
 #: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:18
-#: .\web_site\templates\web_site\product_detail.html:123
+#: .\web_site\templates\web_site\product_detail.html:133
 msgid "Затемнение"
 msgstr "Dimming"
 
@@ -388,7 +392,7 @@ msgid "Оставьте номер телефона, и мы вам перезв
 msgstr "Leave your phone number and we will call you back as soon as possible."
 
 #: .\web_site\templates\web_site\components\index\_feedback.html:10
-#: .\web_site\templates\web_site\product_detail.html:146
+#: .\web_site\templates\web_site\product_detail.html:156
 msgid "Отправить"
 msgstr "Send"
 
@@ -409,6 +413,8 @@ msgid "СКИДКА"
 msgstr "DISCOUNT"
 
 #: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:13
+#, fuzzy, python-format
+#| msgid "Скидка до 15%%"
 msgid "Скидка до 15%%"
 msgstr "Discount up to 15%"
 
@@ -454,95 +460,94 @@ msgstr "Portfolio"
 msgid "Страница товара"
 msgstr "Product page"
 
-#: .\web_site\templates\web_site\product_detail.html:31
+#: .\web_site\templates\web_site\product_detail.html:32
 msgid "Размер"
 msgstr "Size"
 
-#: .\web_site\templates\web_site\product_detail.html:35
-#: .\web_site\templates\web_site\product_detail.html:48
+#: .\web_site\templates\web_site\product_detail.html:37
+#: .\web_site\templates\web_site\product_detail.html:52
 msgid "Менее 1 кв.м, считается как 1 кв.м"
 msgstr "Less than 1 sq.m., considered as 1 sq.m."
 
-#: .\web_site\templates\web_site\product_detail.html:37
+#: .\web_site\templates\web_site\product_detail.html:40
 msgid "ширина"
 msgstr "width"
 
-#: .\web_site\templates\web_site\product_detail.html:50
+#: .\web_site\templates\web_site\product_detail.html:55
 msgid "Длина"
 msgstr "Length"
 
-#: .\web_site\templates\web_site\product_detail.html:59
+#: .\web_site\templates\web_site\product_detail.html:64
 msgid "Управление"
 msgstr "Control"
 
-#: .\web_site\templates\web_site\product_detail.html:64
+#: .\web_site\templates\web_site\product_detail.html:69
 msgid "Слева"
 msgstr "Left"
 
-#: .\web_site\templates\web_site\product_detail.html:69
+#: .\web_site\templates\web_site\product_detail.html:74
 msgid "Справа"
 msgstr "Right"
 
-#: .\web_site\templates\web_site\product_detail.html:72
+#: .\web_site\templates\web_site\product_detail.html:77
 msgid "Кол-во"
 msgstr "Quantity"
 
-#: .\web_site\templates\web_site\product_detail.html:78
+#: .\web_site\templates\web_site\product_detail.html:83
 msgid "штук"
 msgstr "pieces"
 
-#: .\web_site\templates\web_site\product_detail.html:82
+#: .\web_site\templates\web_site\product_detail.html:87
 msgid "Тип карниза"
 msgstr "Cornice type"
 
-#: .\web_site\templates\web_site\product_detail.html:87
+#: .\web_site\templates\web_site\product_detail.html:92
 msgid "Алюминевый"
 msgstr "Aluminum"
 
-#: .\web_site\templates\web_site\product_detail.html:92
+#: .\web_site\templates\web_site\product_detail.html:97
 msgid "Пластиковый"
 msgstr "Plastic"
 
-#: .\web_site\templates\web_site\product_detail.html:95
+#: .\web_site\templates\web_site\product_detail.html:100
 msgid "Тип управления"
 msgstr "Control type"
 
-#: .\web_site\templates\web_site\product_detail.html:100
+#: .\web_site\templates\web_site\product_detail.html:105
 msgid "Ручной"
 msgstr "Manual"
 
-#: .\web_site\templates\web_site\product_detail.html:105
+#: .\web_site\templates\web_site\product_detail.html:110
 msgid "С электроприводом"
 msgstr "Electrically driven"
 
-#: .\web_site\templates\web_site\product_detail.html:110
+#: .\web_site\templates\web_site\product_detail.html:115
 msgid "В корзину"
 msgstr "Add to cart"
 
-#: .\web_site\templates\web_site\product_detail.html:120
+#: .\web_site\templates\web_site\product_detail.html:124
 msgid "Страна производитель"
 msgstr "Manufacturer"
 
-#: .\web_site\templates\web_site\product_detail.html:121
+#: .\web_site\templates\web_site\product_detail.html:127
 msgid "Тип ткани"
 msgstr "Fabric type"
 
-#: .\web_site\templates\web_site\product_detail.html:127
+#: .\web_site\templates\web_site\product_detail.html:138
 msgid "Характеристики"
 msgstr "Characteristics"
 
-#: .\web_site\templates\web_site\product_detail.html:147
+#: .\web_site\templates\web_site\product_detail.html:155
+msgid "Оставьте комментарий"
+msgstr "Leave a comment"
+
+#: .\web_site\templates\web_site\product_detail.html:158
 msgid "Прикрепите фотографию нашей работы"
 msgstr "Attach a photo of our work"
 
-#: .\web_site\templates\web_site\product_detail.html:168
+#: .\web_site\templates\web_site\product_detail.html:180
 msgid "Загрузить еще"
 msgstr "Load more"
-
-#, fuzzy
-#~| msgid "Комментарии"
-#~ msgid "Комментарий"
-#~ msgstr "Comments"
 
 #, fuzzy
 #~| msgid "Варианты доставки"

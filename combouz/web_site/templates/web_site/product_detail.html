@@ -152,7 +152,7 @@
               <div class="single-comments__user">
                 <strong class="single-comments__fullname">{{ request.user }}</strong>
               </div>
-              <textarea class="single-comments__textarea" name="user-comment" placeholder="Оставьте комментарий"></textarea>
+              <textarea class="single-comments__textarea" name="user-comment" placeholder="{% trans 'Оставьте комментарий' %}"></textarea>
               <button class="single-comments__btn darkBlueHover">{% trans 'Отправить' %}</button>
               <p style="margin: 15px 0;">
                 {% trans 'Прикрепите фотографию нашей работы' %}
@@ -177,7 +177,9 @@
                 </div>
               {% endfor %}
             </div>
-            <a class="single-comments__loadmore" href="#!">{% trans 'Загрузить еще' %}</a>
+             {% if comments|length < comments_total %}
+                <a class="single-comments__loadmore" href="?next={{ comments|length }}">{% trans 'Загрузить еще' %}</a>
+            {% endif %}
           </div>
         {% endif %}
       </section>
