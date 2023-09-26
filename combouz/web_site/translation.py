@@ -62,6 +62,7 @@ class ProjectsGalleryTranslationOptions(TranslationOptions):
 class FeedbackTranslationOptions(TranslationOptions):
     fields = (
         "body",
+        "author",
         "company_name",
     )
 
