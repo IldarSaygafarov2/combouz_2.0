@@ -4,7 +4,7 @@ from .models import *
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
-    fields = ("name",)
+    fields = ("name", "width_rounding", "length_rounding")
 
 
 @register(Subcategory)

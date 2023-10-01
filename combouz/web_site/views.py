@@ -81,24 +81,12 @@ def portfolio_view(request):
 
 
 def category_products(request, category_slug):
-    category = Category.objects.filter(slug=category_slug).first()
-    sort = request.GET.get("sort")
-
-    if category is None:
-        products = Product.objects.all()
-    else:
-        products = category.products.all()
-
-    if sort:
-        qs = __create_paginated_products(request, products.order_by(sort))
-    else:
-        qs = __create_paginated_products(request, products)
+    category = Category.objects.get(slug=category_slug)
 
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
-        "products": qs,
-        "category": category,
+        "category": category
     }
     return render(request, "web_site/categories.html", context)
 
@@ -118,14 +106,15 @@ def subcategory_products(request, subcategory_slug):
 
 def product_detail(request, product_slug):
     product = Product.objects.get(slug=product_slug)
+    category = product.category
 
-    next_num = request.GET.get('next')
+    next_num = request.GET.get("next")
     comments_total = product.comments.count()
     comments = product.comments.all()[0:2]
 
     if next_num:
         next_num = int(next_num)
-        comments = product.comments.all()[:next_num + next_num]
+        comments = product.comments.all()[: next_num + next_num]
 
     if request.method == "POST":
         data = request.POST
@@ -147,7 +136,8 @@ def product_detail(request, product_slug):
         "login_form": CustomUserAuthenticationForm(),
         "comments": comments,
         "product": product,
-        "comments_total": comments_total
+        "comments_total": comments_total,
+        "category": category,
     }
     return render(request, "web_site/product_detail.html", context)
 

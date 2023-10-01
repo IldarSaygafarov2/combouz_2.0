@@ -2,9 +2,15 @@ from django import template
 
 from cart.utils import get_cart_data
 from helpers import functions as func
-from web_site.models import Category, Product, ProductColorItem, ProductOptionItem
+from web_site.models import Category, Product, ProductColorItem, Subcategory
 
 register = template.Library()
+
+
+@register.simple_tag()
+def get_subcategories_by_category(category):
+    subcategories = Subcategory.objects.filter(category=category)
+    return subcategories
 
 
 @register.simple_tag()

@@ -1,12 +1,13 @@
-from accounts.models import CustomUser
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
-from helpers.functions import convert_price
 
+from accounts.models import CustomUser
+from helpers.functions import convert_price
 from . import choices
+
 
 # Create your models here.
 
@@ -22,18 +23,32 @@ class Category(models.Model):
         default="",
         help_text="Данное поле заполнять не нужно.",
     )
-
     show_on_homepage = models.BooleanField(
         verbose_name="Показать на главной",
         default=False,
         help_text="При выборе данного пункта, все продукты этой категории будут показаны на главной странице",
     )
-
     make_bestseller = models.BooleanField(
         verbose_name="Сделать бестселлером",
         default=False,
         help_text="При выборе данного пункта, покажет все товары данной категории в секции 'Хиты продаж' ",
     )
+    width_rounding = models.CharField(
+        verbose_name="Округление по ширине для всех товаров категории",
+        max_length=150,
+        null=True,
+        blank=True,
+    )
+    length_rounding = models.CharField(
+        verbose_name="Округление по длине для всех товаров категории",
+        max_length=150,
+        null=True,
+        blank=True,
+    )
+    category_usd_price = models.IntegerField(verbose_name="Стоимость в долларах", default=0)
+
+    def get_uzs_price(self):
+        return convert_price(self.category_usd_price)
 
     def count_products(self):
         return self.products.all().count()
@@ -70,8 +85,17 @@ class Subcategory(models.Model):
         related_name="subcategories",
     )
 
+    image = models.ImageField(verbose_name="Фото подкатегории", upload_to="subcategories/", null=True)
+
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
+
+    def get_first_img(self):
+        if self.image:
+            return self.image.url
+
+    def count_products(self):
+        return self.products.all().count()
 
     def save(self, *args, **kwargs):  # new
         if not self.slug:

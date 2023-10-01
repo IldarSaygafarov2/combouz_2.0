@@ -1,10 +1,10 @@
 {% load static custom_tags i18n %}
 
-{% convert_price product.uzs_price as product_price %}
+{% convert_price subcategory.category.get_uzs_price as category_price %}
 
 <div class="roll-curtains__card">
-  <a class="roll-curtains__img" href="{{ product.get_absolute_url }}">
-    <img src="{{ product.get_first_img }}" alt="{{ product.name }} Combo.uz" loading="lazy" />
+  <a class="roll-curtains__img" href="{{ subcategory.get_absolute_url }}">
+    <img src="{{ subcategory.get_first_img }}" alt="{{ subcategory.name }} Combo.uz" loading="lazy" />
     {% if product.discount %}
       <span class="roll-curtains__discount-abs">{% trans 'СКИДКА' %} {{ product.discount }}%</span>
     {% endif %}
@@ -12,7 +12,7 @@
   <div class="roll-curtains__text">
     <span class="roll-curtains__discount">{% trans 'Скидка до 15%' %}</span>
     <div class="roll-curtains__sep">
-      <h3 class="roll-curtains__name">{{ product.name }}</h3><strong class="roll-curtains__price">{% trans 'От' %} {{ product_price }} {% trans 'сум за' %}м <sup>2</sup></strong>
+      <h3 class="roll-curtains__name">{{ subcategory.name }}</h3><strong class="roll-curtains__price">{% trans 'От' %} {{ category_price }} {% trans 'сум за' %}м <sup>2</sup></strong>
     </div>
   </div>
 </div>

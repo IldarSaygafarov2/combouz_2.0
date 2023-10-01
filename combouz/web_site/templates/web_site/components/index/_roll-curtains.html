@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="roll-curtains__title">{{ home_category }}</h2>
       <div class="roll-curtains__content">
-        {% for product in home_category.products.all %}
+        {% for subcategory in home_category.subcategories.all %}
           {% include './_roll-curtains-card.html' %}
         {% endfor %}
       </div>

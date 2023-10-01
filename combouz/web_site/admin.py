@@ -27,8 +27,9 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
-    list_display = ("pk", "name")
+    list_display = ("pk", "name", "width_rounding", "length_rounding")
     list_display_links = ("pk", "name")
+    list_editable = ("width_rounding", "length_rounding")
     prepopulated_fields = {"slug": ("name",)}
 
 

@@ -2,33 +2,33 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans 'Категории' %}
+    {% trans 'Категории' %}
 {% endblock %}
 
 {% block content %}
-  <div class="breadcrumbs">
-    {% include './components/categories/_breadcrumbs.html' %}
-  </div>
-  <section class="goods-filters">
-    <div class="container">
-      {% if not category %}
-      <h2 class="goods-filters__title">Все продукты COMBO</h2>
-      {% else %}
-      <h2 class="goods-filters__title">{{ category }} COMBO</h2>
-      {% endif %}
-      <h3 class="goods-filters__name">{% trans 'Фильтры' %}</h3>
-      <div class="goods-filters__content">
-        {% include './components/categories/_filters-left.html' %}
-        <div class="goods-filters__right">
-          {% include './components/categories/_categories-sort.html' %}
-          <div class="goods-filters__cards">
-            {% for product in products %}
-              {% include './components/categories/_cassete-item.html' %}
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      {% include './components/categories/_pagination.html' %}
+    <div class="breadcrumbs">
+        {% include './components/categories/_breadcrumbs.html' %}
     </div>
-  </section>
+    <section class="goods-filters">
+        <div class="container">
+            <h2 class="goods-filters__title">{{ category }} COMBO</h2>
+            <h3 class="goods-filters__name">{% trans 'Фильтры' %}</h3>
+            <div class="goods-filters__content">
+                {% include './components/categories/_filters-left.html' %}
+                <div class="goods-filters__right">
+                    {% include './components/categories/_categories-sort.html' %}
+                    <div class="goods-filters__cards">
+                        {% for subcategory in category.subcategories.all %}
+                            pass
+                        {% endfor %}
+
+{#                        {% for product in products %}#}
+{#                            {% include './components/categories/_cassete-item.html' %}#}
+{#                        {% endfor %}#}
+                    </div>
+                </div>
+            </div>
+            {% include './components/categories/_pagination.html' %}
+        </div>
+    </section>
 {% endblock %}

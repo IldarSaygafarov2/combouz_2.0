@@ -2,24 +2,24 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     {% include 'components/_head.html' %}
     <title>
-      {% block title %}
+        {% block title %}
 
-      {% endblock %}
+        {% endblock %}
     </title>
-    <link href="{% static 'css/app.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
-  </head>
+    <link href="{% static 'css/app.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet"/>
+</head>
 
-  <body>
-    {% include 'components/_header.html' %}
-    <main class="main">
-      {% block content %}
+<body>
+{% include 'components/_header.html' %}
+<main class="main">
+    {% block content %}
 
-      {% endblock %}
-    </main>
-    {% include 'components/_footer.html' %}
-  </body>
+    {% endblock %}
+</main>
+{% include 'components/_footer.html' %}
+</body>
 </html>
