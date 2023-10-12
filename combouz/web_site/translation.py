@@ -28,20 +28,6 @@ class ProductTranslationOptions(TranslationOptions):
     )
 
 
-@register(ProductWidthItem)
-class ProductWidthItemTranslationOptions(TranslationOptions):
-    fields = (
-        "width",
-    )
-
-
-@register(ProductLengthItem)
-class ProductLengthItemTranslationOptions(TranslationOptions):
-    fields = (
-        "length",
-    )
-
-
 @register(ProductOptionItem)
 class ProductOptionItemTranslationOptions(TranslationOptions):
     fields = (
@@ -73,3 +59,20 @@ class HeroGalleryTranslationOptions(TranslationOptions):
         "title",
         "body",
     )
+
+
+@register(FabricType)
+class FabricTypeTranslationOptions(TranslationOptions):
+    fields = (
+        "title",
+    )
+
+
+@register(ProductProperty)
+class ProductPropertyTranslationOptions(TranslationOptions):
+    fields = (
+        "title",
+    )
+
+
+

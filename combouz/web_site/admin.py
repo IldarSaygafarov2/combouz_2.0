@@ -1,7 +1,6 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-
 from .models import (
     Category,
     Client,
@@ -10,14 +9,30 @@ from .models import (
     Product,
     ProductColorItem,
     ProductImageItem,
-    ProductLengthItem,
     ProductOptionItem,
-    ProductWidthItem,
     ProjectsGallery,
     Question,
     Subcategory,
     Comment,
+    FabricType,
+    ProductProperty,
+    ProductDimming
 )
+
+
+@admin.register(FabricType)
+class FabricTypeAdmin(TranslationAdmin):
+    fields = ("title",)
+
+
+@admin.register(ProductProperty)
+class ProductPropertyAdmin(TranslationAdmin):
+    fields = ("title",)
+
+
+@admin.register(ProductDimming)
+class ProductDimmingAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Comment)
@@ -27,10 +42,37 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
-    list_display = ("pk", "name", "width_rounding", "length_rounding")
-    list_display_links = ("pk", "name")
-    list_editable = ("width_rounding", "length_rounding")
+    fieldsets = [
+        (
+            "Общее",
+            {
+                "fields": ["name", "slug", "show_on_homepage", "make_bestseller"]
+            }
+        ),
+        (
+            "Округление",
+            {
+                "fields": ["width_rounding", "length_rounding"]
+            }
+        ),
+        (
+            "Ширина продуктов",
+            {
+                "fields": ["product_width_from", "product_width_to"]
+            }
+        ),
+        (
+            "Длина продуктов",
+            {
+                "fields": ["product_length_from", "product_length_to"]
+            }
+        )
+    ]
+
     prepopulated_fields = {"slug": ("name",)}
+    list_display = ("pk", "name", "show_on_homepage", "make_bestseller")
+    list_display_links = ("pk", "name")
+    list_editable = ("show_on_homepage", "make_bestseller")
 
 
 @admin.register(Subcategory)
@@ -47,18 +89,8 @@ class ProductImageItemAdmin(admin.TabularInline):
     extra = 1
 
 
-class ProductLengthItemAdmin(admin.TabularInline):
-    model = ProductLengthItem
-    extra = 1
-
-
 class ProductOptionItemAdmin(admin.TabularInline):
     model = ProductOptionItem
-    extra = 1
-
-
-class ProductWidthItemAdmin(admin.TabularInline):
-    model = ProductWidthItem
     extra = 1
 
 
@@ -70,8 +102,6 @@ class ProductColorItemAdmin(TranslationAdmin):
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
     inlines = [
-        ProductLengthItemAdmin,
-        ProductWidthItemAdmin,
         ProductImageItemAdmin,
         ProductOptionItemAdmin,
     ]

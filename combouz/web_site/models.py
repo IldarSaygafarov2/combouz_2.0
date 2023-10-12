@@ -45,6 +45,13 @@ class Category(models.Model):
         null=True,
         blank=True,
     )
+
+    product_width_from = models.IntegerField(verbose_name="Ширина от", default=0, null=True)
+    product_width_to = models.IntegerField(verbose_name="Ширина до", default=0, null=True)
+
+    product_length_from = models.IntegerField(verbose_name="Длина от", default=0, null=True)
+    product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
+
     category_usd_price = models.IntegerField(verbose_name="Стоимость в долларах", default=0)
 
     def get_uzs_price(self):
@@ -121,6 +128,39 @@ class ProductColorItem(models.Model):
         verbose_name_plural = "Цвета"
 
 
+class FabricType(models.Model):
+    title = models.CharField(verbose_name="Тип ткани", max_length=255)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Тип ткани"
+        verbose_name_plural = "Типы ткани"
+
+
+class ProductProperty(models.Model):
+    title = models.CharField(verbose_name="Свойство", max_length=255)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Свойство"
+        verbose_name_plural = "Свойства"
+
+
+class ProductDimming(models.Model):
+    dimming = models.IntegerField(verbose_name="Затемнение", default=0)
+
+    def __str__(self):
+        return str(self.dimming)
+
+    class Meta:
+        verbose_name = "Затеменение"
+        verbose_name_plural = "Затемнения"
+
+
 class Product(models.Model):
     """Product model."""
 
@@ -144,9 +184,12 @@ class Product(models.Model):
         default="",
         max_length=255,
     )
-    fabric_type = models.CharField(verbose_name="Тип ткани", max_length=255, default="")
-    property = models.CharField(verbose_name="Свойство", max_length=255, default="")
-    dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
+    fabric_type = models.ForeignKey(FabricType, on_delete=models.DO_NOTHING, related_name="products", null=True,
+                                    verbose_name="Тип ткани")
+    property = models.ForeignKey(ProductProperty, on_delete=models.DO_NOTHING, related_name="products", null=True,
+                                 verbose_name="Свойство")
+    dimming = models.ForeignKey(ProductDimming, on_delete=models.DO_NOTHING, related_name="products", null=True,
+                                verbose_name="Затемнение")
     control = models.CharField(
         verbose_name="Управление",
         max_length=50,
@@ -233,50 +276,50 @@ class Product(models.Model):
         verbose_name_plural = "Продукты"
 
 
-class ProductWidthItem(models.Model):
-    """ProductWidthItem model"""
-
-    width = models.CharField(
-        verbose_name="Ширина",
-        max_length=100,
-        default="",
-    )
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        verbose_name="Продукт",
-        related_name="width_list",
-    )
-
-    def __str__(self):
-        return f"{self.product}: {self.width}"
-
-    class Meta:
-        verbose_name = "Ширина продукта"
-        verbose_name_plural = "Ширина продукта"
-
-
-class ProductLengthItem(models.Model):
-    """ProductWidthItem model"""
-
-    length = models.CharField(
-        verbose_name="Длина",
-        max_length=100,
-        default="",
-    )
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        verbose_name="Продукт",
-        related_name="length_list",
-    )
-
-    def __str__(self):
-        return f"{self.product}: {self.length}"
-
-    class Meta:
-        verbose_name = "Длина продукта"
-        verbose_name_plural = "Длина продукта"
+# class ProductWidthItem(models.Model):
+#     """ProductWidthItem model"""
+#
+#     width = models.CharField(
+#         verbose_name="Ширина",
+#         max_length=100,
+#         default="",
+#     )
+#     product = models.ForeignKey(
+#         Product,
+#         on_delete=models.CASCADE,
+#         verbose_name="Продукт",
+#         related_name="width_list",
+#     )
+#
+#     def __str__(self):
+#         return f"{self.product}: {self.width}"
+#
+#     class Meta:
+#         verbose_name = "Ширина продукта"
+#         verbose_name_plural = "Ширина продукта"
+#
+#
+# class ProductLengthItem(models.Model):
+#     """ProductWidthItem model"""
+#
+#     length = models.CharField(
+#         verbose_name="Длина",
+#         max_length=100,
+#         default="",
+#     )
+#     product = models.ForeignKey(
+#         Product,
+#         on_delete=models.CASCADE,
+#         verbose_name="Продукт",
+#         related_name="length_list",
+#     )
+#
+#     def __str__(self):
+#         return f"{self.product}: {self.length}"
+#
+#     class Meta:
+#         verbose_name = "Длина продукта"
+#         verbose_name_plural = "Длина продукта"
 
 
 class ProductImageItem(models.Model):
