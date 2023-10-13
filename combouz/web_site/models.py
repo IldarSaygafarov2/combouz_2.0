@@ -9,7 +9,15 @@ from helpers.functions import convert_price
 from . import choices
 
 
-# Create your models here.
+class ImagesOnAboutPage(models.Model):
+    image = models.ImageField(verbose_name="Фото", upload_to="pages/about/")
+
+    def __str__(self):
+        return f"Фото: {self.pk}"
+
+    class Meta:
+        verbose_name = "Фотка на странице 'О компании'"
+        verbose_name_plural = "Фотки на странице 'О компании'"
 
 
 class Category(models.Model):

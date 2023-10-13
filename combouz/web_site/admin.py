@@ -16,8 +16,14 @@ from .models import (
     Comment,
     FabricType,
     ProductProperty,
-    ProductDimming
+    ProductDimming,
+    ImagesOnAboutPage
 )
+
+
+@admin.register(ImagesOnAboutPage)
+class ImagesOnAboutPageAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(FabricType)

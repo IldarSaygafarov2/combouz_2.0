@@ -156,7 +156,7 @@ def send_phone_number_to_telegram(request):
     return redirect("home")
 
 
-def sort_products_by_color(request, category_slug, color):
+def sort_products_by_color(request,  color):
     color_obj = ProductColorItem.objects.get(color=color)
     products = Product.objects.filter(color=color_obj)
 
@@ -170,7 +170,7 @@ def sort_products_by_color(request, category_slug, color):
     return render(request, "web_site/categories.html", context)
 
 
-def sort_products_by_dimming(request, category_slug, dimming):
+def sort_products_by_dimming(request, dimming):
     dimming_obj = ProductDimming.objects.get(dimming=dimming)
     products = Product.objects.filter(dimming=dimming_obj)
     qs = __create_paginated_products(request, products)
@@ -182,7 +182,7 @@ def sort_products_by_dimming(request, category_slug, dimming):
     return render(request, "web_site/categories.html", context)
 
 
-def sort_products_by_country(request, category_slug, country):
+def sort_products_by_country(request, country):
     products = Product.objects.filter(manufacturer_country=country)
     qs = __create_paginated_products(request, products)
     context = {

@@ -1,10 +1,12 @@
-{% load static i18n %}
+{% load static i18n custom_tags %}
+
+{% get_config as config %}
 
 <div class="container">
   <div class="about__content">
     <div class="about__left">
-      <h3 class="about__title">{% trans 'О компании' %} COMBO.UZ</h3>
-      <p class="about__descr">{% trans 'Компания Combo.uz является производителем жалюзи и рулонных штор.Мы занимаемся изготовлением и установкой жалюзи с 1997г.' %}</p>
+      <h3 class="about__title">{{ config.ABOUT_PAGE_TITLE }} COMBO.UZ</h3>
+      <p class="about__descr">{{ config.ABOUT_PAGE_DESCRIPTION }}</p>
     </div>
     <div class="about__right">
       <div class="about__slider">

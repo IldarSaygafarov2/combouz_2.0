@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     $('.languages').select2({
         minimumResultsForSearch: Infinity,
@@ -5,3 +6,5 @@ $(document).ready(function() {
         dropdownCssClass: "test"
     });
 });
+
+Fancybox.bind(document.getElementById("comments_carousel"), "[data-fancybox]", {});

@@ -169,11 +169,11 @@ Combo.uz {% trans 'Страница товара' %} {{ product.name }}
                         </div>
                         <p class="single-comments__descr">{{ comment.body }}</p>
 
-                        <div class="single-comments__photos">
+                        <div class="single-comments__photos" id="comments_carousel">
                             {% for comment_item in comment.commentitem_set.all %}
-                            <div class="single-comments__photo">
+                            <a href="{{ comment_item.img.url }}" data-fancybox="gallery" class="single-comments__photo" >
                                 <img src="{{ comment_item.img.url }}" alt=""/>
-                            </div>
+                            </a>
                             {% endfor %}
                         </div>
                     </div>

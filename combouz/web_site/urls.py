@@ -13,17 +13,17 @@ urlpatterns = [
         name="category_detail",
     ),
     path(
-        "<slug:category_slug>/subcategories/products/colors/<str:color>/",
+        "subcategories/colors/<str:color>/",
         views.sort_products_by_color,
         name="sort_colors"
     ),
     path(
-        "<slug:category_slug>/subcategories/products/dimming/<str:dimming>/",
+        "subcategories/dimming/<str:dimming>/",
         views.sort_products_by_dimming,
         name="sort_dimming"
     ),
     path(
-        "<slug:category_slug>/subcategories/products/country/<str:country>/",
+        "subcategories/country/<str:country>/",
         views.sort_products_by_country,
         name="sort_country"
     ),
