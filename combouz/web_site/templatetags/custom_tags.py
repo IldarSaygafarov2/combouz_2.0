@@ -8,6 +8,17 @@ register = template.Library()
 
 
 @register.simple_tag()
+def get_width_or_length_range(category, range_type):
+    print(category, range_type)
+    if range_type == 'width':
+        range_list = list(range(category.product_width_from, category.product_width_to + 1))
+    elif range_type == 'length':
+        range_list = list(range(category.product_length_from, category.product_length_to + 1))
+    return range_list
+
+
+
+@register.simple_tag()
 def get_config():
     from constance import config
 

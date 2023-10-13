@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static custom_tags %}
+
+
 
 {% block title %}
 Combo.uz {% trans 'Страница товара' %} {{ product.name }}
@@ -10,6 +12,9 @@ Combo.uz {% trans 'Страница товара' %} {{ product.name }}
     {% include './components/product/_breadcrumbs.html' %}
 </div>
 <section class="single">
+    {% get_width_or_length_range category=product.category range_type='width' as width_range %}
+    {% get_width_or_length_range product.category 'length' as length_range %}
+
     <div class="container">
         <div class="single__good">
             <div class="single__left">
@@ -40,8 +45,8 @@ Combo.uz {% trans 'Страница товара' %} {{ product.name }}
 
                         <select class="single__right-select" name="item-width">
                             <option value="-" selected>-</option>
-                            {% for width in product.width_list.all %}
-                            <option value="{{ width.width }}">{{ width.width }}</option>
+                            {% for width in width_range %}
+                            <option value="{{ width.width }}">{{ width }} мм</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -56,8 +61,8 @@ Combo.uz {% trans 'Страница товара' %} {{ product.name }}
                         <span class="single__right-info">{% trans 'Длина' %}</span>
                         <select class="single__right-select" name="item-length">
                             <option value="-" selected="selected">-</option>
-                            {% for length in product.length_list.all %}
-                            <option value="{{ length.length }}">{{ length.length }}</option>
+                            {% for length in length_range %}
+                            <option value="{{ length.length }}">{{ length }} мм</option>
                             {% endfor %}
                         </select>
                     </div>
