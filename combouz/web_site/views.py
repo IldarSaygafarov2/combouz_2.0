@@ -17,7 +17,8 @@ from .models import (
     CommentItem,
     Question,
     ProductColorItem,
-    ProductDimming
+    ProductDimming,
+    ImagesOnAboutPage
 )
 
 
@@ -53,10 +54,11 @@ def home_view(request):
 
 
 def about_view(request):
-    projects = ProjectsGallery.objects.all()
     clients = Client.objects.all()
+    about_images = ImagesOnAboutPage.objects.all()
+
     context = {
-        "projects": projects,
+        "about_images": about_images,
         "clients": clients,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),

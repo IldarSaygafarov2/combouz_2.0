@@ -11,9 +11,9 @@
     <div class="about__right">
       <div class="about__slider">
         <div class="swiper-wrapper about__wrapper">
-          {% for project in projects %}
+          {% for project in about_images %}
             <div class="swiper-slide about__slide">
-              <img src="{{ project.image.url }}" alt="Combo.uz {{ project.title }}" />
+              <img src="{{ project.image.url }}" alt="Combo.uz" />
             </div>
           {% endfor %}
         </div>
