@@ -167,11 +167,13 @@ class Product(models.Model):
     name = models.CharField(
         verbose_name="Название продукта", max_length=255, unique=True, default=""
     )
-    usd_price = models.SmallIntegerField(verbose_name="Цена в y.e", default=0)
+    # usd_price = models.SmallIntegerField(verbose_name="Цена в y.e", default=0)
     uzs_price = models.IntegerField(
         verbose_name=" Цена в узбекских сумах",
         default=0,
         help_text="Данное поле заполнять не нужно, при добавлении цены в y.e данное поле будет заполнено автоматически",
+        null=True,
+        blank=True
     )
     body = models.TextField(verbose_name="Описание продукта", default="")
     placeholder = models.ImageField(
@@ -265,7 +267,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        self.uzs_price = convert_price(self.usd_price)
+        self.uzs_price = convert_price(self.category.category_usd_price)
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):

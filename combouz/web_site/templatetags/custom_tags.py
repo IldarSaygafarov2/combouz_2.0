@@ -8,9 +8,17 @@ register = template.Library()
 
 
 @register.simple_tag()
-def get_subcategories_by_category(category):
-    subcategories = Subcategory.objects.filter(category=category)
-    return subcategories
+def get_config():
+    from constance import config
+
+    return config
+
+
+@register.simple_tag()
+def get_products_by_category(field, value):
+    products = Product.objects.filter(field=value)
+    
+    return products
 
 
 @register.simple_tag()
@@ -39,7 +47,7 @@ def get_all_products_count():
 def get_sort_fields():
     products = Product.objects.all()
     colors = set([ProductColorItem.objects.get(pk=color["color_id"]) for color in products.values()])
-    dimming = set([item["dimming"] for item in products.values()])
+    dimming = [i.dimming for i in Product.objects.all()]
     countries = [country["manufacturer_country"] for country in products.values()]
     return {
         "colors": colors,

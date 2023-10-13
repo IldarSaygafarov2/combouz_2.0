@@ -1,4 +1,5 @@
 import requests as req
+from constance import config
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 
@@ -16,11 +17,12 @@ from .models import (
     CommentItem,
     Question,
     ProductColorItem,
+    ProductDimming
 )
 
 
 def __create_paginated_products(request, qs):
-    paginator = Paginator(qs, 3)
+    paginator = Paginator(qs, config.PRODUCTS_ON_PAGE)
     page = request.GET.get("page")
     qs = paginator.get_page(page)
     return qs
@@ -154,7 +156,7 @@ def send_phone_number_to_telegram(request):
     return redirect("home")
 
 
-def sort_products_by_color(request, color):
+def sort_products_by_color(request, category_slug, color):
     color_obj = ProductColorItem.objects.get(color=color)
     products = Product.objects.filter(color=color_obj)
 
@@ -168,8 +170,9 @@ def sort_products_by_color(request, color):
     return render(request, "web_site/categories.html", context)
 
 
-def sort_products_by_dimming(request, dimming):
-    products = Product.objects.filter(dimming=dimming)
+def sort_products_by_dimming(request, category_slug, dimming):
+    dimming_obj = ProductDimming.objects.get(dimming=dimming)
+    products = Product.objects.filter(dimming=dimming_obj)
     qs = __create_paginated_products(request, products)
     context = {
         "registration_form": CustomUserCreationForm(),
@@ -179,7 +182,7 @@ def sort_products_by_dimming(request, dimming):
     return render(request, "web_site/categories.html", context)
 
 
-def sort_products_by_country(request, country):
+def sort_products_by_country(request, category_slug, country):
     products = Product.objects.filter(manufacturer_country=country)
     qs = __create_paginated_products(request, products)
     context = {

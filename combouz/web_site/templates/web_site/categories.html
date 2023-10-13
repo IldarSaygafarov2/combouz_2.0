@@ -18,13 +18,15 @@
                 <div class="goods-filters__right">
                     {% include './components/categories/_categories-sort.html' %}
                     <div class="goods-filters__cards">
-                        {% for subcategory in category.subcategories.all %}
-                            pass
-                        {% endfor %}
-
-{#                        {% for product in products %}#}
-{#                            {% include './components/categories/_cassete-item.html' %}#}
-{#                        {% endfor %}#}
+                        {% if 'subcategories' in request.path or 'products' in request.path %}
+                            {% for product in products %}
+                                {% include './components/categories/_cassete-item.html' %}
+                            {% endfor %}
+                        {% else %}
+                            {% for subcategory in category.subcategories.all %}
+                                {% include './components/index/_roll-curtains-card.html' %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>

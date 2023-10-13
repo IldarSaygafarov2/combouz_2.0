@@ -46,7 +46,7 @@ class CategoryAdmin(TranslationAdmin):
         (
             "Общее",
             {
-                "fields": ["name", "slug", "show_on_homepage", "make_bestseller"]
+                "fields": ["name", "category_usd_price", "slug", "show_on_homepage", "make_bestseller"]
             }
         ),
         (
@@ -108,7 +108,7 @@ class ProductAdmin(TranslationAdmin):
     list_display = (
         "pk",
         "name",
-        "usd_price",
+        # "usd_price",
         "uzs_price",
         "quantity",
         "category",
@@ -116,7 +116,11 @@ class ProductAdmin(TranslationAdmin):
     )
     list_display_links = ("pk", "name")
     list_filter = ("category", "subcategory")
-    list_editable = ("usd_price", "category", "subcategory")
+    list_editable = (
+        # "usd_price",
+        "category",
+        "subcategory"
+    )
     prepopulated_fields = {"slug": ("name",)}
 
 

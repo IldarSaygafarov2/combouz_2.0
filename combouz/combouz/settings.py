@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import OrderedDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.facebook",
+    "constance"
 ]
 
 MIDDLEWARE = [
@@ -107,7 +109,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.CustomUser"
-
 
 BOT_TOKEN = "6651100598:AAE0CSIZJ4D9JX-DRnGk_qTYdJ2WX-bzrb8"
 CHANNEL_ID = -1001965630465
@@ -250,3 +251,41 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
+CONSTANCE_DATABASE_PREFIX = "constance:core:"
+
+CONSTANCE_CONFIG = OrderedDict(
+    [
+        ("EMAIL", ("info@combo.uz", "Почта для связи")),
+        ("PHONE_NUMBER", ("+998 (95) 142 - 33 - 13", "Номер для связи")),
+        (
+            "OFFICE_ADDRESS",
+            ("г.Ташкент, Алмазарский район, ул.Сагбан 37/1", "Локация офиса"),
+        ),
+        ("WORKING_TIME", ("с 9:00 до 19:00", "Режим работы")),
+        ("CALLING_TIME", ("с 8:00 до 20:00", "Режим звонков")),
+        ("INSTAGRAM_LINK", ("", "Ссылка на аккаунт instagram")),
+        ("FACEBOOK_LINK", ("", "Ссылка на аккаунт facebook")),
+        ("TELEGRAM_LINK", ("", "Ссылка на аккаунт telegram")),
+        ("ADVANTAGE_1", ("", "Первое преимущество")),
+        ("ADVANTAGE_2", ("", "Второе преимущество")),
+        ("ADVANTAGE_3", ("", "Третье преимущество")),
+        ("ABOUT_PAGE_TITLE", ("", "Заголовок страницы 'О компании'")),
+        ("ABOUT_PAGE_DESCRIPTION", ("", "Описание страницы 'О компании'")),
+        ("PRODUCTS_ON_PAGE", (3, "Количество продуктов на странице"))
+    ]
+)
+
+CONSTANCE_CONFIG_FIELDSETS = {
+    "Общие данные": (
+        "EMAIL",
+        "PHONE_NUMBER",
+        "OFFICE_ADDRESS",
+        "WORKING_TIME",
+        "CALLING_TIME",
+        "PRODUCTS_ON_PAGE"
+    ),
+    "Социальные сети": ("INSTAGRAM_LINK", "FACEBOOK_LINK", "TELEGRAM_LINK"),
+    "Страница 'О компании'": ("ABOUT_PAGE_TITLE", "ABOUT_PAGE_DESCRIPTION", "ADVANTAGE_1", "ADVANTAGE_2", "ADVANTAGE_3")
+    # 'Theme Options': ('THEME',),
+}
