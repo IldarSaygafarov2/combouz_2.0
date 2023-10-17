@@ -2,17 +2,32 @@
 {% load i18n %}
 
 {% block title %}
-  Combouz {% trans 'страница портфолио' %}
+    Combouz {% trans 'страница портфолио' %}
 {% endblock %}
 
 {% block content %}
-  <div class="portfolio">
-    <div class="container">
-      <div class="portfolio__cards">
-        {% for idx, project in projects %}
-          {% include './components/portfolio/_portfolio-item.html' %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+    <section class="companies">
+        <div class="container">
+            <div class="companies__content">
+                <div class="companies__cards">
+                    {% for project in projects %}
+                        <div class="companies__block">
+                            <div class="companies__item">
+                                <h3 class="companies__title">{{ project.title }}</h3>
+                                <p class="companies__descr">{{ project.short_description }}</p>
+                                <a class="companies__link darkBlueHover" href="{{ project.get_absolute_url }}">
+                                    Посмотреть
+                                </a>
+                            </div>
+                            {% for image in project.images.all %}
+                                <div class="companies__item">
+                                    <img src="{{ image.photo.url }}" alt="companies collaboration Combo.uz">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

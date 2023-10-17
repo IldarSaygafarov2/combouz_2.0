@@ -75,13 +75,23 @@ def contacts_view(request):
 
 
 def portfolio_view(request):
-    projects = enumerate(ProjectsGallery.objects.all(), start=1)
+    projects = ProjectsGallery.objects.all()
     context = {
         "projects": projects,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
     }
     return render(request, "web_site/portfolio.html", context)
+
+
+def portfolio_detail_view(request, slug):
+    project = ProjectsGallery.objects.get(slug=slug)
+    context = {
+        "project": project,
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+    }
+    return render(request, "web_site/portfolio_detail.html", context)
 
 
 def category_products(request, category_slug):
@@ -193,3 +203,13 @@ def sort_products_by_country(request, country):
         "products": qs,
     }
     return render(request, "web_site/categories.html", context)
+
+
+def reviews_view(request):
+    reviews = Feedback.objects.all()
+    context = {
+        "reviews": reviews,
+        "registration_form": CustomUserCreationForm(),
+        "login_form": CustomUserAuthenticationForm(),
+    }
+    return render(request, "web_site/reviews.html", context)

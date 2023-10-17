@@ -1,0 +1,44 @@
+{% load i18n %}
+
+<section class="single-comments">
+    <h3 class="single-comments__title">{% trans 'Комментарии' %}</h3>
+    {% if request.user.is_authenticated %}
+        <div class="single-comments__content">
+            <form class="single-comments__form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="single-comments__user">
+                    <strong class="single-comments__fullname">{{ request.user }}</strong>
+                </div>
+                <textarea class="single-comments__textarea" name="user-comment"
+                          placeholder="{% trans 'Оставьте комментарий' %}"></textarea>
+                <button class="single-comments__btn darkBlueHover">{% trans 'Отправить' %}</button>
+                <p style="margin: 15px 0;">
+                    {% trans 'Прикрепите фотографию нашей работы' %}
+                </p>
+                <input type="file" name="img" multiple="" accept="image/*" id="id_img"/>
+            </form>
+            <div class="single-comments__block">
+                {% for comment in comments %}
+                    <div class="single-comments__item">
+                        <div class="single-comments__user">
+                            <strong class="single-comments__fullname">{{ comment.author.email }}</strong>
+                        </div>
+                        <p class="single-comments__descr">{{ comment.body }}</p>
+
+                        <div class="single-comments__photos" id="comments_carousel">
+                            {% for comment_item in comment.commentitem_set.all %}
+                                <a href="{{ comment_item.img.url }}" data-fancybox="gallery"
+                                   class="single-comments__photo">
+                                    <img src="{{ comment_item.img.url }}" alt=""/>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if comments|length < comments_total %}
+                <a class="single-comments__loadmore" href="?next={{ comments|length }}">{% trans 'Загрузить еще' %}</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>

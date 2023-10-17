@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="container">
+    <div class="breadcrumbs__content">
+        <div class="breadcrumbs__item"><a class="breadcrumbs__link" href="#!"><span>Главная</span><img
+                src="{% static 'images/icons/arrow-right-light.svg' %}" alt=""></a></div>
+        <div class="breadcrumbs__item"><a class="breadcrumbs__link" href="#!"><span>Портфолио</span><img
+                src="{% static 'images/icons/arrow-right-light.svg' %}" alt=""></a></div>
+        <div class="breadcrumbs__item"><span class="breadcrumbs__line"></span><a
+                class="breadcrumbs__link active" href="#!"><span>{{ project.title }}</span></a></div>
+    </div>
+</div>

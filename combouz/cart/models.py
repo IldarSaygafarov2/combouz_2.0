@@ -58,4 +58,6 @@ class OrderProduct(models.Model):
 
     @property
     def get_total_price(self):
+        if self.product.category.discount and self.product.subcategory.has_discount:
+            return int(self.product.get_price_with_discount() * self.quantity)
         return int(self.product.uzs_price) * self.quantity

@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="reviews__item">
+<div class="{% if 'reviews' in request.path %}reviews-page__item{% endif %} reviews__item">
   <p class="reviews__descr">{{ review.body }}</p>
   <div class="reviews__author">
     <img src="{{ review.author_avatar.url }}" alt="Combo.uz {{ review.body }}" />

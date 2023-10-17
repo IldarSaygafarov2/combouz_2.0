@@ -116,10 +116,19 @@
     color: var(--mainTitleText);
     font-size: 18px;
     line-height: 150%;
-    /*margin: 30px 0*/
 }
 
 .article-single__content  img {
     margin: 30px 0;
     display: inline-block;
+}
+
+.portfolio-special__content p {
+    display: inline-flex;
+    gap: 30px;
+    margin: 15px 0;
+    color: #616161;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
 }

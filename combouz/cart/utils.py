@@ -6,6 +6,7 @@ from .models import Customer, Order, OrderProduct, Product
 class CartForAuthenticatedUser:
     def __init__(self, request, product_id=None, action=None):
         self.user = request.user
+        self.request = request
 
         if action == "delete_product":
             self.delete_order_product(product_id)
@@ -31,15 +32,28 @@ class CartForAuthenticatedUser:
         order = self.get_cart_info()["order"]
         product = Product.objects.get(pk=product_id)
         order_product, created = OrderProduct.objects.get_or_create(
-            order=order, product=product
+            order=order,
+            product=product,
         )
 
+        # order_product.quantity = quantity
+        # order_product.save()
+        qty = self.request.POST.get('item-count')
         if action == "add" and product.quantity > 0:
-            order_product.quantity += 1  # +1 в корзину
-            product.quantity -= 1  # -1 со склада
+
+            if not qty:
+                order_product.quantity += 1  # +1 в корзину
+                product.quantity -= 1  # -1 со склада
+            else:
+                order_product.quantity += int(qty)  # +1 в корзину
+                product.quantity -= int(qty)  # -1 со склада
         else:
-            order_product.quantity -= 1
-            product.quantity += 1
+            if not qty:
+                order_product.quantity -= 1
+                product.quantity += 1
+            else:
+                order_product.quantity -= int(qty)
+                product.quantity += int(qty)
         product.save()
         order_product.save()
 
@@ -51,6 +65,10 @@ class CartForAuthenticatedUser:
         product = Product.objects.get(pk=product_id)
 
         order_product = OrderProduct.objects.get(order=order, product=product)
+
+        # возвращаем продукту то количество, которое было удалено из корзины
+        product.quantity = order_product.quantity
+        product.save()
 
         order_product.delete()
         order.save()

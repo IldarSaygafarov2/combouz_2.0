@@ -17,7 +17,8 @@ from .models import (
     FabricType,
     ProductProperty,
     ProductDimming,
-    ImagesOnAboutPage
+    ImagesOnAboutPage,
+    ProjectsGalleryImageItem,
 )
 
 
@@ -52,7 +53,7 @@ class CategoryAdmin(TranslationAdmin):
         (
             "Общее",
             {
-                "fields": ["name", "category_usd_price", "slug", "show_on_homepage", "make_bestseller"]
+                "fields": ["name", "category_usd_price", "slug", "show_on_homepage", "make_bestseller", "discount"]
             }
         ),
         (
@@ -76,17 +77,17 @@ class CategoryAdmin(TranslationAdmin):
     ]
 
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ("pk", "name", "show_on_homepage", "make_bestseller")
+    list_display = ("pk", "name", "discount", "show_on_homepage", "make_bestseller")
     list_display_links = ("pk", "name")
-    list_editable = ("show_on_homepage", "make_bestseller")
+    list_editable = ("show_on_homepage", "make_bestseller", "discount")
 
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(TranslationAdmin):
-    list_display = ("pk", "name", "discount", "category")
+    list_display = ("pk", "name", "has_discount", "category")
     list_display_links = ("pk", "name")
     list_filter = ("category",)
-    list_editable = ("category", "discount")
+    list_editable = ("category", "has_discount")
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -135,11 +136,18 @@ class HeroGalleryAdmin(TranslationAdmin):
     list_editable = ("body",)
 
 
+class ProjectsGalleryImageItemInline(admin.TabularInline):
+    model = ProjectsGalleryImageItem
+    extra = 1
+
+
 @admin.register(ProjectsGallery)
 class ProjectsGalleryAdmin(TranslationAdmin):
     list_display = ("pk", "title", "subtitle", "img_preview")
     list_display_links = ("pk", "title")
     list_editable = ("subtitle",)
+    prepopulated_fields = {"slug": ("title",)}
+    inlines = [ProjectsGalleryImageItemInline]
 
 
 @admin.register(Feedback)

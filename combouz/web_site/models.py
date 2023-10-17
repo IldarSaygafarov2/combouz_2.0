@@ -5,8 +5,9 @@ from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
-from helpers.functions import convert_price
+from helpers.functions import convert_price, format_price
 from . import choices
+from ckeditor.fields import RichTextField
 
 
 class ImagesOnAboutPage(models.Model):
@@ -61,6 +62,7 @@ class Category(models.Model):
     product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
 
     category_usd_price = models.IntegerField(verbose_name="Стоимость в долларах", default=0)
+    discount = models.SmallIntegerField(verbose_name="Процент скидки", default=0)
 
     def get_uzs_price(self):
         return convert_price(self.category_usd_price)
@@ -102,8 +104,8 @@ class Subcategory(models.Model):
 
     image = models.ImageField(verbose_name="Фото подкатегории", upload_to="subcategories/", null=True)
 
-    discount = models.SmallIntegerField(verbose_name="Размер скидки", default=0,
-                                        help_text="Размер скидки для всех товаров этой подкатегории")
+    has_discount = models.BooleanField(verbose_name="Есть ли скида?", default=False,
+                                       help_text="Есть ли скидка для всех товаров этой подкатегории")
 
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
@@ -115,7 +117,7 @@ class Subcategory(models.Model):
     def count_products(self):
         return self.products.all().count()
 
-    def save(self, *args, **kwargs):  # new
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
@@ -257,6 +259,11 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})
 
+    def get_price_with_discount(self):
+        if self.category.discount and self.subcategory.has_discount:
+            discount = int((self.uzs_price / 100) * self.category.discount)
+            return self.uzs_price - discount
+
     def add_to_cart(self):
         return reverse("cart:to_cart", kwargs={"product_id": self.pk, "action": "add"})
 
@@ -286,52 +293,6 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-
-
-# class ProductWidthItem(models.Model):
-#     """ProductWidthItem model"""
-#
-#     width = models.CharField(
-#         verbose_name="Ширина",
-#         max_length=100,
-#         default="",
-#     )
-#     product = models.ForeignKey(
-#         Product,
-#         on_delete=models.CASCADE,
-#         verbose_name="Продукт",
-#         related_name="width_list",
-#     )
-#
-#     def __str__(self):
-#         return f"{self.product}: {self.width}"
-#
-#     class Meta:
-#         verbose_name = "Ширина продукта"
-#         verbose_name_plural = "Ширина продукта"
-#
-#
-# class ProductLengthItem(models.Model):
-#     """ProductWidthItem model"""
-#
-#     length = models.CharField(
-#         verbose_name="Длина",
-#         max_length=100,
-#         default="",
-#     )
-#     product = models.ForeignKey(
-#         Product,
-#         on_delete=models.CASCADE,
-#         verbose_name="Продукт",
-#         related_name="length_list",
-#     )
-#
-#     def __str__(self):
-#         return f"{self.product}: {self.length}"
-#
-#     class Meta:
-#         verbose_name = "Длина продукта"
-#         verbose_name_plural = "Длина продукта"
 
 
 class ProductImageItem(models.Model):
@@ -397,8 +358,21 @@ class ProjectsGallery(models.Model):
     title = models.CharField(
         verbose_name="Название проекта", max_length=255, unique=True
     )
-    subtitle = models.CharField(verbose_name="Подзаголовок проекта", max_length=255)
+    subtitle = models.CharField(verbose_name="Подзаголовок проекта", max_length=255,
+                                help_text="Показывается на главной странице")
+    short_description = models.TextField(verbose_name="Краткое описание проекта", null=True,
+                                         help_text="Краткое описание для проекта, показывается на странице проектов")
     image = models.ImageField(verbose_name="Фотография", upload_to="projects_gallery/")
+    description = RichTextField(verbose_name="Описание проекта", null=True)
+    slug = models.SlugField(verbose_name="Слаг", null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('portfolio_detail', kwargs={"slug": self.slug})
 
     def img_preview(self):  # new
         return mark_safe(f'<img src = "{self.image.url}" width = "45" height="45"/>')
@@ -409,6 +383,15 @@ class ProjectsGallery(models.Model):
     class Meta:
         verbose_name = "Проект"
         verbose_name_plural = "Проекты"
+
+
+class ProjectsGalleryImageItem(models.Model):
+    project = models.ForeignKey(ProjectsGallery, on_delete=models.CASCADE, verbose_name="Проект", related_name="images")
+    photo = models.ImageField(verbose_name="Дополнительное фото", upload_to="projects_gallery/addons/")
+
+    class Meta:
+        verbose_name = "Дополнительное фото"
+        verbose_name_plural = "Дополнительные фото"
 
 
 class Question(models.Model):

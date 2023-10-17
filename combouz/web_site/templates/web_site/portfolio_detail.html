@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ project.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+        {% include './components/portfolio/_breadcrumbs.html' %}
+    </div>
+    <section class="portfolio-special">
+        <div class="container">
+            <h2 class="portfolio-special__title">{{ project.title }}</h2>
+            <div class="portfolio-special__content">
+                {{ project.description|safe }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

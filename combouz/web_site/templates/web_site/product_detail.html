@@ -4,192 +4,25 @@
 
 
 {% block title %}
-Combo.uz {% trans 'Страница товара' %} {{ product.name }}
+    Combo.uz {% trans 'Страница товара' %} {{ product.name }}
 {% endblock %}
 
 {% block content %}
-<div class="breadcrumbs">
-    {% include './components/product/_breadcrumbs.html' %}
-</div>
-<section class="single">
-    {% get_width_or_length_range category=product.category range_type='width' as width_range %}
-    {% get_width_or_length_range product.category 'length' as length_range %}
-
-    <div class="container">
-        <div class="single__good">
-            <div class="single__left">
-                <div class="single__left-images">
-                    {% for img in product.images.all %}
-                    <div class="single__left-item">
-                        <img src="{{ img.image.url }}" alt="{{ product.name }}"/>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="single__left-show" data-img="{{ product.get_first_img }}">
-                    <div class="single__left-zoom" itemprop="image"></div>
-                    <img src="{{ product.get_first_img }}" alt=""/>
-                </div>
-            </div>
-            <form class="single__right" method="post" action="{{ product.add_to_cart }}">
-                {% csrf_token %}
-                <h2 class="single__right-title">{{ product.name }}</h2>
-                <strong class="single__right-feature size">{% trans 'Размер' %}</strong>
-                <div class="single__right-sep size">
-                    <div class="single__right-chose">
-                        {% if category.width_rounding %}
-                        <div class="single__right-hint-abs">
-                            <p>{{ category.width_rounding }}</p>
-                        </div>
-                        {% endif %}
-                        <span class="single__right-info">{% trans 'ширина' %}</span>
-
-                        <select class="single__right-select" name="item-width">
-                            <option value="-" selected>-</option>
-                            {% for width in width_range %}
-                            <option value="{{ width.width }}">{{ width }} мм</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="single__right-chose">
-                        {% if category.length_rounding %}
-                        <div class="single__right-hint-abs">
-                            <p>
-                                {{ category.length_rounding }}
-                            </p>
-                        </div>
-                        {% endif %}
-                        <span class="single__right-info">{% trans 'Длина' %}</span>
-                        <select class="single__right-select" name="item-length">
-                            <option value="-" selected="selected">-</option>
-                            {% for length in length_range %}
-                            <option value="{{ length.length }}">{{ length }} мм</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <strong class="single__right-feature control">{% trans 'Управление' %}</strong>
-                <div class="single__right-sep control">
-                    <label class="single__right-label">
-                        <input type="radio" value="left" name="item-control"/>
-                        <span class="single__right-check"></span>
-                        <span class="single__right-info">{% trans 'Слева' %}</span>
-                    </label>
-                    <label class="single__right-label">
-                        <input type="radio" value="right" name="item-control"/>
-                        <span class="single__right-check"></span>
-                        <span class="single__right-info">{% trans 'Справа' %}</span>
-                    </label>
-                </div>
-                <strong class="single__right-feature count">{% trans 'Кол-во' %}</strong>
-                <div class="single__right-sep count">
-                    <select class="single__right-select" name="item-count">
-                        {% for qty in product.generate_qty_range %}
-                        <option value="{{ qty }}">{{ qty }}</option>
-                        {% endfor %}
-                    </select><span class="single__right-info">{% trans 'штук' %}</span>
-                </div>
-                <div class="single__right-flex">
-                    <div class="single__right-flex-left">
-                        <strong class="single__right-feature type-cornise">{% trans 'Тип карниза' %}</strong>
-                        <div class="single__right-sep">
-                            <label class="single__right-label">
-                                <input type="radio" value="aluminium" name="item-cornice-type"/>
-                                <span class="single__right-check"></span>
-                                <span class="single__right-info">{% trans 'Алюминевый' %}</span>
-                            </label>
-                            <label class="single__right-label">
-                                <input type="radio" value="plastic" name="item-cornice-type"/>
-                                <span class="single__right-check"></span>
-                                <span class="single__right-info">{% trans 'Пластиковый' %}</span>
-                            </label>
-                        </div>
-                        <strong class="single__right-feature type-control">{% trans 'Тип управления' %}</strong>
-                        <div class="single__right-sep">
-                            <label class="single__right-label">
-                                <input type="radio" value="manual" name="item-control-type"/>
-                                <span class="single__right-check"></span>
-                                <span class="single__right-info">{% trans 'Ручной' %}</span>
-                            </label>
-                            <label class="single__right-label">
-                                <input type="radio" value="electro" name="item-control-type"/>
-                                <span class="single__right-check"></span>
-                                <span class="single__right-info">{% trans 'С электроприводом' %}</span>
-                            </label>
-                        </div>
-                    </div>
-                    <button class="single__right-btn darkBlueHover" type="submit">
-                        <strong>{% trans 'В корзину' %}</strong>
-                        <span class="single__right-icon"><img src="{% static 'images/icons/work-light.svg' %}" alt=""/></span>
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div class="single__content">
-            <ul class="single__content-features">
-                <li class="single__content-elem">
-                    {% trans 'Страна производитель' %}: {{ product.manufacturer_country }}
-                </li>
-                <li class="single__content-elem">
-                    {% trans 'Тип ткани' %}: {{ product.fabric_type }}
-                </li>
-                <li class="single__content-elem">
-                    {% trans 'Свойство' %}: {{ product.property }}
-                </li>
-                <li class="single__content-elem">
-                    {% trans 'Затемнение' %}: {{ product.dimming }}%
-                </li>
-            </ul>
-            <h4 class="single__content-price">{% trans 'Цена' %}: {{ product.uzs_price }} сум за 1 м2</h4>
-            <p class="single__content-info">{{ product.body }}</p>
-            <h3 class="single__content-characters">{% trans 'Характеристики' %}</h3>
-            {% for option in product.options.all %}
-            <div class="single__content-item">
-                <h4 class="single__content-title">{{ option.title }}</h4>
-                <p class="single__content-descr">{{ option.descr }}</p>
-            </div>
-            {% endfor %}
-        </div>
-        <section class="single-comments">
-            <h3 class="single-comments__title">{% trans 'Комментарии' %}</h3>
-            {% if request.user.is_authenticated %}
-            <div class="single-comments__content">
-                <form class="single-comments__form" action="" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="single-comments__user">
-                        <strong class="single-comments__fullname">{{ request.user }}</strong>
-                    </div>
-                    <textarea class="single-comments__textarea" name="user-comment"
-                              placeholder="{% trans 'Оставьте комментарий' %}"></textarea>
-                    <button class="single-comments__btn darkBlueHover">{% trans 'Отправить' %}</button>
-                    <p style="margin: 15px 0;">
-                        {% trans 'Прикрепите фотографию нашей работы' %}
-                    </p>
-                    <input type="file" name="img" multiple="" accept="image/*" id="id_img"/>
-                </form>
-                <div class="single-comments__block">
-                    {% for comment in comments %}
-                    <div class="single-comments__item">
-                        <div class="single-comments__user">
-                            <strong class="single-comments__fullname">{{ comment.author.email }}</strong>
-                        </div>
-                        <p class="single-comments__descr">{{ comment.body }}</p>
-
-                        <div class="single-comments__photos" id="comments_carousel">
-                            {% for comment_item in comment.commentitem_set.all %}
-                            <a href="{{ comment_item.img.url }}" data-fancybox="gallery" class="single-comments__photo" >
-                                <img src="{{ comment_item.img.url }}" alt=""/>
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% if comments|length < comments_total %}
-                <a class="single-comments__loadmore" href="?next={{ comments|length }}">{% trans 'Загрузить еще' %}</a>
-                {% endif %}
-            </div>
-            {% endif %}
-        </section>
+    <div class="breadcrumbs">
+        {% include './components/product/_breadcrumbs.html' %}
     </div>
-</section>
+    <section class="single">
+        {% get_width_or_length_range category=product.category range_type='width' as width_range %}
+        {% get_width_or_length_range product.category 'length' as length_range %}
+
+        <div class="container">
+            <div class="single__good">
+                {% include './components/product/_product-top.html' %}
+            </div>
+            <div class="single__content">
+                {% include './components/product/_product-middle.html' %}
+            </div>
+            {% include './components/product/_product-comments.html' %}
+        </div>
+    </section>
 {% endblock %}

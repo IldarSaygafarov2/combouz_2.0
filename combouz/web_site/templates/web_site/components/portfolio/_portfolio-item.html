@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="portfolio__card">
-  <a class="portfolio__link" href="#!"></a><img src="{{ project.image.url }}" alt="Combo.uz {{ project.title }}" />
+  <a class="portfolio__link" href="{{ project.get_absolute_url }}"></a><img src="{{ project.image.url }}" alt="Combo.uz {{ project.title }}" />
   <div class="portfolio__text">
     <p class="gallery-projects__excerpt portfolio__excerpt">{{ idx }} - {{ project.title }}</p>
     <h4 class="gallery-projects__name portfolio__name">{{ project.subtitle }}</h4>
