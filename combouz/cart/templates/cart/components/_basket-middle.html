@@ -1,0 +1,21 @@
+{% load i18n static custom_tags %}
+
+<div class="container">
+                <div class="busket-middle__content">
+                    <div class="busket-middle__ways">
+                        <strong>{% trans 'Варианты доставки' %}</strong><select class="busket-middle__select"
+                                                                                name="busket-delivery">
+                        <option value="pickup" selected="selected">
+                            {% trans 'Самовывоз' %}- 0{% trans 'сум' %}
+                        </option>
+                        <option value="takeaway">
+                            {% trans 'Доставка курьером' %}
+                        </option>
+                    </select>
+                    </div>
+                    <div class="busket-middle__total">
+                        {% trans 'Общая сумма заказа' %}-&nbsp;<output>{{ cart_total_price }}</output>
+                        {% trans 'сум' %}
+                    </div>
+                </div>
+            </div>

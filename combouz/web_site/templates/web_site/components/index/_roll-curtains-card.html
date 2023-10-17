@@ -6,8 +6,8 @@
 <div class="roll-curtains__card">
   <a class="roll-curtains__img" href="{{ subcategory.get_absolute_url }}">
     <img src="{{ subcategory.get_first_img }}" alt="{{ subcategory.name }} Combo.uz" loading="lazy" />
-    {% if product.discount %}
-      <span class="roll-curtains__discount-abs">{% trans 'СКИДКА' %} {{ product.discount }}%</span>
+    {% if subcategory.discount %}
+      <span class="roll-curtains__discount-abs">{% trans 'СКИДКА' %} {{ subcategory.discount }}%</span>
     {% endif %}
   </a>
   <div class="roll-curtains__text">

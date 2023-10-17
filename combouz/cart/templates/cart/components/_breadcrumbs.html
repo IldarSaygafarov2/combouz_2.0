@@ -1,0 +1,30 @@
+{% load i18n static %}
+
+<div class="container">
+    <div class="breadcrumbs__content">
+        <div class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{% url 'home' %}">
+                <span>{% trans 'Главная' %}</span>
+                <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt=""/>
+            </a>
+        </div>
+        {% if category %}
+            <div class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{{ category.get_absolute_url }}">
+                    <span>{{ category }}</span>
+                    <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt=""/>
+                </a>
+            </div>
+            <div class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{{ last_product.get_absolute_url }}">
+                    <span>{{ last_product }}</span>
+                    <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt=""/>
+                </a>
+            </div>
+        {% endif %}
+        <div class="breadcrumbs__item">
+            <span class="breadcrumbs__line"></span>
+            <a class="breadcrumbs__link active" href="#!"><span>{% trans 'Корзина' %}</span></a>
+        </div>
+    </div>
+</div>

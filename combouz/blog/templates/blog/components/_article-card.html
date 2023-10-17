@@ -1,0 +1,8 @@
+{% load static %}
+
+<div class="articles__card">
+    <a class="articles__img" href="{{ article.get_absolute_url }}">
+        <img src="{{ article.photo.url }}" alt="combo.uz articles image"></a>
+    <a class="articles__title" href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+    <p class="articles__descr">{{ article.short_description }}</p>
+</div>

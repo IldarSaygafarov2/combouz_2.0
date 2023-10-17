@@ -2,139 +2,23 @@
 {% load static custom_tags i18n %}
 
 {% block title %}
-  Combo.uz busket order page
+    Combo.uz busket order page
 {% endblock %}
 
 {% block content %}
-  <div class="breadcrumbs">
-    <div class="container">
-      <div class="breadcrumbs__content">
-        <div class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{% url 'home' %}"><span>{% trans 'Главная' %}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
-        </div>
-        {% if category %}
-          <div class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ category.get_absolute_url }}"><span>{{ category }}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
-          </div>
-          <div class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ last_product.get_absolute_url }}"><span>{{ last_product }}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
-          </div>
-        {% endif %}
-        <div class="breadcrumbs__item">
-          <span class="breadcrumbs__line"></span><a class="breadcrumbs__link active" href="#!"><span>{% trans 'Корзина' %}</span></a>
-        </div>
-      </div>
+    <div class="breadcrumbs">
+        {% include './components/_breadcrumbs.html' %}
     </div>
-  </div>
-  <form class="busket" action="{% url 'cart:cart' %}" method="POST">
-    {% csrf_token %}
-    <div class="container">
-      <div class="busket-top">
-        <div class="busket-top__sep">
-          <h3 class="busket-top__title">{% trans 'Корзина' %}</h3>
-          <p class="busket-top__excerpt">
-            {% trans 'Изделия на заказ по размерам покупателя, предоплата от 20%' %}
-          </p>
+    <form class="busket" action="{% url 'cart:cart' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            {% include './components/_basket-top.html' %}
         </div>
-        <div class="busket-top__table">
-          <div class="busket-top__slugs">
-            <strong>{% trans 'Наименование товара' %}</strong><strong>{% trans 'Количество' %}</strong><strong>{% trans 'Цена' %}</strong><strong>{% trans 'Итого' %}</strong>
-          </div>
-          <div class="busket-top__items">
-            {% for cart_product in products %}
-              {% convert_price cart_product.product.uzs_price as product_price %}
-              {% convert_price cart_product.get_total_price as total_price %}
-              <div class="busket-top__elem">
-                <p class="busket-top__name">{{ cart_product.product.name }}</p>
-                <div class="busket-top__controls">
-                  <a class="busket-top__minus" href="{{ cart_product.product.remove_from_cart }}"><img src="{% static 'images/icons/minus.svg' %}" alt="" /></a>
-                  <output class="busket-top__count">{{ cart_product.quantity }}</output>
-                  <a class="busket-top__plus" href="{{ cart_product.product.add_to_cart }}"><img src="{% static 'images/icons/plus.svg' %}" alt="" /></a>
-                </div>
-                <p class="busket-top__control price">
-                  {{ product_price }} {% trans 'сум' %}
-                </p>
-                <p class="busket-top__control total">
-                  {{ total_price }} {% trans 'сум' %}
-                </p>
-                <a class="busket-top__remove" href="{% url 'cart:to_cart' cart_product.product.pk 'delete_product' %}"><img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon" /></a>
-              </div>
-            {% endfor %}
-          </div>
+        <div class="busket-middle">
+            {% include './components/_basket-middle.html' %}
         </div>
-      </div>
-    </div>
-    <div class="busket-middle">
-      <div class="container">
-        <div class="busket-middle__content">
-          <div class="busket-middle__ways">
-            <strong>{% trans 'Варианты доставки' %}</strong><select class="busket-middle__select" name="busket-delivery">
-              <option value="pickup" selected="selected">
-                {% trans 'Самовывоз' %}- 0{% trans 'сум' %}
-              </option>
-              <option value="takeaway">
-                {% trans 'Доставка курьером' %}
-              </option>
-            </select>
-          </div>
-          <div class="busket-middle__total">
-            {% trans 'Общая сумма заказа' %}-&nbsp;<output>{{ cart_total_price }}</output>
-            {% trans 'сум' %}
-          </div>
+        <div class="container">
+            {% include './components/_basket-bottom.html' %}
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="busket-bottom">
-        <h3 class="busket-bottom__title busket-top__title">{% trans 'Для покупки заполните форму' %}</h3>
-        <div class="busket-bottom__data">
-          <div class="busket-bottom__sep">
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Фамилия' %}</span><input class="busket-bottom__input" name="busket-surname" />
-            </div>
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Имя' %}</span><input class="busket-bottom__input" name="busket-name" required />
-            </div>
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Почта' %}</span><input class="busket-bottom__input" type="email" name="busket-email" required />
-            </div>
-          </div>
-          <div class="busket-bottom__sep">
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Телефон' %}</span><input class="busket-bottom__input" type="number" name="busket-phone" required />
-            </div>
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Тип монтажа' %}</span><input class="busket-bottom__input" name="busket-montage" />
-            </div>
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Адрес' %}</span><input class="busket-bottom__input" name="busket-address" required />
-            </div>
-          </div>
-          <div class="busket-bottom__sep">
-            <div class="busket-bottom__item">
-              <span class="busket-bottom__info">{% trans 'Комментарии' %}</span><input class="busket-bottom__input busket-bottom__textarea" name="busket-comment" />
-            </div>
-          </div>
-        </div>
-        <h3 class="busket-bottom__title busket-top__title">{% trans 'Тип доставки' %}</h3>
-        <div class="busket-bottom__delivery">
-          <label class="busket-bottom__label">
-            <input type="radio" name="busket-delivery-type" value="install,size,delivery" required />
-            <span class="busket-bottom__check"></span>
-            <span>{% trans 'Установка, размер, доставка' %}</span>
-          </label><label class="busket-bottom__label">
-            <input type="radio" name="busket-delivery-type" value="install,delivery" required />
-            <span class="busket-bottom__check"></span>
-            <span>{% trans 'Доставка и установка' %}</span>
-          </label>
-          <label class="busket-bottom__label">
-            <input type="radio" name="busket-delivery-type" value="delivery-tashkent" required />
-            <span class="busket-bottom__check"></span>
-            <span>{% trans 'Доставка по городу Ташкент' %}</span>
-          </label>
-          <button class="busket-bottom__btn darkBlueHover" type="submit">{% trans 'Купить' %}</button>
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
 {% endblock %}

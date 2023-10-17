@@ -1,0 +1,49 @@
+{% load i18n static custom_tags %}
+
+<div class="busket-top">
+    <div class="busket-top__sep">
+        <h3 class="busket-top__title">{% trans 'Корзина' %}</h3>
+        <p class="busket-top__excerpt">
+            {% trans 'Изделия на заказ по размерам покупателя, предоплата от 20%' %}
+        </p>
+    </div>
+    <div class="busket-top__table">
+        <div class="busket-top__slugs">
+            <strong>{% trans 'Наименование товара' %}</strong>
+            <strong>{% trans 'Количество' %}</strong>
+            <strong>{% trans 'Цена' %}</strong>
+            <strong>Цена со скидкой</strong>
+            <strong>{% trans 'Итого' %}</strong>
+        </div>
+        <div class="busket-top__items">
+            {% for cart_product in products %}
+                {% convert_price cart_product.product.uzs_price as product_price %}
+                {% convert_price cart_product.get_total_price as total_price %}
+                <div class="busket-top__elem">
+                    <p class="busket-top__name">{{ cart_product.product.name }}</p>
+                    <div class="busket-top__controls">
+                        <a class="busket-top__minus" href="{{ cart_product.product.remove_from_cart }}">
+                            <img src="{% static 'images/icons/minus.svg' %}" alt=""/>
+                        </a>
+                        <output class="busket-top__count">{{ cart_product.quantity }}</output>
+                        <a class="busket-top__plus" href="{{ cart_product.product.add_to_cart }}">
+                            <img src="{% static 'images/icons/plus.svg' %}" alt=""/>
+                        </a>
+                    </div>
+                    <p class="busket-top__control price">
+                        {{ product_price }} {% trans 'сум' %}
+                    </p>
+                    <p class="busket-top__control price">
+                        {{ product_price }} {% trans 'сум' %}
+                    </p>
+                    <p class="busket-top__control total">
+                        {{ total_price }} {% trans 'сум' %}
+                    </p>
+                    <a class="busket-top__remove"
+                       href="{% url 'cart:to_cart' cart_product.product.pk 'delete_product' %}"><img
+                            src="{% static 'images/icons/trash.svg' %}" alt="remove item icon"/></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

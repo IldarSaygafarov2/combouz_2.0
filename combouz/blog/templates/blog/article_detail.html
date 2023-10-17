@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Combo.uz страница статьи
+{% endblock %}
+
+{% block content %}
+ <section class="article-single">
+            <div class="container">
+                <div class="article-single__content">
+                    {{ article.description|safe }}
+                </div>
+            </div>
+        </section>
+{% endblock %}

@@ -15,6 +15,7 @@ urlpatterns += i18n_patterns(
     path("", include("web_site.urls")),
     path("cart/", include("cart.urls")),
     path("accounts/", include("accounts.urls")),
+    path("blog/", include("blog.urls")),
 )
 
 if settings.DEBUG:

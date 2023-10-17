@@ -83,10 +83,10 @@ class CategoryAdmin(TranslationAdmin):
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(TranslationAdmin):
-    list_display = ("pk", "name", "category")
+    list_display = ("pk", "name", "discount", "category")
     list_display_links = ("pk", "name")
     list_filter = ("category",)
-    list_editable = ("category",)
+    list_editable = ("category", "discount")
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -114,7 +114,6 @@ class ProductAdmin(TranslationAdmin):
     list_display = (
         "pk",
         "name",
-        # "usd_price",
         "uzs_price",
         "quantity",
         "category",
@@ -123,7 +122,6 @@ class ProductAdmin(TranslationAdmin):
     list_display_links = ("pk", "name")
     list_filter = ("category", "subcategory")
     list_editable = (
-        # "usd_price",
         "category",
         "subcategory"
     )

@@ -102,6 +102,9 @@ class Subcategory(models.Model):
 
     image = models.ImageField(verbose_name="Фото подкатегории", upload_to="subcategories/", null=True)
 
+    discount = models.SmallIntegerField(verbose_name="Размер скидки", default=0,
+                                        help_text="Размер скидки для всех товаров этой подкатегории")
+
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
 
@@ -175,11 +178,10 @@ class Product(models.Model):
     name = models.CharField(
         verbose_name="Название продукта", max_length=255, unique=True, default=""
     )
-    # usd_price = models.SmallIntegerField(verbose_name="Цена в y.e", default=0)
     uzs_price = models.IntegerField(
         verbose_name=" Цена в узбекских сумах",
         default=0,
-        help_text="Данное поле заполнять не нужно, при добавлении цены в y.e данное поле будет заполнено автоматически",
+        help_text="Данное поле заполнять не нужно.",
         null=True,
         blank=True
     )

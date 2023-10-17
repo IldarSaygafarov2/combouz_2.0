@@ -1,3 +1,9 @@
+{% load custom_tags %}
+
+{% get_config as config %}
+
+
+{% if config.SHOW_SLIDER %}
 <section class="best-curtains">
   <div class="container">
     <div class="best-curtains__slider">
@@ -14,3 +20,4 @@
     </div>
   </div>
 </section>
+{% endif %}
