@@ -1,12 +1,15 @@
 {% load i18n %}
 
 <section class="reviews">
-  <div class="container">
-    <h2 class="reviews__title">{% trans 'Что говорят о нас' %}</h2>
-    <div class="reviews__items">
-      {% for review in reviews %}
-        {% include './_review-item.html' %}
-      {% endfor %}
+    <div class="container">
+        <h2 class="reviews__title">{% trans 'Что говорят о нас' %}</h2>
+        <div class="reviews__items">
+            {% for review in reviews %}
+            {% include './_review-item.html' %}
+            {% endfor %}
+        </div>
+        <div class="wrap">
+            <a class="darkBlueHover" href="{% url 'reviews' %}">Все отзывы</a>
+        </div>
     </div>
-  </div>
 </section>

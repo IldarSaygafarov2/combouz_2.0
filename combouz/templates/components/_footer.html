@@ -166,9 +166,9 @@
             <div class="footer-se__kinds">
                 <h3 class="footer-se__kinds-title">{% trans 'Виды' %}</h3>
                 <ul class="footer-se__kinds-list">
-                    {% for category in categories %}
+                    {% for article in articles %}
                         <li class="footer-se__kinds-list-item">
-                            <a class="footer-se__link" href="{{ category.get_absolute_url }}">{{ category }}</a>
+                            <a class="footer-se__link" href="{{ article.get_absolute_url }}">{{ article }}</a>
                         </li>
                     {% endfor %}
                 </ul>

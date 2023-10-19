@@ -132,3 +132,15 @@
     font-weight: 400;
     line-height: 150%;
 }
+
+.wrap {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.wrap > a {
+    background: var(--primaryColor);
+    color: var(--textWhite);
+    font-size: 16px;
+    padding: 8px 19px;
+}

@@ -2,7 +2,7 @@ import requests as req
 from constance import config
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
-
+from blog.models import Article
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
 from .models import (
@@ -36,6 +36,7 @@ def home_view(request):
     bestsellers = Category.objects.filter(make_bestseller=True).first()
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
+    articles = Article.objects.all()
     correct_videos = [
         video.video_link.replace("youtu.be", "www.youtube.com/embed")
         for video in videos
@@ -49,6 +50,7 @@ def home_view(request):
         "home_categories": home_categories,
         "bestsellers": bestsellers,
         "videos": correct_videos,
+        "articles": articles
     }
     return render(request, "web_site/index.html", context)
 
