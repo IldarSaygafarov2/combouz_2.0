@@ -77,9 +77,9 @@ class CategoryAdmin(TranslationAdmin):
     ]
 
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ("pk", "name", "discount", "show_on_homepage", "make_bestseller")
+    list_display = ("pk", "name", "category_usd_price", "discount", "show_on_homepage", "make_bestseller")
     list_display_links = ("pk", "name")
-    list_editable = ("show_on_homepage", "make_bestseller", "discount")
+    list_editable = ("show_on_homepage", "category_usd_price", "make_bestseller", "discount")
 
 
 @admin.register(Subcategory)

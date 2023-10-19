@@ -2,9 +2,14 @@ from django import template
 
 from cart.utils import get_cart_data
 from helpers import functions as func
-from web_site.models import Category, Product, ProductColorItem
+from web_site.models import Category, Product, ProductColorItem, Subcategory
 
 register = template.Library()
+
+
+@register.simple_tag()
+def get_categories():
+    return Category.objects.all()
 
 
 @register.simple_tag()
@@ -24,10 +29,27 @@ def get_config():
     return config
 
 
+def get_category_by_path(path: str):
+    items = [item for item in path.split("/") if item]
+    category = Category.objects.filter(slug=items[-1]).first()
+    if category is None:
+        return False
+    return category
+
+
 @register.simple_tag()
-def get_categories():
-    categories = Category.objects.all()
-    return categories
+def get_subcategories(path):
+    category = get_category_by_path(path)
+    if not category:
+        return Category.objects.all()
+    return Subcategory.objects.filter(category=category)
+
+
+def get_products_by_category(category=None):
+    if category is None:
+        return Subcategory.objects.all()
+
+    return Subcategory.objects.filter(category=category)
 
 
 @register.simple_tag()
