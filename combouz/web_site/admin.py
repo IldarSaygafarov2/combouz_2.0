@@ -19,7 +19,13 @@ from .models import (
     ProductDimming,
     ImagesOnAboutPage,
     ProjectsGalleryImageItem,
+    SocialItem
 )
+
+
+@admin.register(SocialItem)
+class SocialItemAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(ImagesOnAboutPage)
@@ -29,12 +35,13 @@ class ImagesOnAboutPageAdmin(admin.ModelAdmin):
 
 @admin.register(FabricType)
 class FabricTypeAdmin(TranslationAdmin):
-    fields = ("title",)
+    list_display = ("title",)
 
 
 @admin.register(ProductProperty)
 class ProductPropertyAdmin(TranslationAdmin):
-    fields = ("title",)
+    list_display = ("title",)
+    list_display_links = ("title",)
 
 
 @admin.register(ProductDimming)

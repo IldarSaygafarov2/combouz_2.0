@@ -16,7 +16,7 @@
                                 <h3 class="companies__title">{{ project.title }}</h3>
                                 <p class="companies__descr">{{ project.short_description }}</p>
                                 <a class="companies__link darkBlueHover" href="{{ project.get_absolute_url }}">
-                                    Посмотреть
+                                    {% trans 'Посмотреть' %}
                                 </a>
                             </div>
                             {% for image in project.images.all %}

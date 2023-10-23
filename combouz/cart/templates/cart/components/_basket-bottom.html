@@ -1,59 +1,59 @@
 {% load i18n static custom_tags %}
 
 <div class="busket-bottom">
-                <h3 class="busket-bottom__title busket-top__title">{% trans 'Для покупки заполните форму' %}</h3>
-                <div class="busket-bottom__data">
-                    <div class="busket-bottom__sep">
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Фамилия' %}</span><input
-                                class="busket-bottom__input" name="busket-surname"/>
-                        </div>
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Имя' %}</span><input
-                                class="busket-bottom__input" name="busket-name" required/>
-                        </div>
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Почта' %}</span><input
-                                class="busket-bottom__input" type="email" name="busket-email" required/>
-                        </div>
-                    </div>
-                    <div class="busket-bottom__sep">
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Телефон' %}</span><input
-                                class="busket-bottom__input" type="number" name="busket-phone" required/>
-                        </div>
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Тип монтажа' %}</span><input
-                                class="busket-bottom__input" name="busket-montage"/>
-                        </div>
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Адрес' %}</span><input
-                                class="busket-bottom__input" name="busket-address" required/>
-                        </div>
-                    </div>
-                    <div class="busket-bottom__sep">
-                        <div class="busket-bottom__item">
-                            <span class="busket-bottom__info">{% trans 'Комментарии' %}</span><input
-                                class="busket-bottom__input busket-bottom__textarea" name="busket-comment"/>
-                        </div>
-                    </div>
-                </div>
-                <h3 class="busket-bottom__title busket-top__title">{% trans 'Тип доставки' %}</h3>
-                <div class="busket-bottom__delivery">
-                    <label class="busket-bottom__label">
-                        <input type="radio" name="busket-delivery-type" value="install,size,delivery" required/>
-                        <span class="busket-bottom__check"></span>
-                        <span>{% trans 'Установка, размер, доставка' %}</span>
-                    </label><label class="busket-bottom__label">
-                    <input type="radio" name="busket-delivery-type" value="install,delivery" required/>
-                    <span class="busket-bottom__check"></span>
-                    <span>{% trans 'Доставка и установка' %}</span>
-                </label>
-                    <label class="busket-bottom__label">
-                        <input type="radio" name="busket-delivery-type" value="delivery-tashkent" required/>
-                        <span class="busket-bottom__check"></span>
-                        <span>{% trans 'Доставка по городу Ташкент' %}</span>
-                    </label>
-                    <button class="busket-bottom__btn darkBlueHover" type="submit">{% trans 'Купить' %}</button>
-                </div>
+    <h3 class="busket-bottom__title busket-top__title">{% trans 'Для покупки заполните форму' %}</h3>
+    <div class="busket-bottom__data">
+        <div class="busket-bottom__sep">
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Фамилия' %}</span><input
+                    class="busket-bottom__input" name="busket-surname"/>
             </div>
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Имя' %}</span><input
+                    class="busket-bottom__input" name="busket-name" required/>
+            </div>
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Почта' %}</span><input
+                    class="busket-bottom__input" type="email" name="busket-email" required/>
+            </div>
+        </div>
+        <div class="busket-bottom__sep">
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Телефон' %}</span><input
+                    class="busket-bottom__input" type="number" name="busket-phone" required/>
+            </div>
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Тип монтажа' %}</span><input
+                    class="busket-bottom__input" name="busket-montage"/>
+            </div>
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Адрес' %}</span><input
+                    class="busket-bottom__input" name="busket-address" required/>
+            </div>
+        </div>
+        <div class="busket-bottom__sep">
+            <div class="busket-bottom__item">
+                <span class="busket-bottom__info">{% trans 'Комментарии' %}</span><input
+                    class="busket-bottom__input busket-bottom__textarea" name="busket-comment"/>
+            </div>
+        </div>
+    </div>
+    <h3 class="busket-bottom__title busket-top__title">{% trans 'Тип доставки' %}</h3>
+    <div class="busket-bottom__delivery">
+        <label class="busket-bottom__label">
+            <input type="radio" name="busket-delivery-type" value="install,size,delivery" required/>
+            <span class="busket-bottom__check"></span>
+            <span>{% trans 'Установка, размер, доставка' %}</span>
+        </label><label class="busket-bottom__label">
+        <input type="radio" name="busket-delivery-type" value="install,delivery" required/>
+        <span class="busket-bottom__check"></span>
+        <span>{% trans 'Доставка и установка' %}</span>
+    </label>
+        <label class="busket-bottom__label">
+            <input type="radio" name="busket-delivery-type" value="delivery-tashkent" required/>
+            <span class="busket-bottom__check"></span>
+            <span>{% trans 'Доставка по городу Ташкент' %}</span>
+        </label>
+        <button class="busket-bottom__btn darkBlueHover" type="submit">{% trans 'Купить' %}</button>
+    </div>
+</div>

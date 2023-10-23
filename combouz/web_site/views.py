@@ -18,7 +18,8 @@ from .models import (
     Question,
     ProductColorItem,
     ProductDimming,
-    ImagesOnAboutPage
+    ImagesOnAboutPage,
+    SocialItem
 )
 
 
@@ -37,6 +38,7 @@ def home_view(request):
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
     articles = Article.objects.all()
+    social_items = SocialItem.objects.all()
     correct_videos = [
         video.video_link.replace("youtu.be", "www.youtube.com/embed")
         for video in videos
@@ -50,7 +52,8 @@ def home_view(request):
         "home_categories": home_categories,
         "bestsellers": bestsellers,
         "videos": correct_videos,
-        "articles": articles
+        "articles": articles,
+        "social_items": social_items
     }
     return render(request, "web_site/index.html", context)
 

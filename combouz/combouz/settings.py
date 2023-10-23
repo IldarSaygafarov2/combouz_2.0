@@ -197,7 +197,8 @@ JAZZMIN_SETTINGS = {
 gettext = lambda s: s
 LANGUAGES = (
     ("ru", gettext("Russia")),
-    ("en", gettext("English")),
+    # ("en", gettext("English")),
+    ("uz", gettext("Uzbek")),
 )
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)

@@ -406,8 +406,8 @@ class Question(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Вопрос"
-        verbose_name_plural = "Вопросы"
+        verbose_name = "Видео"
+        verbose_name_plural = "Видео"
 
 
 class Feedback(models.Model):
@@ -475,3 +475,16 @@ class CommentItem(models.Model):
         blank=True,
         null=True,
     )
+
+
+class SocialItem(models.Model):
+    link = models.CharField(verbose_name="Ссылка на соц сеть", max_length=500)
+    icon = models.ImageField(verbose_name="Фото соц сети.", upload_to="socials/icons/",
+                             help_text="Фото должно быть расширения PNG")
+
+    def __str__(self):
+        return self.link
+
+    class Meta:
+        verbose_name = "Социальная сеть"
+        verbose_name_plural = "Социальные сети"

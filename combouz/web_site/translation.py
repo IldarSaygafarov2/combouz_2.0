@@ -1,5 +1,15 @@
 from modeltranslation.translator import register, TranslationOptions
 from .models import *
+from blog.models import Article
+
+
+@register(Article)
+class ArticleTranslationOptions(TranslationOptions):
+    fields = (
+        "name",
+        "short_description",
+        "description",
+    )
 
 
 @register(Category)
@@ -41,6 +51,8 @@ class ProjectsGalleryTranslationOptions(TranslationOptions):
     fields = (
         "title",
         "subtitle",
+        "short_description",
+        "description",
     )
 
 
