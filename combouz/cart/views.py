@@ -61,9 +61,13 @@ def basket_view(request):
         category = category.product.category if category else None
         last_product = cart_info["products"].last().product if category else None
     else:
-        product = Product.objects.get(pk=cart_info["products"][-1]["product"]["pk"])
-        category = product.category
-        last_product = product
+        if cart_info["products"]:
+            product = Product.objects.get(pk=cart_info["products"][-1]["product"]["pk"])
+            category = product.category
+            last_product = product
+        else:
+            category = ""
+            last_product = ""
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
