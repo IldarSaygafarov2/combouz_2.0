@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -5,9 +6,8 @@ from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
-from helpers.functions import convert_price, format_price
+from helpers.functions import convert_price
 from . import choices
-from ckeditor.fields import RichTextField
 
 
 class ImagesOnAboutPage(models.Model):
@@ -25,87 +25,70 @@ class Category(models.Model):
     """Category model."""
 
     name = models.CharField(
-        verbose_name=_("Название категории"), max_length=255, unique=True
+        verbose_name=_("Название вида"), max_length=255, unique=True
     )
-    slug = models.SlugField(
-        verbose_name=_("Ссылка категории"),
-        default="",
-        help_text="Данное поле заполнять не нужно.",
-    )
-    show_on_homepage = models.BooleanField(
-        verbose_name="Показать на главной",
-        default=False,
-        help_text="При выборе данного пункта, все продукты этой категории будут показаны на главной странице",
-    )
-    make_bestseller = models.BooleanField(
-        verbose_name="Сделать бестселлером",
-        default=False,
-        help_text="При выборе данного пункта, покажет все товары данной категории в секции 'Хиты продаж' ",
-    )
-    width_rounding = models.CharField(
-        verbose_name="Округление по ширине для всех товаров категории",
-        max_length=150,
-        null=True,
-        blank=True,
-    )
-    length_rounding = models.CharField(
-        verbose_name="Округление по длине для всех товаров категории",
-        max_length=150,
-        null=True,
-        blank=True,
-    )
+    # slug = models.SlugField(
+    #     verbose_name=_("Ссылка категории"),
+    #     default="",
+    #     help_text="Данное поле заполнять не нужно.",
+    # )
+    # show_on_homepage = models.BooleanField(
+    #     verbose_name="Показать на главной",
+    #     default=False,
+    #     help_text="При выборе данного пункта, все продукты этой категории будут показаны на главной странице",
+    # )
+    # make_bestseller = models.BooleanField(
+    #     verbose_name="Сделать бестселлером",
+    #     default=False,
+    #     help_text="При выборе данного пункта, покажет все товары данной категории в секции 'Хиты продаж' ",
+    # )
+    # width_rounding = models.CharField(
+    #     verbose_name="Округление по ширине для всех товаров категории",
+    #     max_length=150,
+    #     null=True,
+    #     blank=True,
+    # )
+    # length_rounding = models.CharField(
+    #     verbose_name="Округление по длине для всех товаров категории",
+    #     max_length=150,
+    #     null=True,
+    #     blank=True,
+    # )
 
-    product_width_from = models.IntegerField(verbose_name="Ширина от", default=0, null=True)
-    product_width_to = models.IntegerField(verbose_name="Ширина до", default=0, null=True)
-
-    product_length_from = models.IntegerField(verbose_name="Длина от", default=0, null=True)
-    product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
-
-    category_usd_price = models.IntegerField(verbose_name="Стоимость в долларах", default=0)
-    discount = models.SmallIntegerField(verbose_name="Процент скидки", default=0)
-
-    def get_uzs_price(self):
-        return convert_price(self.category_usd_price)
-
-    def count_products(self):
-        return self.products.all().count()
-
-    def get_absolute_url(self):
-        return reverse("category_detail", kwargs={"category_slug": self.slug})
-
-    def save(self, *args, **kwargs):  # new
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
+    # product_width_from = models.IntegerField(verbose_name="Ширина от", default=0, null=True)
+    # product_width_to = models.IntegerField(verbose_name="Ширина до", default=0, null=True)
+    #
+    # product_length_from = models.IntegerField(verbose_name="Длина от", default=0, null=True)
+    # product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
+    #
+    # category_usd_price = models.IntegerField(verbose_name="Стоимость в долларах", default=0)
+    # discount = models.SmallIntegerField(verbose_name="Процент скидки", default=0)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Категория"
-        verbose_name_plural = "Категории"
+        verbose_name = "Вид"
+        verbose_name_plural = "Виды"
 
 
 class Subcategory(models.Model):
     """Subcategory model."""
 
-    name = models.CharField(verbose_name="Название подкатегории", max_length=255)
+    name = models.CharField(verbose_name="Название категории", max_length=255)
     slug = models.SlugField(
-        verbose_name="Ссылка подкатегории",
+        verbose_name="Ссылка категории",
         default="",
         help_text="Данное поле заполнять не нужно",
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        verbose_name="Категория",
+        verbose_name="Вид",
         related_name="subcategories",
     )
 
     image = models.ImageField(verbose_name="Фото подкатегории", upload_to="subcategories/", null=True)
-
-    has_discount = models.BooleanField(verbose_name="Есть ли скида?", default=False,
-                                       help_text="Есть ли скидка для всех товаров этой подкатегории")
 
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
@@ -126,8 +109,8 @@ class Subcategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Подкатегория"
-        verbose_name_plural = "Подкатегории"
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
 
 
 class ProductColorItem(models.Model):

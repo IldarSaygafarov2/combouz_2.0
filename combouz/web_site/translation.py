@@ -14,7 +14,7 @@ class ArticleTranslationOptions(TranslationOptions):
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
-    fields = ("name", "width_rounding", "length_rounding")
+    fields = ("name", )
 
 
 @register(Subcategory)

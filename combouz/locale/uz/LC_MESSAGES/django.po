@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 01:33+0500\n"
+"POT-Creation-Date: 2023-11-06 10:46+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: .\blog\templates\blog\article_detail.html:5
 msgid "страница статьи"
 msgstr "maqola sahifasi"
@@ -115,7 +116,9 @@ msgstr "Savat"
 #: .\cart\templates\cart\components\_basket-top.html:7
 #, python-format
 msgid "Изделия на заказ по размерам покупателя, предоплата от 20%%"
-msgstr "Mahsulotlar xaridorning oʻlchamiga koʻra buyurtma asosida tayyorlanadi, 20%% dan avans toʻlovi"
+msgstr ""
+"Mahsulotlar xaridorning oʻlchamiga koʻra buyurtma asosida tayyorlanadi, 20%% "
+"dan avans toʻlovi"
 
 #: .\cart\templates\cart\components\_basket-top.html:12
 msgid "Наименование товара"
@@ -233,7 +236,7 @@ msgstr "Maqolalar"
 
 #: .\templates\components\_footer.html:133
 #: .\web_site\templates\web_site\components\reviews\_breadcrumbs.html:11
-#: .\web_site\templates\web_site\reviews.html:4
+#: .\web_site\templates\web_site\reviews.html:5
 msgid "Отзывы"
 msgstr "Sharhlar"
 
@@ -258,15 +261,19 @@ msgstr "Bosh sahifa"
 msgid "Лучшие шторы в Узбекистане"
 msgstr "O'zbekistondagi eng zo'r pardalar"
 
-#: .\templates\components\_header.html:39
+#: .\templates\components\_header.html:25
+msgid "Дополнительно"
+msgstr "Qo'shimcha"
+
+#: .\templates\components\_header.html:33
 msgid "Заказать звонок"
 msgstr "Qo'ng'iroqni talab qiling"
 
-#: .\templates\components\_header.html:43
+#: .\templates\components\_header.html:36
 msgid "Авторизация / Регистрация"
 msgstr "Avtorizatsiya / Ro'yxatdan o'tish"
 
-#: .\templates\components\_header.html:45
+#: .\templates\components\_header.html:39
 msgid "Выйти"
 msgstr "Tashqariga chiqish"
 
@@ -389,7 +396,9 @@ msgstr "Savollaringiz bor, sizga yordam bera olamizmi?"
 
 #: .\web_site\templates\web_site\components\index\_feedback.html:6
 msgid "Оставьте номер телефона, и мы вам перезвоним в ближашее время."
-msgstr "Telefon raqamingizni qoldiring va biz sizga imkon qadar tezroq qo'ng'iroq qilamiz."
+msgstr ""
+"Telefon raqamingizni qoldiring va biz sizga imkon qadar tezroq qo'ng'iroq "
+"qilamiz."
 
 #: .\web_site\templates\web_site\components\index\_feedback.html:10
 #: .\web_site\templates\web_site\components\product\_product-comments.html:14
@@ -402,7 +411,8 @@ msgstr "Loyiha galereyasi"
 
 #: .\web_site\templates\web_site\components\index\_gallery-projects.html:9
 msgid "Здесь вы можете посмотреть проекты, которые выполнены с нашими жалюзями"
-msgstr "Bu erda siz bizning jalyuzimiz bilan qilingan loyihalarni ko'rishingiz mumkin"
+msgstr ""
+"Bu erda siz bizning jalyuzimiz bilan qilingan loyihalarni ko'rishingiz mumkin"
 
 #: .\web_site\templates\web_site\components\index\_reviews.html:5
 msgid "Что говорят о нас"
