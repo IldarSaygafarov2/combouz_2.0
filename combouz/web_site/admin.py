@@ -19,7 +19,8 @@ from .models import (
     ProductDimming,
     ImagesOnAboutPage,
     ProjectsGalleryImageItem,
-    SocialItem
+    SocialItem,
+    Collection
 )
 
 
@@ -31,6 +32,15 @@ class SocialItemAdmin(admin.ModelAdmin):
 @admin.register(ImagesOnAboutPage)
 class ImagesOnAboutPageAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Collection)
+class CollectionAdmin(TranslationAdmin):
+    list_display = ('pk', 'name', 'type', 'category')
+    list_display_links = ('pk', 'name')
+    list_filter = ('type', 'category')
+    list_editable = ('type', 'category')
+    prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(FabricType)
@@ -56,45 +66,16 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
-    fieldsets = [
-        (
-            "Общее",
-            {
-                "fields": ["name", "category_usd_price", "slug", "show_on_homepage", "make_bestseller", "discount"]
-            }
-        ),
-        (
-            "Округление",
-            {
-                "fields": ["width_rounding", "length_rounding"]
-            }
-        ),
-        (
-            "Ширина продуктов",
-            {
-                "fields": ["product_width_from", "product_width_to"]
-            }
-        ),
-        (
-            "Длина продуктов",
-            {
-                "fields": ["product_length_from", "product_length_to"]
-            }
-        )
-    ]
-
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ("pk", "name", "category_usd_price", "discount", "show_on_homepage", "make_bestseller")
+    list_display = ("pk", "name")
     list_display_links = ("pk", "name")
-    list_editable = ("show_on_homepage", "category_usd_price", "make_bestseller", "discount")
 
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(TranslationAdmin):
-    list_display = ("pk", "name", "has_discount", "category")
+    list_display = ("pk", "name",  "category")
     list_display_links = ("pk", "name")
     list_filter = ("category",)
-    list_editable = ("category", "has_discount")
+    list_editable = ("category",)
     prepopulated_fields = {"slug": ("name",)}
 
 

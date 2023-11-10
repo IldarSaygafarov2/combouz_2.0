@@ -29,20 +29,20 @@ def get_config():
     return config
 
 
-def get_category_by_path(path: str):
-    items = [item for item in path.split("/") if item]
-    category = Category.objects.filter(slug=items[-1]).first()
-    if category is None:
-        return False
-    return category
-
-
-@register.simple_tag()
-def get_subcategories(path):
-    category = get_category_by_path(path)
-    if not category:
-        return Category.objects.all()
-    return Subcategory.objects.filter(category=category)
+# def get_category_by_path(path: str):
+#     items = [item for item in path.split("/") if item]
+#     category = Category.objects.filter(slug=items[-1]).first()
+#     if category is None:
+#         return False
+#     return category
+#
+#
+# @register.simple_tag()
+# def get_subcategories(path):
+#     category = get_category_by_path(path)
+#     if not category:
+#         return Category.objects.all()
+#     return Subcategory.objects.filter(category=category)
 
 
 def get_products_by_category(category=None):

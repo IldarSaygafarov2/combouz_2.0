@@ -2,8 +2,9 @@ import requests as req
 from constance import config
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
-from blog.models import Article
+
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
+from blog.models import Article
 from combouz import settings
 from .models import (
     Category,
@@ -33,8 +34,8 @@ def __create_paginated_products(request, qs):
 def home_view(request):
     slides = HeroGallery.objects.all()
     projects = enumerate(ProjectsGallery.objects.all(), start=1)
-    home_categories = Category.objects.filter(show_on_homepage=True)
-    bestsellers = Category.objects.filter(make_bestseller=True).first()
+    home_categories = Category.objects.all()
+    # bestsellers = Category.objects.filter(make_bestseller=True).first()
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
     articles = Article.objects.all()
@@ -50,7 +51,7 @@ def home_view(request):
         "projects": projects,
         "reviews": reviews,
         "home_categories": home_categories,
-        "bestsellers": bestsellers,
+        # "bestsellers": bestsellers,
         "videos": correct_videos,
         "articles": articles,
         "social_items": social_items

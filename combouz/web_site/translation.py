@@ -3,6 +3,10 @@ from .models import *
 from blog.models import Article
 
 
+@register(Collection)
+class CollectionTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
 @register(Article)
 class ArticleTranslationOptions(TranslationOptions):
     fields = (
@@ -14,7 +18,7 @@ class ArticleTranslationOptions(TranslationOptions):
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
-    fields = ("name", "width_rounding", "length_rounding")
+    fields = ("name",)
 
 
 @register(Subcategory)
