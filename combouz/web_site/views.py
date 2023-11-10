@@ -20,7 +20,9 @@ from .models import (
     ProductColorItem,
     ProductDimming,
     ImagesOnAboutPage,
-    SocialItem
+    SocialItem,
+    Collection,
+    ProductManufacturerCountry
 )
 
 
@@ -35,7 +37,6 @@ def home_view(request):
     slides = HeroGallery.objects.all()
     projects = enumerate(ProjectsGallery.objects.all(), start=1)
     home_categories = Category.objects.all()
-    # bestsellers = Category.objects.filter(make_bestseller=True).first()
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
     articles = Article.objects.all()
@@ -51,7 +52,6 @@ def home_view(request):
         "projects": projects,
         "reviews": reviews,
         "home_categories": home_categories,
-        # "bestsellers": bestsellers,
         "videos": correct_videos,
         "articles": articles,
         "social_items": social_items
@@ -100,26 +100,35 @@ def portfolio_detail_view(request, slug):
     return render(request, "web_site/portfolio_detail.html", context)
 
 
-def category_products(request, category_slug):
-    category = Category.objects.get(slug=category_slug)
-
-    context = {
-        "registration_form": CustomUserCreationForm(),
-        "login_form": CustomUserAuthenticationForm(),
-        "category": category
-    }
-    return render(request, "web_site/categories.html", context)
-
-
 def subcategory_products(request, subcategory_slug):
     subcategory = Subcategory.objects.get(slug=subcategory_slug)
-    products = subcategory.products.all()
+
+    query = request.GET
+
+    if "color" in query:
+        color_obj = ProductColorItem.objects.get(color=query.get("color"))
+        products = Product.objects.filter(color=color_obj)
+    elif "dimming" in query:
+        dimming_obj = ProductDimming.objects.get(dimming=query.get("dimming"))
+        products = Product.objects.filter(dimming=dimming_obj)
+    elif "country" in query:
+        country_obj = ProductManufacturerCountry.objects.get(name=query.get("country"))
+        products = Product.objects.filter(manufacturer_country=country_obj)
+    elif "collection" in query:
+        collection = Collection.objects.get(name=query.get("collection"))
+        products = collection.products.all()
+    else:
+        products = subcategory.products.all()
+
+    if "sort" in query:
+        products = products.order_by(query.get("sort"))
+
     qs = __create_paginated_products(request, products)
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
         "products": qs,
-        "category": subcategory.category,
+        "subcategory": subcategory
     }
     return render(request, "web_site/categories.html", context)
 
@@ -174,7 +183,7 @@ def send_phone_number_to_telegram(request):
     return redirect("home")
 
 
-def sort_products_by_color(request,  color):
+def sort_products_by_color(request, color):
     color_obj = ProductColorItem.objects.get(color=color)
     products = Product.objects.filter(color=color_obj)
 
@@ -200,8 +209,8 @@ def sort_products_by_dimming(request, dimming):
     return render(request, "web_site/categories.html", context)
 
 
-def sort_products_by_country(request, country):
-    products = Product.objects.filter(manufacturer_country=country)
+def sort_products_by_country(request, country_id):
+    products = Product.objects.filter(manufacturer_country=country_id)
     qs = __create_paginated_products(request, products)
     context = {
         "registration_form": CustomUserCreationForm(),

@@ -1,12 +1,12 @@
 {% load static i18n %}
 <div class="goods-filters__sort">
   {% if '-usd_price' in request.META.QUERY_STRING %}
-    <a class="goods-filters__sort-link active" href="?sort=usd_price">
+    <a class="goods-filters__sort-link active" href="">
       <span>{% trans 'По цене' %}</span>
       <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" />
     </a>
   {% else %}
-    <a class="goods-filters__sort-link" href="?sort=-usd_price">
+    <a class="goods-filters__sort-link" href="">
       <span>{% trans 'По цене' %}</span>
       <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="" />
     </a>

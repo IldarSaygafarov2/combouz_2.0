@@ -2,7 +2,7 @@ from django import template
 
 from cart.utils import get_cart_data
 from helpers import functions as func
-from web_site.models import Category, Product, ProductColorItem, Subcategory
+from web_site.models import Category, Product, ProductColorItem, Subcategory, Collection
 
 register = template.Library()
 
@@ -27,22 +27,6 @@ def get_config():
     from constance import config
 
     return config
-
-
-# def get_category_by_path(path: str):
-#     items = [item for item in path.split("/") if item]
-#     category = Category.objects.filter(slug=items[-1]).first()
-#     if category is None:
-#         return False
-#     return category
-#
-#
-# @register.simple_tag()
-# def get_subcategories(path):
-#     category = get_category_by_path(path)
-#     if not category:
-#         return Category.objects.all()
-#     return Subcategory.objects.filter(category=category)
 
 
 def get_products_by_category(category=None):
@@ -72,8 +56,8 @@ def get_all_products_count():
 def get_sort_fields():
     products = Product.objects.all()
     colors = set([ProductColorItem.objects.get(pk=color["color_id"]) for color in products.values()])
-    dimming = [i.dimming for i in Product.objects.all()]
-    countries = [country["manufacturer_country"] for country in products.values()]
+    dimming = [i.dimming for i in products]
+    countries = [product.manufacturer_country for product in products]
     return {
         "colors": colors,
         "dimming": dimming,
@@ -97,3 +81,10 @@ def count_products_by_dimming(dimming):
 def count_products_by_country(country):
     products = Product.objects.filter(manufacturer_country=country)
     return products.count()
+
+
+@register.simple_tag()
+def get_subcategory_collections(subcategory_id):
+    subcategory = Subcategory.objects.get(pk=subcategory_id)
+    collections = Collection.objects.filter(category=subcategory)
+    return collections

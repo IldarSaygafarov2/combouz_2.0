@@ -1,11 +1,18 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import *
+
 from blog.models import Article
+from .models import *
+
+
+@register(ProductManufacturerCountry)
+class ProductManufacturerCountryTranslationOptions(TranslationOptions):
+    fields = ('name',)
 
 
 @register(Collection)
 class CollectionTranslationOptions(TranslationOptions):
     fields = ('name',)
+
 
 @register(Article)
 class ArticleTranslationOptions(TranslationOptions):
@@ -23,7 +30,7 @@ class CategoryTranslationOptions(TranslationOptions):
 
 @register(Subcategory)
 class SubcategoryTranslationOptions(TranslationOptions):
-    fields = ("name",)
+    fields = ("name", "width_rounding", "length_rounding")
 
 
 @register(ProductColorItem)
@@ -36,9 +43,9 @@ class ProductTranslationOptions(TranslationOptions):
     fields = (
         "name",
         "body",
-        "manufacturer_country",
-        "fabric_type",
-        "property",
+        # "manufacturer_country",
+        # "fabric_type",
+        # "property",
     )
 
 
@@ -89,6 +96,3 @@ class ProductPropertyTranslationOptions(TranslationOptions):
     fields = (
         "title",
     )
-
-
-

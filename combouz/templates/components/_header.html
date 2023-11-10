@@ -9,7 +9,7 @@
 
 
 <header class="header-top">
-    <a class="logo" href="/"><img src="{% static 'images/icons/logo.svg' %}" alt="combo.uz logo"/></a>
+    <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/icons/logo.svg' %}" alt="combo.uz logo"/></a>
     <div class="header-top__items header__items">
         <ul class="header-top__left">
             <li class="header-top__left-item">
@@ -51,10 +51,6 @@
                 </a>
             </li>
             <li class="header__list-se-item">
-                <a class="header__link-se" href="#!"><img src="{% static 'images/icons/heart-white.svg' %}"
-                                                          alt="combo.uz favorites"/></a>
-            </li>
-            <li class="header__list-se-item">
                 <a class="header__link-se" href="{% url 'cart:cart' %}"><img
                         src="{% static 'images/icons/work-white.svg' %}" alt="combo.uz busket goods"/><span
                         class="header__busket-notify have-goods">{{ cart_total }}</span></a>
@@ -80,7 +76,7 @@
         <ul class="header__list header__list-top">
             {% for category in categories_data %}
                 <li class="header__list-item">
-                    <a class="header__link" href="{{ category.get_absolute_url }}">{{ category }}</a>
+                    <a class="header__link" href="#">{{ category }}</a>
                     {% if category.subcategories.all %}
                         <ul class="header__list-sub">
                             {% for subcategory in category.subcategories.all %}
@@ -118,14 +114,15 @@
             <ul class="header__list header__list-top">
                 {% for category in categories_data %}
                     <li class="header__list-item">
-                        <a class="header__link" href="{{ category.get_absolute_url }}">{{ category }}</a>
+                        <a class="header__link" href="#">{{ category }}</a>
                         {% if category.subcategories.all %}
                             <ul class="header__list-sub">
                                 {% for subcategory in category.subcategories.all %}
                                     <li class="header__list-sub-item">
                                         <a class="header__link header__list-sub-link"
                                            href="{{ subcategory.get_absolute_url }}">
-                                            {{ subcategory }}</a>
+                                            {{ subcategory }}
+                                        </a>
                                     </li>
                                 {% endfor %}
                             </ul>

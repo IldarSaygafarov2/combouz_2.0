@@ -27,6 +27,7 @@ class Category(models.Model):
     name = models.CharField(
         verbose_name=_("Название вида"), max_length=255, unique=True
     )
+
     # slug = models.SlugField(
     #     verbose_name=_("Ссылка категории"),
     #     default="",
@@ -104,6 +105,25 @@ class Subcategory(models.Model):
 
     image = models.ImageField(verbose_name="Фото категории", upload_to="subcategories/", null=True)
 
+    width_rounding = models.CharField(
+        verbose_name="Округление по ширине для всех товаров категории",
+        max_length=150,
+        null=True,
+        blank=True,
+    )
+    length_rounding = models.CharField(
+        verbose_name="Округление по длине для всех товаров категории",
+        max_length=150,
+        null=True,
+        blank=True,
+    )
+
+    product_width_from = models.IntegerField(verbose_name="Ширина от", default=0, null=True)
+    product_width_to = models.IntegerField(verbose_name="Ширина до", default=0, null=True)
+
+    product_length_from = models.IntegerField(verbose_name="Длина от", default=0, null=True)
+    product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
+
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
 
@@ -171,6 +191,17 @@ class ProductDimming(models.Model):
         verbose_name_plural = "Затемнения"
 
 
+class ProductManufacturerCountry(models.Model):
+    name = models.CharField(verbose_name="Название страны", max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Страна производитель"
+        verbose_name_plural = "Страны производители"
+
+
 class Product(models.Model):
     """Product model."""
 
@@ -190,11 +221,8 @@ class Product(models.Model):
         upload_to="products/placeholders/",
         null=True,
     )
-    manufacturer_country = models.CharField(
-        verbose_name="Страна производитель",
-        default="",
-        max_length=255,
-    )
+    manufacturer_country = models.ForeignKey(ProductManufacturerCountry, on_delete=models.CASCADE, null=True,
+                                             related_name="products", verbose_name="Страна производитель")
     fabric_type = models.ForeignKey(FabricType, on_delete=models.DO_NOTHING, related_name="products", null=True,
                                     verbose_name="Тип ткани")
     property = models.ForeignKey(ProductProperty, on_delete=models.DO_NOTHING, related_name="products", null=True,
@@ -256,11 +284,6 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})
-
-    # def get_price_with_discount(self):
-    #     if self.discount and self.subcategory.has_discount:
-    #         discount = int((self.uzs_price / 100) * self.discount)
-    #         return self.uzs_price - discount
 
     def add_to_cart(self):
         return reverse("cart:to_cart", kwargs={"product_id": self.pk, "action": "add"})
@@ -491,8 +514,12 @@ class SocialItem(models.Model):
 class Collection(models.Model):
     name = models.CharField(verbose_name="Название коллекции", max_length=150)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="types", verbose_name="Вид")
-    category = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name="categories", verbose_name="Категория")
+    category = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name="categories",
+                                 verbose_name="Категория")
     slug = models.SlugField(verbose_name="Ссылка коллекции", default="", help_text="Данное поле заполнять не нужно")
+
+    def count_products(self):
+        return self.products.all().count()
 
     def save(self, *args, **kwargs):  # new
         if not self.slug:

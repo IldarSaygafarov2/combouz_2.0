@@ -3,23 +3,25 @@
 
 {% get_all_products_count as total_count %}
 {% get_sort_fields as fields %}
-{#{% get_subcategories path=request.path as subcategories %}#}
+{% get_subcategory_collections subcategory.pk as collections %}
 
 
 <aside class="goods-filters__left">
     <div class="goods-filters__accordion">
         <div class="goods-filters__accordion-item open">
-            <h4 class="goods-filters__accordion-name"><span>{% trans 'Каталог' %}</span><img
+            <h4 class="goods-filters__accordion-name"><span>{% trans 'Коллекции' %}</span><img
                     src="{% static 'images/icons/arrow-bottom.svg' %}" alt=""/></h4>
             <div class="goods-filters__accordion-content">
                 <ul class="goods-filters__accordion-list">
-                    {% for subcategory in subcategories %}
-                    <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link" href="{{ subcategory.get_absolute_url }}">
-                            <span>{{ subcategory }}</span>
-                            <span>({{ subcategory.count_products }})</span>
-                        </a>
-                    </li>
+                    {% for collection in collections %}
+                        {% if collection.count_products %}
+                            <li class="goods-filters__accordion-elem">
+                                <a class="goods-filters__accordion-link" href="?collection={{ collection }}">
+                                    <span>{{ collection }}</span>
+                                    <span>({{ collection.count_products }})</span>
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
@@ -31,11 +33,11 @@
             <div class="goods-filters__accordion-content">
                 <ul class="goods-filters__accordion-list">
                     {% for color in fields.colors %}
-                    {% count_products_by_color color as color_products_count %}
-                    <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link"
-                           href="{% url 'sort_colors' color %}"><span>{{ color }}</span><span>({{ color_products_count }})</span></a>
-                    </li>
+                        {% count_products_by_color color as color_products_count %}
+                        <li class="goods-filters__accordion-elem">
+                            <a class="goods-filters__accordion-link"
+                               href="?color={{ color }}"><span>{{ color }}</span><span>({{ color_products_count }})</span></a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -47,10 +49,11 @@
             <div class="goods-filters__accordion-content">
                 <ul class="goods-filters__accordion-list">
                     {% for dimming in fields.dimming %}
-                    {% count_products_by_dimming dimming as dimming_products_count %}
-                    <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link" href="{% url 'sort_dimming' dimming %}"><span>{{ dimming }}%</span><span>({{ dimming_products_count }})</span></a>
-                    </li>
+                        {% count_products_by_dimming dimming as dimming_products_count %}
+                        <li class="goods-filters__accordion-elem">
+                            <a class="goods-filters__accordion-link"
+                               href="?dimming={{ dimming }}"><span>{{ dimming }}%</span><span>({{ dimming_products_count }})</span></a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -62,10 +65,11 @@
             <div class="goods-filters__accordion-content">
                 <ul class="goods-filters__accordion-list">
                     {% for country in fields.countries %}
-                    {% count_products_by_country country as country_products_count %}
-                    <li class="goods-filters__accordion-elem">
-                        <a class="goods-filters__accordion-link" href="{% url 'sort_country' country %}"><span>{{ country }}</span><span>({{ country_products_count }})</span></a>
-                    </li>
+                        {% count_products_by_country country as country_products_count %}
+                        <li class="goods-filters__accordion-elem">
+                            <a class="goods-filters__accordion-link" href="?country={{ country }}">
+                                <span>{{ country }}</span><span>({{ country_products_count }})</span></a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>

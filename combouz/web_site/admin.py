@@ -20,7 +20,8 @@ from .models import (
     ImagesOnAboutPage,
     ProjectsGalleryImageItem,
     SocialItem,
-    Collection
+    Collection,
+    ProductManufacturerCountry
 )
 
 
@@ -32,6 +33,12 @@ class SocialItemAdmin(admin.ModelAdmin):
 @admin.register(ImagesOnAboutPage)
 class ImagesOnAboutPageAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(ProductManufacturerCountry)
+class ProductManufacturerCountryAdmin(TranslationAdmin):
+    list_display = ('pk', 'name')
+    list_display_links = ('pk', 'name')
 
 
 @admin.register(Collection)
@@ -72,7 +79,27 @@ class CategoryAdmin(TranslationAdmin):
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(TranslationAdmin):
-    list_display = ("pk", "name",  "category")
+    fieldsets = [
+        (
+            'Общее',
+            {
+                'fields': ['name', 'category', 'slug']
+            }
+        ),
+        (
+            "Округление",
+            {
+                'fields': ['width_rounding', 'length_rounding']
+            }
+        ),
+        (
+            'Размеры',
+            {
+                'fields': ['product_width_from', 'product_width_to', 'product_length_from', 'product_length_to']
+            }
+        )
+    ]
+    list_display = ("pk", "name", "category")
     list_display_links = ("pk", "name")
     list_filter = ("category",)
     list_editable = ("category",)
@@ -107,12 +134,14 @@ class ProductAdmin(TranslationAdmin):
         "quantity",
         "category",
         "subcategory",
+        "collection"
     )
     list_display_links = ("pk", "name")
-    list_filter = ("category", "subcategory")
+    list_filter = ("category", "subcategory", "collection")
     list_editable = (
         "category",
-        "subcategory"
+        "subcategory",
+        "collection"
     )
     prepopulated_fields = {"slug": ("name",)}
 
@@ -155,3 +184,4 @@ class ClientAdmin(admin.ModelAdmin):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     pass
+

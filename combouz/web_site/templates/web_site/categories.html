@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="breadcrumbs">
         {% include './components/categories/_breadcrumbs.html' %}
     </div>
@@ -18,15 +19,9 @@
                 <div class="goods-filters__right">
                     {% include './components/categories/_categories-sort.html' %}
                     <div class="goods-filters__cards">
-                        {% if 'subcategories' in request.path or 'products' in request.path %}
-                            {% for product in products %}
-                                {% include './components/categories/_cassete-item.html' %}
-                            {% endfor %}
-                        {% else %}
-                            {% for subcategory in category.subcategories.all %}
-                                {% include './components/index/_roll-curtains-card.html' %}
-                            {% endfor %}
-                        {% endif %}
+                        {% for product in products %}
+                            {% include './components/categories/_cassete-item.html' %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
