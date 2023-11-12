@@ -85,9 +85,6 @@ class Subcategory(models.Model):
         default=ControlTypeChoices.manual,
     )
 
-    def is_cornice_type_aluminium(self):
-        return self.cornice_type == 'aluminium'
-
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
 

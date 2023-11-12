@@ -79,12 +79,15 @@
                 <label class="single__right-label">
                     <input type="radio" value="{{ subcategory.cornice_type }}"
                            name="item-cornice-type"
+                           {% if subcategory.cornice_type == 'aluminum' %}checked{% endif %}
                     />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Алюминевый' %}</span>
                 </label>
                 <label class="single__right-label">
-                    <input type="radio" value="plastic" name="item-cornice-type"/>
+                    <input type="radio" value="plastic" name="item-cornice-type"
+                           {% if subcategory.cornice_type == 'plastic' %}checked{% endif %}
+                    />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Пластиковый' %}</span>
                 </label>
@@ -92,12 +95,16 @@
             <strong class="single__right-feature type-control">{% trans 'Тип управления' %}</strong>
             <div class="single__right-sep">
                 <label class="single__right-label">
-                    <input type="radio" value="manual" name="item-control-type"/>
+                    <input type="radio" value="manual" name="item-control-type"
+                           {% if subcategory.control_type == 'manual' %}checked{% endif %}
+                    />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Ручной' %}</span>
                 </label>
                 <label class="single__right-label">
-                    <input type="radio" value="electro" name="item-control-type"/>
+                    <input type="radio" value="electro" name="item-control-type"
+                           {% if subcategory.control_type == 'electrically_driven' %}checked{% endif %}
+                    />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'С электроприводом' %}</span>
                 </label>
