@@ -160,6 +160,7 @@ def product_detail(request, product_slug):
             comment_item = CommentItem.objects.create(comment=comment, img=image)
             comment_item.save()
         return redirect("product_detail", product_slug=product_slug)
+
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
@@ -167,6 +168,7 @@ def product_detail(request, product_slug):
         "product": product,
         "comments_total": comments_total,
         "category": category,
+        "subcategory": product.subcategory
     }
     return render(request, "web_site/product_detail.html", context)
 

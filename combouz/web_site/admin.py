@@ -87,15 +87,27 @@ class SubcategoryAdmin(TranslationAdmin):
             }
         ),
         (
-            "Округление",
+            "Ширина",
             {
-                'fields': ['width_rounding', 'length_rounding']
+                'fields': ['width_rounding']
+            }
+        ),
+        (
+            "Длина",
+            {
+                'fields': ['length_rounding']
             }
         ),
         (
             'Размеры',
             {
                 'fields': ['product_width_from', 'product_width_to', 'product_length_from', 'product_length_to']
+            }
+        ),
+        (
+            'Опции',
+            {
+                "fields": ['cornice_type', 'control_type']
             }
         )
     ]
@@ -130,7 +142,7 @@ class ProductAdmin(TranslationAdmin):
     list_display = (
         "pk",
         "name",
-        "uzs_price",
+        "usd_price",
         "quantity",
         "category",
         "subcategory",
@@ -139,6 +151,7 @@ class ProductAdmin(TranslationAdmin):
     list_display_links = ("pk", "name")
     list_filter = ("category", "subcategory", "collection")
     list_editable = (
+        "usd_price",
         "category",
         "subcategory",
         "collection"

@@ -14,14 +14,14 @@
             <div class="goods-filters__accordion-content">
                 <ul class="goods-filters__accordion-list">
                     {% for collection in collections %}
-                        {% if collection.count_products %}
+{#                        {% if collection.count_products %}#}
                             <li class="goods-filters__accordion-elem">
                                 <a class="goods-filters__accordion-link" href="?collection={{ collection }}">
                                     <span>{{ collection }}</span>
                                     <span>({{ collection.count_products }})</span>
                                 </a>
                             </li>
-                        {% endif %}
+{#                        {% endif %}#}
                     {% endfor %}
                 </ul>
             </div>

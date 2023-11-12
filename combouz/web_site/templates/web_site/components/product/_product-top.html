@@ -1,6 +1,8 @@
 {% load static i18n %}
 
 
+{{ subcategory.get_cornice_type }}
+
 <div class="single__left">
     <div class="single__left-images">
         {% for img in product.images.all %}
@@ -37,9 +39,7 @@
         <div class="single__right-chose">
             {% if category.length_rounding %}
                 <div class="single__right-hint-abs">
-                    <p>
-                        {{ category.length_rounding }}
-                    </p>
+                    <p>{{ category.length_rounding }}</p>
                 </div>
             {% endif %}
             <span class="single__right-info">{% trans 'Длина' %}</span>
@@ -77,7 +77,9 @@
             <strong class="single__right-feature type-cornise">{% trans 'Тип карниза' %}</strong>
             <div class="single__right-sep">
                 <label class="single__right-label">
-                    <input type="radio" value="aluminium" name="item-cornice-type"/>
+                    <input type="radio" value="{{ subcategory.cornice_type }}"
+                           name="item-cornice-type"
+                    />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Алюминевый' %}</span>
                 </label>

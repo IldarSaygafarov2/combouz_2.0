@@ -7,7 +7,13 @@ from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
 from helpers.functions import convert_price
-from . import choices
+# from . import choices
+
+
+CONTROL_CHOICES = (
+    ('left', "Слева"),
+    ('right', "Справа"),
+)
 
 
 class ImagesOnAboutPage(models.Model):
@@ -28,57 +34,6 @@ class Category(models.Model):
         verbose_name=_("Название вида"), max_length=255, unique=True
     )
 
-    # slug = models.SlugField(
-    #     verbose_name=_("Ссылка категории"),
-    #     default="",
-    #     help_text="Данное поле заполнять не нужно.",
-    # )
-    # show_on_homepage = models.BooleanField(
-    #     verbose_name="Показать на главной",
-    #     default=False,
-    #     help_text="При выборе данного пункта, все продукты этой категории будут показаны на главной странице",
-    # )
-    # make_bestseller = models.BooleanField(
-    #     verbose_name="Сделать бестселлером",
-    #     default=False,
-    #     help_text="При выборе данного пункта, покажет все товары данной категории в секции 'Хиты продаж' ",
-    # )
-    # width_rounding = models.CharField(
-    #     verbose_name="Округление по ширине для всех товаров категории",
-    #     max_length=150,
-    #     null=True,
-    #     blank=True,
-    # )
-    # length_rounding = models.CharField(
-    #     verbose_name="Округление по длине для всех товаров категории",
-    #     max_length=150,
-    #     null=True,
-    #     blank=True,
-    # )
-    #
-    # product_width_from = models.IntegerField(verbose_name="Ширина от", default=0, null=True)
-    # product_width_to = models.IntegerField(verbose_name="Ширина до", default=0, null=True)
-    #
-    # product_length_from = models.IntegerField(verbose_name="Длина от", default=0, null=True)
-    # product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
-    #
-    # category_usd_price = models.IntegerField(verbose_name="Стоимость в долларах", default=0)
-    # discount = models.SmallIntegerField(verbose_name="Процент скидки", default=0)
-
-    # def get_uzs_price(self):
-    #     return convert_price(self.category_usd_price)
-    #
-    # def count_products(self):
-    #     return self.products.all().count()
-    #
-    # def get_absolute_url(self):
-    #     return reverse("category_detail", kwargs={"category_slug": self.slug})
-
-    # def save(self, *args, **kwargs):  # new
-    #     if not self.slug:
-    #         self.slug = slugify(self.name)
-    #     return super().save(*args, **kwargs)
-
     def __str__(self):
         return self.name
 
@@ -90,39 +45,48 @@ class Category(models.Model):
 class Subcategory(models.Model):
     """Subcategory model."""
 
+    class CorniceTypeChoices(models.TextChoices):
+        aluminium = "aluminium", 'Алюминиевый'
+        plastic = "plastic", 'Пластиковый'
+
+    class ControlTypeChoices(models.TextChoices):
+        manual = "manual", "Ручной"
+        electrically_driven = "electrically_driven", "С электроприводом"
+
     name = models.CharField(verbose_name="Название категории", max_length=255)
     slug = models.SlugField(
         verbose_name="Ссылка категории",
         default="",
         help_text="Данное поле заполнять не нужно",
     )
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        verbose_name="Вид",
-        related_name="subcategories",
-    )
-
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Вид", related_name="subcategories")
     image = models.ImageField(verbose_name="Фото категории", upload_to="subcategories/", null=True)
-
-    width_rounding = models.CharField(
-        verbose_name="Округление по ширине для всех товаров категории",
-        max_length=150,
-        null=True,
-        blank=True,
-    )
+    width_rounding = models.CharField(verbose_name="Округление по ширине для всех товаров категории", max_length=150,
+                                      null=True, blank=True)
     length_rounding = models.CharField(
-        verbose_name="Округление по длине для всех товаров категории",
-        max_length=150,
-        null=True,
-        blank=True,
-    )
+        verbose_name="Округление по длине для всех товаров категории", max_length=150, null=True, blank=True)
 
     product_width_from = models.IntegerField(verbose_name="Ширина от", default=0, null=True)
     product_width_to = models.IntegerField(verbose_name="Ширина до", default=0, null=True)
 
     product_length_from = models.IntegerField(verbose_name="Длина от", default=0, null=True)
     product_length_to = models.IntegerField(verbose_name="Длина до", default=0, null=True)
+
+    cornice_type = models.CharField(
+        verbose_name="Тип карниза",
+        max_length=50,
+        choices=CorniceTypeChoices.choices,
+        default=CorniceTypeChoices.aluminium,
+    )
+    control_type = models.CharField(
+        verbose_name="Тип управления",
+        max_length=50,
+        choices=ControlTypeChoices.choices,
+        default=ControlTypeChoices.manual,
+    )
+
+    def is_cornice_type_aluminium(self):
+        return self.cornice_type == 'aluminium'
 
     def get_absolute_url(self):
         return reverse("subcategory_detail", kwargs={"subcategory_slug": self.slug})
@@ -208,10 +172,9 @@ class Product(models.Model):
     name = models.CharField(
         verbose_name="Название продукта", max_length=255, unique=True, default=""
     )
-    uzs_price = models.IntegerField(
-        verbose_name="Цена в узбекских сумах",
+    usd_price = models.IntegerField(
+        verbose_name="Цена в долларах",
         default=0,
-        help_text="Данное поле заполнять не нужно.",
         null=True,
         blank=True
     )
@@ -232,20 +195,8 @@ class Product(models.Model):
     control = models.CharField(
         verbose_name="Управление",
         max_length=50,
-        choices=choices.CONTROL_CHOICES,
+        choices=CONTROL_CHOICES,
         default="left",
-    )
-    cornice_type = models.CharField(
-        verbose_name="Тип карниза",
-        max_length=50,
-        choices=choices.CORNICE_TYPE_CHOICES,
-        default="aluminum",
-    )
-    control_type = models.CharField(
-        verbose_name="Тип управления",
-        max_length=50,
-        choices=choices.CONTROL_TYPE_CHOICES,
-        default="manual",
     )
     quantity = models.SmallIntegerField(verbose_name="Количество продукта", default=0)
     color = models.ForeignKey(
@@ -274,7 +225,8 @@ class Product(models.Model):
         null=True,
         related_name="products",
     )
-    collection = models.ForeignKey("Collection", on_delete=models.CASCADE, null=True, related_name="products")
+    collection = models.ForeignKey("Collection", on_delete=models.CASCADE, null=True, related_name="products",
+                                   verbose_name="Коллекция")
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now=True)
     slug = models.SlugField(
         verbose_name="Ссылка продукта",
@@ -302,10 +254,12 @@ class Product(models.Model):
     def generate_qty_range(self):
         return [x for x in range(1, self.quantity + 1)]
 
+    def get_price(self):
+        return convert_price(self.usd_price)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        # self.uzs_price = convert_price(self.category.category_usd_price)
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):

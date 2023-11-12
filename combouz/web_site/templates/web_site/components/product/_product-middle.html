@@ -1,6 +1,5 @@
-{% load i18n custom_tags %}
+{% load i18n %}
 
-{% convert_price product.uzs_price as product_price %}
 
 <ul class="single__content-features">
     <li class="single__content-elem">
@@ -16,7 +15,7 @@
         {% trans 'Затемнение' %}: {{ product.dimming }}%
     </li>
 </ul>
-<h4 class="single__content-price">{% trans 'Цена' %}: {{ product_price }} сум за 1 м2</h4>
+<h4 class="single__content-price">{% trans 'Цена' %}: {{ product.get_price }} сум за 1 м2</h4>
 <p class="single__content-info">{{ product.body }}</p>
 <h3 class="single__content-characters">{% trans 'Характеристики' %}</h3>
 {% for option in product.options.all %}

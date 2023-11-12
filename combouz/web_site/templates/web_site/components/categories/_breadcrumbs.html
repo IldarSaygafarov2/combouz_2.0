@@ -1,18 +1,25 @@
 {% load static i18n %}
 
 <div class="container">
-  <div class="breadcrumbs__content">
-    <div class="breadcrumbs__item">
-      <a class="breadcrumbs__link" href="{% url 'home' %}"><span>{% trans 'Главная' %}</span><img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="" /></a>
+    <div class="breadcrumbs__content">
+        <div class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{% url 'home' %}">
+                <span>{% trans 'Главная' %}</span>
+                <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt=""/>
+            </a>
+        </div>
+        {% if category %}
+            <div class="breadcrumbs__item">
+                <span class="breadcrumbs__line"></span>
+                <a class="breadcrumbs__link active" href="#!"><span>{{ category }}</span>
+                </a>
+            </div>
+        {% else %}
+            <div class="breadcrumbs__item">
+                <span class="breadcrumbs__line"></span>
+                <a class="breadcrumbs__link active" href="#!"><span>{{ subcategory }}</span>
+                </a>
+            </div>
+        {% endif %}
     </div>
-    {% if category %}
-      <div class="breadcrumbs__item">
-        <span class="breadcrumbs__line"></span><a class="breadcrumbs__link active" href="#!"><span>{{ category }}</span></a>
-      </div>
-    {% else %}
-      <div class="breadcrumbs__item">
-        <span class="breadcrumbs__line"></span><a class="breadcrumbs__link active" href="#!"><span>{% trans 'Все' %}</span></a>
-      </div>
-    {% endif %}
-  </div>
 </div>

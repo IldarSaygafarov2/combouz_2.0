@@ -12,8 +12,8 @@
         {% include './components/product/_breadcrumbs.html' %}
     </div>
     <section class="single">
-        {% get_width_or_length_range category=product.category range_type='width' as width_range %}
-        {% get_width_or_length_range product.category 'length' as length_range %}
+        {% get_width_or_length_range category=product.subcategory range_type='width' as width_range %}
+        {% get_width_or_length_range product.subcategory 'length' as length_range %}
 
         <div class="container">
             <div class="single__good">
