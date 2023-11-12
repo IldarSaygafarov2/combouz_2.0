@@ -1,10 +1,9 @@
 import requests as req
-from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from django.shortcuts import redirect, render
-from web_site.models import Product
-
+from constance import config
+from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
-
+from web_site.models import Product
 from .utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 
 DELIVERY_TYPES = {
@@ -77,5 +76,6 @@ def basket_view(request):
         "last_product": last_product,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
+        "config": config
     }
     return render(request, "cart/basket.html", context)

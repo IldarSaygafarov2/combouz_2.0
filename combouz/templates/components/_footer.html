@@ -1,6 +1,7 @@
 {% load static custom_tags i18n %}
 
 {% get_categories as categories %}
+{% filter_number config.PHONE_NUMBER as phone_number %}
 
 <footer class="footer">
     <div class="container">
@@ -12,10 +13,11 @@
                              alt="combo.uz phone numbers"/><strong>{% trans 'Телефоны' %}</strong>
                     </li>
                     <li class="footer__list-item">
-                        <a class="footer__list-link-se" href="tel:+998951423313">+998 (95) 142 - 33 - 13</a>
+
+                        <a class="footer__list-link-se" href="tel:{{ phone_number }}">{{ config.PHONE_NUMBER }}</a>
                     </li>
                     <li class="footer__list-item">
-                        <span>({% trans 'с ' %}8:00{% trans ' до ' %}21:00)</span>
+                        <span>({{ config.WORKING_TIME }})</span>
                     </li>
                 </ul>
                 <ul class="footer__list">
@@ -24,7 +26,7 @@
                              alt="combo.uz mailbox"/><strong>{% trans 'Почта' %}</strong>
                     </li>
                     <li class="footer__list-item">
-                        <a class="footer__list-link" href="mailto:info@combo.uz">info@combo.uz</a>
+                        <a class="footer__list-link" href="mailto:{{ config.EMAIL }}">{{ config.EMAIL }}</a>
                     </li>
                     <li class="footer__list-item">
                         <span>{% trans 'Отдел продаж' %}</span>
@@ -37,8 +39,8 @@
                     </li>
                     <li class="footer__list-item">
                         <a class="footer__list-link"
-                           href="https://www.google.com/maps/search/%D0%B3.%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82,+%D0%90%D0%BB%D0%BC%D0%B0%D0%B7%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%B9+%D1%80%D0%B0%D0%B9%D0%BE%D0%BD,+%D1%83%D0%BB.%D0%A1%D0%B0%D0%B3%D0%B1%D0%B0%D0%BD+37%2F1/@41.3305483,69.2321323,17z/data=!3m1!4b1?entry=ttu"
-                           target="_blank">{% trans 'г.Ташкент, Алмазарский район, ул.Сагбан 37/1' %}</a>
+                           href="https://yandex.uz/maps/org/combo_uz/238036475009/?utm_medium=mapframe&utm_source=maps"
+                           target="_blank">{{ config.OFFICE_ADDRESS }}</a>
                     </li>
                     <li class="footer__list-item">
                         <span>{% trans 'Офис' %}</span>
@@ -51,7 +53,7 @@
                     </li>
                     <li class="footer__list-item">
                         <div class="footer__list-link-se">
-                            {% trans 'с ' %}9:00{% trans ' до ' %}19:00
+                            {{ config.CALLING_TIME }}
                         </div>
                     </li>
                     <li class="footer__list-item">
@@ -75,17 +77,18 @@
                 </div>
                 <div class="footer__middle-right">
                     <h3 class="footer__middle-questions">{% trans 'Появились вопросы?' %}</h3><a
-                        class="footer__list-link" href="tel:+998951423313">{% trans 'Позвони' %}</a>
+                        class="footer__list-link" href="tel:{{ phone_number }}">{% trans 'Позвони' %}</a>
                 </div>
             </div>
-                       <div class="footer__bottom"><p class="footer__bottom-descr">{% trans 'Разработано' %}:Creative Agency</p>
+            <div class="footer__bottom"><p class="footer__bottom-descr">{% trans 'Разработано' %}:Creative Agency</p>
                 <ul class="footer__bottom-list">
                     {% for social_item in social_items %}
-                    <li class="footer__bottom-list-item"><a class="footer__bottom-link" href="{{ social_item.link }}" target="_blank"><span
-                            class="footer__bottom-link-mask"
-                            style="-webkit-mask-image: url('{{ social_item.icon.url }}');
-                            mask-image: url('{{ social_item.icon.url }}');"></span></a>
-                    </li>
+                        <li class="footer__bottom-list-item"><a class="footer__bottom-link"
+                                                                href="{{ social_item.link }}" target="_blank"><span
+                                class="footer__bottom-link-mask"
+                                style="-webkit-mask-image: url('{{ social_item.icon.url }}');
+                                        mask-image: url('{{ social_item.icon.url }}');"></span></a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>

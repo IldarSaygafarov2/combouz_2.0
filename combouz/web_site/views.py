@@ -54,7 +54,8 @@ def home_view(request):
         "home_categories": home_categories,
         "videos": correct_videos,
         "articles": articles,
-        "social_items": social_items
+        "social_items": social_items,
+        "config": config
     }
     return render(request, "web_site/index.html", context)
 
@@ -68,6 +69,7 @@ def about_view(request):
         "clients": clients,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
+        "config": config
     }
     return render(request, "web_site/about.html", context)
 
@@ -76,6 +78,7 @@ def contacts_view(request):
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
+        "config": config
     }
     return render(request, "web_site/contacts.html", context)
 
@@ -86,6 +89,7 @@ def portfolio_view(request):
         "projects": projects,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
+        "config": config
     }
     return render(request, "web_site/portfolio.html", context)
 
@@ -96,6 +100,7 @@ def portfolio_detail_view(request, slug):
         "project": project,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
+        "config": config
     }
     return render(request, "web_site/portfolio_detail.html", context)
 
@@ -128,7 +133,8 @@ def subcategory_products(request, subcategory_slug):
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
         "products": qs,
-        "subcategory": subcategory
+        "subcategory": subcategory,
+        "config": config
     }
     return render(request, "web_site/categories.html", context)
 
@@ -168,7 +174,8 @@ def product_detail(request, product_slug):
         "product": product,
         "comments_total": comments_total,
         "category": category,
-        "subcategory": product.subcategory
+        "subcategory": product.subcategory,
+        "config": config
     }
     return render(request, "web_site/product_detail.html", context)
 
@@ -185,48 +192,12 @@ def send_phone_number_to_telegram(request):
     return redirect("home")
 
 
-def sort_products_by_color(request, color):
-    color_obj = ProductColorItem.objects.get(color=color)
-    products = Product.objects.filter(color=color_obj)
-
-    qs = __create_paginated_products(request, products)
-
-    context = {
-        "registration_form": CustomUserCreationForm(),
-        "login_form": CustomUserAuthenticationForm(),
-        "products": qs,
-    }
-    return render(request, "web_site/categories.html", context)
-
-
-def sort_products_by_dimming(request, dimming):
-    dimming_obj = ProductDimming.objects.get(dimming=dimming)
-    products = Product.objects.filter(dimming=dimming_obj)
-    qs = __create_paginated_products(request, products)
-    context = {
-        "registration_form": CustomUserCreationForm(),
-        "login_form": CustomUserAuthenticationForm(),
-        "products": qs,
-    }
-    return render(request, "web_site/categories.html", context)
-
-
-def sort_products_by_country(request, country_id):
-    products = Product.objects.filter(manufacturer_country=country_id)
-    qs = __create_paginated_products(request, products)
-    context = {
-        "registration_form": CustomUserCreationForm(),
-        "login_form": CustomUserAuthenticationForm(),
-        "products": qs,
-    }
-    return render(request, "web_site/categories.html", context)
-
-
 def reviews_view(request):
     reviews = Feedback.objects.all()
     context = {
         "reviews": reviews,
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
+        "config": config
     }
     return render(request, "web_site/reviews.html", context)

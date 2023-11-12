@@ -1,6 +1,7 @@
 import requests
 
 
+
 def format_price(price):
     return f"{price:,d}".replace(',', ' ')
 
@@ -11,3 +12,8 @@ def convert_price(product_price):
     resp = requests.get(url).json()
     uzs = resp["conversion_rates"]["UZS"]
     return format_price(round(product_price * uzs))
+
+
+def get_digits_from_number(number):
+    phone = ''.join(list(filter(str.isdigit, number)))
+    return f'+{phone}'

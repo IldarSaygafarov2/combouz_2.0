@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import OrderedDict
+from collections import OrderedDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,19 +25,24 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "django_dump_load_utf8",
+    "django.contrib.sites",
+
     "accounts.apps.AccountsConfig",
     "web_site.apps.WebSiteConfig",
     "cart.apps.CartConfig",
     "blog.apps.BlogConfig",
-    "django.contrib.sites",
+
+
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.facebook",
+
+    "ckeditor",
     "constance",
-    "ckeditor"
 ]
 
 MIDDLEWARE = [
@@ -121,11 +126,10 @@ CART_SESSION_ID = "cart"
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 28
 ACCOUNT_UNIQUE_EMAIL = False
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+
 SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = "/"
 SITE_ID = 1
@@ -197,7 +201,6 @@ JAZZMIN_SETTINGS = {
 gettext = lambda s: s
 LANGUAGES = (
     ("ru", gettext("Russia")),
-    # ("en", gettext("English")),
     ("uz", gettext("Uzbek")),
 )
 
@@ -205,28 +208,24 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 CONSTANCE_DATABASE_PREFIX = "constance:core:"
 
-CONSTANCE_CONFIG = OrderedDict(
-    [
-        ("EMAIL", ("info@combo.uz", "Почта для связи")),
-        ("PHONE_NUMBER", ("+998 (95) 142 - 33 - 13", "Номер для связи")),
-        (
-            "OFFICE_ADDRESS",
-            ("г.Ташкент, Алмазарский район, ул.Сагбан 37/1", "Локация офиса"),
-        ),
-        ("WORKING_TIME", ("с 9:00 до 19:00", "Режим работы")),
-        ("CALLING_TIME", ("с 8:00 до 20:00", "Режим звонков")),
-        ("INSTAGRAM_LINK", ("", "Ссылка на аккаунт instagram")),
-        ("FACEBOOK_LINK", ("", "Ссылка на аккаунт facebook")),
-        ("TELEGRAM_LINK", ("", "Ссылка на аккаунт telegram")),
-        ("ADVANTAGE_1", ("", "Первое преимущество")),
-        ("ADVANTAGE_2", ("", "Второе преимущество")),
-        ("ADVANTAGE_3", ("", "Третье преимущество")),
-        ("ABOUT_PAGE_TITLE", ("", "Заголовок страницы 'О компании'")),
-        ("ABOUT_PAGE_DESCRIPTION", ("", "Описание страницы 'О компании'")),
-        ("PRODUCTS_ON_PAGE", (3, "Количество продуктов на странице")),
-        ("SHOW_SLIDER", (True, ("Скрыть/показать слайдер на главной странице")))
-    ]
-)
+CONSTANCE_CONFIG = OrderedDict([
+    ("EMAIL", ("info@combo.uz", "Почта для связи")),
+    ("PHONE_NUMBER", ("+998 (95) 142 - 33 - 13", "Номер для связи")),
+    ("OFFICE_ADDRESS", ("г.Ташкент, Алмазарский район, ул.Сагбан 37/1", "Локация офиса")),
+    ("WORKING_TIME", ("с 9:00 до 19:00", "Режим работы")),
+    ("CALLING_TIME", ("с 8:00 до 20:00", "Режим звонков")),
+    # ("INSTAGRAM_LINK", ("", "Ссылка на аккаунт instagram")),
+    # ("FACEBOOK_LINK", ("", "Ссылка на аккаунт facebook")),
+    # ("TELEGRAM_LINK", ("", "Ссылка на аккаунт telegram")),
+    ("ADVANTAGE_1", ("", "Первое преимущество")),
+    ("ADVANTAGE_2", ("", "Второе преимущество")),
+    ("ADVANTAGE_3", ("", "Третье преимущество")),
+    ("ABOUT_PAGE_TITLE", ("", "Заголовок страницы 'О компании'")),
+    ("ABOUT_PAGE_DESCRIPTION", ("", "Описание страницы 'О компании'")),
+    ("PRODUCTS_ON_PAGE", (3, "Количество продуктов на странице")),
+    ("SHOW_SLIDER", (True, "Скрыть/показать слайдер на главной странице")),
+    ("CONTACTS_PAGE_DESCRIPTION", ("", "Описание страницы 'Контакты'"))
+])
 
 CONSTANCE_CONFIG_FIELDSETS = {
     "Общие данные": (
@@ -238,9 +237,9 @@ CONSTANCE_CONFIG_FIELDSETS = {
         "PRODUCTS_ON_PAGE",
         "SHOW_SLIDER"
     ),
-    "Социальные сети": ("INSTAGRAM_LINK", "FACEBOOK_LINK", "TELEGRAM_LINK"),
-    "Страница 'О компании'": ("ABOUT_PAGE_TITLE", "ABOUT_PAGE_DESCRIPTION", "ADVANTAGE_1", "ADVANTAGE_2", "ADVANTAGE_3")
+    # "Социальные сети": ("INSTAGRAM_LINK", "FACEBOOK_LINK", "TELEGRAM_LINK"),
+    "Страница 'О компании'": ("ABOUT_PAGE_TITLE", "ABOUT_PAGE_DESCRIPTION", "ADVANTAGE_1", "ADVANTAGE_2", "ADVANTAGE_3"),
+    "Страница 'Контакты'": ("CONTACTS_PAGE_DESCRIPTION",)
 }
-
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

@@ -23,10 +23,8 @@ def get_width_or_length_range(category, range_type):
 
 
 @register.simple_tag()
-def get_config():
-    from constance import config
-
-    return config
+def filter_number(number):
+    return func.get_digits_from_number(number)
 
 
 def get_products_by_category(category=None):
