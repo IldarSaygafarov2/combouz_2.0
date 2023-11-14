@@ -136,6 +136,36 @@ class ProductColorItemAdmin(TranslationAdmin):
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
+    fieldsets = [
+        (
+            "Общее",
+            {
+                "fields": ['name', 'body', 'quantity', 'placeholder', 'discount', 'slug']
+            }
+        ),
+        (
+            "Опции",
+            {
+                "fields": [
+                    'kind',
+                    'category',
+                    'collection',
+                    'manufacturer_country',
+                    'control',
+                    'fabric_type',
+                    'property',
+                    'dimming',
+                    'color'
+                ]
+            }
+        ),
+        (
+            "Цены",
+            {
+                "fields": ['usd_price']
+            }
+        )
+    ]
     inlines = [
         ProductImageItemAdmin,
         ProductOptionItemAdmin,
@@ -198,4 +228,3 @@ class ClientAdmin(admin.ModelAdmin):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     pass
-

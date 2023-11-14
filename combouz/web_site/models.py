@@ -179,7 +179,7 @@ class Product(models.Model):
         verbose_name="Название продукта", max_length=255, unique=True, default=""
     )
     usd_price = models.IntegerField(
-        verbose_name="Цена в долларах",
+        verbose_name="Базовая цена в долларах",
         default=0,
         null=True,
         blank=True
