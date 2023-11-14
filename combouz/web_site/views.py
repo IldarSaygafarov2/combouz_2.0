@@ -120,10 +120,9 @@ def subcategory_products(request, subcategory_slug):
         country_obj = ProductManufacturerCountry.objects.get(name=query.get("country"))
         products = Product.objects.filter(manufacturer_country=country_obj)
     elif "collection" in query:
-        collection = Collection.objects.get(name=query.get("collection"))
-        products = collection.products.all()
+        products = Product.objects.select_related("collection")
     else:
-        products = subcategory.products.all()
+        products = Product.objects.select_related("subcategory")
 
     if "sort" in query:
         products = products.order_by(query.get("sort"))
@@ -144,12 +143,14 @@ def product_detail(request, product_slug):
     category = product.category
 
     next_num = request.GET.get("next")
-    comments_total = product.comments.count()
-    comments = product.comments.all()[0:2]
+    comments_total = Comment.objects.select_related("product").count()
+    comments = Comment.objects.select_related("product")
 
-    if next_num:
+    if not next_num:
+        comments = comments[0:2]
+    else:
         next_num = int(next_num)
-        comments = product.comments.all()[: next_num + next_num]
+        comments = comments[: next_num + next_num]
 
     if request.method == "POST":
         data = request.POST

@@ -1,23 +1,23 @@
 {% load custom_tags %}
 
-{% get_config as config %}
-
 
 {% if config.SHOW_SLIDER %}
-<section class="best-curtains">
-  <div class="container">
-    <div class="best-curtains__slider">
-      <div class="swiper-wrapper">
-        {% for slide in slides %}
-          <div class="best-curtains__content swiper-slide">
-            <div class="best-curtains__text">
-              <h1 class="best-curtains__title">{{ slide.title }}</h1>
-              <p class="best-curtains__descr">{{ slide.body }}</p>
-            </div><img class="best-curtains__background" src="{{ slide.img.url }}" alt="best curtains in Uzbekistan Combo.uz" />
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="best-curtains">
+        <div class="container">
+            <div class="best-curtains__slider">
+                <div class="swiper-wrapper">
+                    {% for slide in slides %}
+                        <div class="best-curtains__content swiper-slide">
+                            <div class="best-curtains__text">
+                                <h1 class="best-curtains__title">{{ slide.title }}</h1>
+                                <p class="best-curtains__descr">{{ slide.body }}</p>
+                            </div>
+                            <img class="best-curtains__background" src="{{ slide.img.url }}"
+                                 alt="best curtains in Uzbekistan Combo.uz"/>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endif %}
