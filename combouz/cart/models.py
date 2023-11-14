@@ -1,9 +1,10 @@
-from accounts.models import CustomUser
 from django.db import models
 from django.utils.translation import gettext as _
+
+from accounts.models import CustomUser
 from helpers.functions import format_price
 from web_site.models import Product
-
+from helpers.functions import convert_price
 
 # Create your models here.
 class Customer(models.Model):
@@ -58,6 +59,5 @@ class OrderProduct(models.Model):
 
     @property
     def get_total_price(self):
-        if self.product.category.discount and self.product.subcategory.has_discount:
-            return int(self.product.get_price_with_discount() * self.quantity)
-        return int(self.product.uzs_price) * self.quantity
+        price = int(self.product.usd_price) * self.quantity
+        return convert_price(price, _format=False)

@@ -140,10 +140,10 @@ def subcategory_products(request, subcategory_slug):
 
 def product_detail(request, product_slug):
     product = Product.objects.get(slug=product_slug)
-    # category = product.category
+    category = product.category
 
     next_num = request.GET.get("next")
-    comments_total = Comment.objects.select_related("product").count()
+    comments_total = Comment.objects.filter(product=product).count()
     comments = Comment.objects.select_related("product")
 
     if not next_num:
@@ -174,8 +174,7 @@ def product_detail(request, product_slug):
         "comments": comments,
         "product": product,
         "comments_total": comments_total,
-        # "category": category,
-        "subcategory": product.category,
+        "category": category,
         "config": config
     }
     return render(request, "web_site/product_detail.html", context)
