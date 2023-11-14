@@ -2,14 +2,14 @@ from django import template
 
 from cart.utils import get_cart_data
 from helpers import functions as func
-from web_site.models import Category, Product, ProductColorItem, Subcategory, Collection
+from web_site.models import Kind, Product, ProductColorItem, Category, Collection
 
 register = template.Library()
 
 
 @register.simple_tag()
 def get_categories():
-    return Category.objects.all()
+    return Kind.objects.all()
 
 
 @register.simple_tag()
@@ -29,9 +29,9 @@ def filter_number(number):
 
 def get_products_by_category(category=None):
     if category is None:
-        return Subcategory.objects.all()
+        return Category.objects.all()
 
-    return Subcategory.objects.filter(category=category)
+    return Category.objects.filter(category=category)
 
 
 @register.simple_tag()
@@ -83,6 +83,6 @@ def count_products_by_country(country):
 
 @register.simple_tag()
 def get_subcategory_collections(subcategory_id):
-    subcategory = Subcategory.objects.get(pk=subcategory_id)
+    subcategory = Category.objects.get(pk=subcategory_id)
     collections = Collection.objects.filter(category=subcategory)
     return collections

@@ -2,7 +2,7 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
 from .models import (
-    Category,
+    Kind,
     Client,
     Feedback,
     HeroGallery,
@@ -12,7 +12,7 @@ from .models import (
     ProductOptionItem,
     ProjectsGallery,
     Question,
-    Subcategory,
+    Category,
     Comment,
     FabricType,
     ProductProperty,
@@ -71,19 +71,19 @@ class CommentAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Category)
-class CategoryAdmin(TranslationAdmin):
+@admin.register(Kind)
+class KindAdmin(TranslationAdmin):
     list_display = ("pk", "name")
     list_display_links = ("pk", "name")
 
 
-@admin.register(Subcategory)
-class SubcategoryAdmin(TranslationAdmin):
+@admin.register(Category)
+class CategoryAdmin(TranslationAdmin):
     fieldsets = [
         (
             'Общее',
             {
-                'fields': ['name', 'category', 'slug']
+                'fields': ['name', 'kind', 'image', 'category_common_price_usd', 'category_common_price_uzs', 'slug']
             }
         ),
         (
@@ -111,10 +111,11 @@ class SubcategoryAdmin(TranslationAdmin):
             }
         )
     ]
-    list_display = ("pk", "name", "category")
+    list_display = ("pk", "name", "category_common_price_usd", "category_common_price_uzs", "kind")
     list_display_links = ("pk", "name")
-    list_filter = ("category",)
-    list_editable = ("category",)
+    list_filter = ("kind",)
+    list_editable = ("kind", "category_common_price_usd")
+    readonly_fields = ("category_common_price_uzs",)
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -144,16 +145,16 @@ class ProductAdmin(TranslationAdmin):
         "name",
         "usd_price",
         "quantity",
+        "kind",
         "category",
-        "subcategory",
         "collection"
     )
     list_display_links = ("pk", "name")
-    list_filter = ("category", "subcategory", "collection")
+    list_filter = ("kind", "category", "collection")
     list_editable = (
         "usd_price",
+        "kind",
         "category",
-        "subcategory",
         "collection"
     )
     prepopulated_fields = {"slug": ("name",)}

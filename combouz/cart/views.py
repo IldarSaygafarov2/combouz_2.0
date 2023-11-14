@@ -57,12 +57,12 @@ def basket_view(request):
         )
     if request.user.is_authenticated:
         category = cart_info["products"].last()
-        category = category.product.category if category else None
+        category = category.product.kind if category else None
         last_product = cart_info["products"].last().product if category else None
     else:
         if cart_info["products"]:
             product = Product.objects.get(pk=cart_info["products"][-1]["product"]["pk"])
-            category = product.category
+            category = product.kind
             last_product = product
         else:
             category = ""

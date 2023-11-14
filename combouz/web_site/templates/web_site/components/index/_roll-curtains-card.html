@@ -11,7 +11,7 @@
   <div class="roll-curtains__text">
     <span class="roll-curtains__discount">{% trans 'Скидка до 15%' %}</span>
     <div class="roll-curtains__sep">
-      <h3 class="roll-curtains__name">{{ subcategory.name }}</h3><strong class="roll-curtains__price">{% trans 'От' %} {{ category_price }} {% trans 'сум за' %} м<sup>2</sup></strong>
+      <h3 class="roll-curtains__name">{{ subcategory.name }}</h3><strong class="roll-curtains__price">{% trans 'От' %} {{ subcategory.get_price }} {% trans 'сум за' %} м<sup>2</sup></strong>
     </div>
   </div>
 </div>

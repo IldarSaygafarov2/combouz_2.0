@@ -7,13 +7,13 @@ from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from blog.models import Article
 from combouz import settings
 from .models import (
-    Category,
+    Kind,
     Client,
     Feedback,
     HeroGallery,
     Product,
     ProjectsGallery,
-    Subcategory,
+    Category,
     Comment,
     CommentItem,
     Question,
@@ -21,8 +21,7 @@ from .models import (
     ProductDimming,
     ImagesOnAboutPage,
     SocialItem,
-    Collection,
-    ProductManufacturerCountry
+    ProductManufacturerCountry, Collection
 )
 
 
@@ -36,7 +35,7 @@ def __create_paginated_products(request, qs):
 def home_view(request):
     slides = HeroGallery.objects.all()
     projects = enumerate(ProjectsGallery.objects.all(), start=1)
-    home_categories = Category.objects.all()
+    home_categories = Kind.objects.all()
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
     articles = Article.objects.all()
@@ -106,7 +105,7 @@ def portfolio_detail_view(request, slug):
 
 
 def subcategory_products(request, subcategory_slug):
-    subcategory = Subcategory.objects.get(slug=subcategory_slug)
+    category = Category.objects.get(slug=subcategory_slug)
 
     query = request.GET
 
@@ -120,9 +119,10 @@ def subcategory_products(request, subcategory_slug):
         country_obj = ProductManufacturerCountry.objects.get(name=query.get("country"))
         products = Product.objects.filter(manufacturer_country=country_obj)
     elif "collection" in query:
-        products = Product.objects.select_related("collection")
+        collection = Collection.objects.get(name=query.get("collection"))
+        products = Product.objects.filter(collection=collection)
     else:
-        products = Product.objects.select_related("subcategory")
+        products = Product.objects.filter(category=category)
 
     if "sort" in query:
         products = products.order_by(query.get("sort"))
@@ -132,7 +132,7 @@ def subcategory_products(request, subcategory_slug):
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
         "products": qs,
-        "subcategory": subcategory,
+        "subcategory": category,
         "config": config
     }
     return render(request, "web_site/categories.html", context)
@@ -140,7 +140,7 @@ def subcategory_products(request, subcategory_slug):
 
 def product_detail(request, product_slug):
     product = Product.objects.get(slug=product_slug)
-    category = product.category
+    # category = product.category
 
     next_num = request.GET.get("next")
     comments_total = Comment.objects.select_related("product").count()
@@ -174,8 +174,8 @@ def product_detail(request, product_slug):
         "comments": comments,
         "product": product,
         "comments_total": comments_total,
-        "category": category,
-        "subcategory": product.subcategory,
+        # "category": category,
+        "subcategory": product.category,
         "config": config
     }
     return render(request, "web_site/product_detail.html", context)

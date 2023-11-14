@@ -23,12 +23,12 @@ class ArticleTranslationOptions(TranslationOptions):
     )
 
 
-@register(Category)
+@register(Kind)
 class CategoryTranslationOptions(TranslationOptions):
     fields = ("name",)
 
 
-@register(Subcategory)
+@register(Category)
 class SubcategoryTranslationOptions(TranslationOptions):
     fields = ("name", "width_rounding", "length_rounding")
 

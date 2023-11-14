@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.facebook",
 
     "ckeditor",
+    "ckeditor_uploader",
     "constance",
     "debug_toolbar"
 ]
@@ -217,9 +218,6 @@ CONSTANCE_CONFIG = OrderedDict([
     ("OFFICE_ADDRESS", ("г.Ташкент, Алмазарский район, ул.Сагбан 37/1", "Локация офиса")),
     ("WORKING_TIME", ("с 9:00 до 19:00", "Режим работы")),
     ("CALLING_TIME", ("с 8:00 до 20:00", "Режим звонков")),
-    # ("INSTAGRAM_LINK", ("", "Ссылка на аккаунт instagram")),
-    # ("FACEBOOK_LINK", ("", "Ссылка на аккаунт facebook")),
-    # ("TELEGRAM_LINK", ("", "Ссылка на аккаунт telegram")),
     ("ADVANTAGE_1", ("", "Первое преимущество")),
     ("ADVANTAGE_2", ("", "Второе преимущество")),
     ("ADVANTAGE_3", ("", "Третье преимущество")),
@@ -240,7 +238,6 @@ CONSTANCE_CONFIG_FIELDSETS = {
         "PRODUCTS_ON_PAGE",
         "SHOW_SLIDER"
     ),
-    # "Социальные сети": ("INSTAGRAM_LINK", "FACEBOOK_LINK", "TELEGRAM_LINK"),
     "Страница 'О компании'": ("ABOUT_PAGE_TITLE", "ABOUT_PAGE_DESCRIPTION", "ADVANTAGE_1", "ADVANTAGE_2", "ADVANTAGE_3"),
     "Страница 'Контакты'": ("CONTACTS_PAGE_DESCRIPTION",)
 }

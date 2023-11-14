@@ -2,6 +2,7 @@
 
 {% get_categories as categories_data %}
 {% get_cart_qty request as cart_total %}
+{% filter_number config.PHONE_NUMBER as phone_number %}
 
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -26,8 +27,9 @@
                 <ul class="header__list-sub header__list-sub-se">
                     <li class="header-top__right-item"><a
                             class="header-top__right-link header-top__right-link-first"
-                            href="mailto:info@combo.uz"><img src="{% static 'images/icons/message.svg' %}"
-                                                             alt="combo.uz mail"><span>info@combo.uz</span></a></li>
+                            href="mailto:{{ config.EMAIL }}"><img src="{% static 'images/icons/message.svg' %}"
+                                                                  alt="combo.uz mail"><span>{{ config.EMAIL }}</span></a>
+                    </li>
                     <li class="header-top__right-item"><a
                             class="header-top__right-link header-top__right-sp-link darkBlueHover"
                             href="#!">{% trans 'Заказать звонок' %}</a></li>
@@ -45,9 +47,9 @@
 
         <ul class="header__list header__list-se">
             <li class="header-top__right-item">
-                <a class="header-top__right-link" href="tel:+998951423313">
+                <a class="header-top__right-link" href="tel:{{ phone_number }}">
                     <img src="{% static 'images/icons/call.svg' %}" alt="combo.uz phone number"/>
-                    <span>+998 (95) 142 - 33 - 13</span>
+                    <span>{{ config.PHONE_NUMBER }}</span>
                 </a>
             </li>
             <li class="header__list-se-item">
@@ -83,7 +85,8 @@
                                 <li class="header__list-sub-item">
                                     <a class="header__link header__list-sub-link"
                                        href="{{ subcategory.get_absolute_url }}">
-                                        {{ subcategory }}</a>
+                                        {{ subcategory }}
+                                    </a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -100,9 +103,9 @@
     </div>
     <div class="header__abs"></div>
     <div class="header__controls">
-        <a class="header-top__right-link header__controls-number" href="tel:+998951423313"><img
+        <a class="header-top__right-link header__controls-number" href="tel:{{ phone_number }}"><img
                 src="{% static 'images/icons/call.svg' %}"
-                alt="combo.uz phone number"/><span>+998 (95) 142 - 33 - 13</span></a>
+                alt="combo.uz phone number"/><span>{{ config.PHONE_NUMBER }}</span></a>
         <button class="header__btn"><span class="bars first"></span><span class="bars second"></span><span
                 class="bars third"></span></button>
     </div>

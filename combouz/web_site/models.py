@@ -6,7 +6,8 @@ from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
-from helpers.functions import convert_price
+from helpers.functions import convert_price, format_price
+
 # from . import choices
 
 
@@ -27,8 +28,8 @@ class ImagesOnAboutPage(models.Model):
         verbose_name_plural = "Фотки на странице 'О компании'"
 
 
-class Category(models.Model):
-    """Category model."""
+class Kind(models.Model):
+    """Kind model."""
 
     name = models.CharField(
         verbose_name=_("Название вида"), max_length=255, unique=True
@@ -42,7 +43,7 @@ class Category(models.Model):
         verbose_name_plural = "Виды"
 
 
-class Subcategory(models.Model):
+class Category(models.Model):
     """Subcategory model."""
 
     class CorniceTypeChoices(models.TextChoices):
@@ -59,7 +60,11 @@ class Subcategory(models.Model):
         default="",
         help_text="Данное поле заполнять не нужно",
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Вид", related_name="subcategories")
+    category_common_price_usd = models.SmallIntegerField(verbose_name="Цена (y.e) от", default=0,
+                                                         help_text="Данное поле используется чтобы отобразить среднюю стоимость продуктов данной категории на Главной странице")
+    category_common_price_uzs = models.IntegerField(verbose_name="Цена (сум) от", default=0,
+                                                    help_text="Данное поле заполнять не нужно. Оно заполнится само при сохранении данного продукта")
+    kind = models.ForeignKey(Kind, on_delete=models.CASCADE, verbose_name="Вид", related_name="subcategories")
     image = models.ImageField(verbose_name="Фото категории", upload_to="subcategories/", null=True)
     width_rounding = models.CharField(verbose_name="Округление по ширине для всех товаров категории", max_length=150,
                                       null=True, blank=True)
@@ -95,9 +100,13 @@ class Subcategory(models.Model):
     def count_products(self):
         return self.products.all().count()
 
+    def get_price(self):
+        return format_price(self.category_common_price_uzs)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+        self.category_common_price_uzs = convert_price(self.category_common_price_usd, _format=False)
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -206,16 +215,16 @@ class Product(models.Model):
         verbose_name="Размер скидки", default=0, null=True, blank=True
     )
 
-    category = models.ForeignKey(
-        Category,
+    kind = models.ForeignKey(
+        Kind,
         on_delete=models.CASCADE,
         verbose_name="Вид",
         default=None,
         null=True,
         related_name="products",
     )
-    subcategory = models.ForeignKey(
-        Subcategory,
+    category = models.ForeignKey(
+        Category,
         on_delete=models.CASCADE,
         verbose_name="Категория",
         default=None,
@@ -464,8 +473,8 @@ class SocialItem(models.Model):
 
 class Collection(models.Model):
     name = models.CharField(verbose_name="Название коллекции", max_length=150)
-    type = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="types", verbose_name="Вид")
-    category = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name="categories",
+    type = models.ForeignKey(Kind, on_delete=models.CASCADE, related_name="types", verbose_name="Вид")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories",
                                  verbose_name="Категория")
     slug = models.SlugField(verbose_name="Ссылка коллекции", default="", help_text="Данное поле заполнять не нужно")
 
