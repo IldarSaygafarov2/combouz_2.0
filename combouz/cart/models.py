@@ -2,9 +2,10 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
+from helpers.functions import convert_price
 from helpers.functions import format_price
 from web_site.models import Product
-from helpers.functions import convert_price
+
 
 # Create your models here.
 class Customer(models.Model):

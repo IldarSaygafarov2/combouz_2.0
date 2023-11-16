@@ -155,3 +155,12 @@
     position: relative
 }
 
+.roll-curtains__img--custom {
+    padding: 0;
+}
+
+.roll-curtains__img--custom img {
+    max-width: 100%;
+    aspect-ratio: auto;
+    height: 100%;
+}

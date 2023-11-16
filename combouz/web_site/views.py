@@ -1,3 +1,5 @@
+import random
+
 import requests as req
 from constance import config
 from django.core.paginator import Paginator
@@ -7,7 +9,6 @@ from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from blog.models import Article
 from combouz import settings
 from .models import (
-    Kind,
     Client,
     Feedback,
     HeroGallery,
@@ -21,7 +22,8 @@ from .models import (
     ProductDimming,
     ImagesOnAboutPage,
     SocialItem,
-    ProductManufacturerCountry, Collection
+    ProductManufacturerCountry,
+    Collection
 )
 
 
@@ -35,7 +37,7 @@ def __create_paginated_products(request, qs):
 def home_view(request):
     slides = HeroGallery.objects.all()
     projects = enumerate(ProjectsGallery.objects.all(), start=1)
-    home_categories = Kind.objects.all()
+    home_categories = Category.objects.all()
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
     articles = Article.objects.all()
@@ -44,6 +46,10 @@ def home_view(request):
         video.video_link.replace("youtu.be", "www.youtube.com/embed")
         for video in videos
     ]
+
+    bestsellers = list(Product.objects.all())
+    bestsellers = random.sample(bestsellers, 3)
+
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
@@ -54,6 +60,7 @@ def home_view(request):
         "videos": correct_videos,
         "articles": articles,
         "social_items": social_items,
+        "bestsellers": bestsellers,
         "config": config
     }
     return render(request, "web_site/index.html", context)

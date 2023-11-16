@@ -1,12 +1,11 @@
-{% for home_category in home_categories %}
-  <section class="roll-curtains">
+<section class="roll-curtains">
     <div class="container">
-      <h2 class="roll-curtains__title">{{ home_category }}</h2>
-      <div class="roll-curtains__content">
-        {% for subcategory in home_category.subcategories.all %}
-          {% include './_roll-curtains-card.html' %}
-        {% endfor %}
-      </div>
+        <h2 class="roll-curtains__title">{{ home_category }}</h2>
+        <div class="roll-curtains__content">
+            {% for category in home_categories %}
+                {% include './_roll-curtains-card.html' %}
+            {% endfor %}
+        </div>
     </div>
-  </section>
-{% endfor %}
+</section>
+
