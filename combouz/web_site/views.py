@@ -48,7 +48,8 @@ def home_view(request):
     ]
 
     bestsellers = list(Product.objects.all())
-    bestsellers = random.sample(bestsellers, 3)
+    if bestsellers:
+        bestsellers = random.sample(bestsellers, 4)
 
     context = {
         "registration_form": CustomUserCreationForm(),
