@@ -32,13 +32,13 @@
                         </a>
                     </div>
                     <p class="busket-top__control price">
-                        {{ product_price }} {% trans 'сум' %}
+                        {{ cart_product.product.get_price }} {% trans 'сум' %}
                     </p>
                     <p class="busket-top__control price">
-                        {{ discounted_price }} {% trans 'сум' %}
+                        {{ cart_product.product.get_price_with_discount }} {% trans 'сум' %}
                     </p>
                     <p class="busket-top__control total">
-                        {{ total_price }} {% trans 'сум' %}
+                        {{ cart_product.get_total_price }} {% trans 'сум' %}
                     </p>
                     <a class="busket-top__remove" href="{% url 'cart:to_cart' cart_product.product.pk 'delete_product' %}">
                         <img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon"/>

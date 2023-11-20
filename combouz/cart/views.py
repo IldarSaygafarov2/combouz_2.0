@@ -1,6 +1,7 @@
 import requests as req
-from django.shortcuts import redirect, render
 from constance import config
+from django.shortcuts import redirect, render
+
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
 from web_site.models import Product
@@ -57,12 +58,12 @@ def basket_view(request):
         )
     if request.user.is_authenticated:
         category = cart_info["products"].last()
-        category = category.product.kind if category else None
+        category = category.product.category if category else None
         last_product = cart_info["products"].last().product if category else None
     else:
         if cart_info["products"]:
             product = Product.objects.get(pk=cart_info["products"][-1]["product"]["pk"])
-            category = product.kind
+            category = product.category
             last_product = product
         else:
             category = ""

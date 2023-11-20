@@ -184,6 +184,11 @@ class Product(models.Model):
         null=True,
         blank=True
     )
+    uzs_price = models.IntegerField(
+        verbose_name="Базовая цена в сумах",
+        default=0,
+        help_text="Данное поле заполнять не нужно, цена будет рассчитываться от базовой цены в долларах"
+    )
     body = models.TextField(verbose_name="Описание продукта", default="")
     placeholder = models.ImageField(
         verbose_name="Заставка",
@@ -260,12 +265,27 @@ class Product(models.Model):
     def generate_qty_range(self):
         return [x for x in range(1, self.quantity + 1)]
 
-    def get_price(self):
-        return convert_price(self.usd_price)
+    def get_price(self, _format=True):
+        if not _format:
+            return self.uzs_price
+        return format_price(self.uzs_price)
+
+    def get_price_with_discount(self, _format=True):
+        if not self.discount:
+            return self.get_price(_format)
+
+        discount_amount = (self.uzs_price / 100) * self.discount
+        final_price = round(self.uzs_price - discount_amount)
+        if not _format:
+            return final_price
+
+        return format_price(final_price)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        self.uzs_price = convert_price(self.usd_price, _format=False)
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):

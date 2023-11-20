@@ -40,7 +40,7 @@ class Order(models.Model):
     @property
     def get_cart_total_price(self):
         order_products = self.orderproduct_set.all()
-        total = sum([item.get_total_price for item in order_products])
+        total = sum([item.get_total_price(_format=False) for item in order_products])
         return format_price(total)
         # return total
 
@@ -58,7 +58,12 @@ class OrderProduct(models.Model):
     quantity = models.IntegerField(default=0)
     added_at = models.DateTimeField(auto_now_add=True)
 
-    @property
-    def get_total_price(self):
-        price = int(self.product.usd_price) * self.quantity
-        return convert_price(price, _format=False)
+    # @property
+    def get_total_price(self, _format=True):
+        if not self.product.discount:
+            return int(self.product.uzs_price) * self.quantity
+
+        if not _format:
+            return self.product.get_price_with_discount(_format=False) * self.quantity
+
+        return format_price(self.product.get_price_with_discount(_format=False) * self.quantity)

@@ -162,7 +162,7 @@ class ProductAdmin(TranslationAdmin):
         (
             "Цены",
             {
-                "fields": ['usd_price']
+                "fields": ['usd_price', 'uzs_price']
             }
         )
     ]
@@ -174,7 +174,7 @@ class ProductAdmin(TranslationAdmin):
         "pk",
         "name",
         "usd_price",
-        "quantity",
+        "discount",
         "kind",
         "category",
         "collection"
@@ -183,6 +183,7 @@ class ProductAdmin(TranslationAdmin):
     list_filter = ("kind", "category", "collection")
     list_editable = (
         "usd_price",
+        "discount",
         "kind",
         "category",
         "collection"
