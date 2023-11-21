@@ -48,9 +48,10 @@ def home_view(request):
     ]
 
     bestsellers = list(Product.objects.all())
-    if bestsellers:
+    try:
         bestsellers = random.sample(bestsellers, 4)
-
+    except Exception as e:
+        bestsellers = bestsellers
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
