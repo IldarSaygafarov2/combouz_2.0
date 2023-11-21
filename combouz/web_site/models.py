@@ -7,7 +7,6 @@ from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
 from helpers.functions import convert_price, format_price
-
 # from . import choices
 
 
@@ -178,6 +177,7 @@ class Product(models.Model):
     name = models.CharField(
         verbose_name="Название продукта", max_length=255, unique=True, default=""
     )
+    # Базовая цена продукта
     usd_price = models.IntegerField(
         verbose_name="Базовая цена в долларах",
         default=0,
@@ -188,6 +188,16 @@ class Product(models.Model):
         verbose_name="Базовая цена в сумах",
         default=0,
         help_text="Данное поле заполнять не нужно, цена будет рассчитываться от базовой цены в долларах"
+    )
+    # Цена продукта с электроприводом
+    usd_electrical_price = models.IntegerField(
+        verbose_name="Цена с электроприводом в долларах",
+        default=0,
+    )
+    uzs_electrical_price = models.IntegerField(
+        verbose_name="Цена с электроприводом в суммах",
+        default=0,
+        help_text="Данное поле заполнять не нужно, цена будет рассчитываться от цены элекртопривода в долларах",
     )
     body = models.TextField(verbose_name="Описание продукта", default="")
     placeholder = models.ImageField(
@@ -286,6 +296,8 @@ class Product(models.Model):
             self.slug = slugify(self.name)
 
         self.uzs_price = convert_price(self.usd_price, _format=False)
+        self.uzs_electrical_price = convert_price(self.usd_electrical_price, _format=False)
+
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
