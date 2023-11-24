@@ -164,3 +164,7 @@
     aspect-ratio: auto;
     height: 100%;
 }
+
+.single__content-price--electrical {
+    display: none;
+}

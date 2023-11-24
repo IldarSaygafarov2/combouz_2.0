@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     $('.languages').select2({
         minimumResultsForSearch: Infinity,
@@ -7,4 +6,6 @@ $(document).ready(function() {
     });
 });
 
-Fancybox.bind(document.getElementById("comments_carousel"), "[data-fancybox]", {});
+const commentsCarousel = document.getElementById("comments_carousel");
+
+Fancybox.bind(commentsCarousel, "[data-fancybox]", {});

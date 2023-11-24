@@ -280,6 +280,12 @@ class Product(models.Model):
             return self.uzs_price
         return format_price(self.uzs_price)
 
+    def get_electrical_price(self, _format=True):
+        if not _format:
+            return self.uzs_electrical_price
+
+        return format_price(self.uzs_electrical_price)
+
     def get_price_with_discount(self, _format=True):
         if not self.discount:
             return self.get_price(_format)
