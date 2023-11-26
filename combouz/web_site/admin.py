@@ -162,7 +162,14 @@ class ProductAdmin(TranslationAdmin):
         (
             "Цены",
             {
-                "fields": ['usd_price', 'uzs_price', 'usd_electrical_price', 'uzs_electrical_price']
+                "fields": [
+                    'usd_price',
+                    'uzs_price',
+                    'usd_electrical_price',
+                    'uzs_electrical_price',
+                    'usd_cornice_type_price',
+                    'uzs_cornice_type_price',
+                ]
             }
         )
     ]

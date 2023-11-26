@@ -42,7 +42,7 @@
                     <p>{{ category.length_rounding }}</p>
                 </div>
             {% endif %}
-            <span class="single__right-info">{% trans 'Длина' %}</span>
+            <span class="single__right-info">{% trans 'Высота' %}</span>
             <select class="single__right-select" name="item-length">
                 <option value="-" selected="selected">-</option>
                 {% for length in length_range %}
@@ -97,6 +97,7 @@
                 <label class="single__right-label">
                     <input type="radio" value="manual" name="item-control-type"
                            {% if category.control_type == 'manual' %}checked{% endif %}
+                           onchange="changeClassOnInputChange('common');"
                     />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Ручной' %}</span>
@@ -104,6 +105,7 @@
                 <label class="single__right-label">
                     <input type="radio" value="electro" name="item-control-type"
                            {% if category.control_type == 'electrically_driven' %}checked{% endif %}
+                           onchange="changeClassOnInputChange('electrical')"
                     />
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'С электроприводом' %}</span>

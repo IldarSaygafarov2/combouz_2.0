@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
 from helpers.functions import convert_price, format_price
+
 # from . import choices
 
 
@@ -178,26 +179,36 @@ class Product(models.Model):
         verbose_name="Название продукта", max_length=255, unique=True, default=""
     )
     # Базовая цена продукта
-    usd_price = models.IntegerField(
+    usd_price = models.PositiveIntegerField(
         verbose_name="Базовая цена в долларах",
         default=0,
         null=True,
         blank=True
     )
-    uzs_price = models.IntegerField(
+    uzs_price = models.PositiveIntegerField(
         verbose_name="Базовая цена в сумах",
         default=0,
         help_text="Данное поле заполнять не нужно, цена будет рассчитываться от базовой цены в долларах"
     )
     # Цена продукта с электроприводом
-    usd_electrical_price = models.IntegerField(
+    usd_electrical_price = models.PositiveIntegerField(
         verbose_name="Цена с электроприводом в долларах",
         default=0,
     )
-    uzs_electrical_price = models.IntegerField(
+    uzs_electrical_price = models.PositiveIntegerField(
         verbose_name="Цена с электроприводом в суммах",
         default=0,
         help_text="Данное поле заполнять не нужно, цена будет рассчитываться от цены элекртопривода в долларах",
+    )
+    # цена продукта с типом карниза 'Алюминевый'
+    usd_cornice_type_price = models.PositiveIntegerField(
+        verbose_name="Цена в долларах типа карниза 'Алюминевый'",
+        default=0
+    )
+    uzs_cornice_type_price = models.PositiveIntegerField(
+        verbose_name="Цена в суммах типа карниза 'Алюминевый'",
+        default=0,
+        help_text="Данное поле заполнять не нужно, цена будет рассчитываться от цены карниза 'Алюминевый' в долларах",
     )
     body = models.TextField(verbose_name="Описание продукта", default="")
     placeholder = models.ImageField(
@@ -255,6 +266,23 @@ class Product(models.Model):
         help_text="Данное поле заполнять не нужно",
     )
 
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        self.uzs_price = convert_price(self.usd_price, _format=False)
+        self.uzs_electrical_price = convert_price(self.usd_electrical_price, _format=False)
+        self.uzs_cornice_type_price = convert_price(self.usd_cornice_type_price, _format=False)
+
+        super(Product, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})
 
@@ -286,6 +314,18 @@ class Product(models.Model):
 
         return format_price(self.uzs_electrical_price)
 
+    def get_cornice_type_price(self, _format=True):
+        if not _format:
+            return self.uzs_cornice_type_price
+
+        return format_price(self.uzs_cornice_type_price)
+
+    def get_total_types_price(self, _format=True):
+        total_price = self.uzs_cornice_type_price + self.uzs_electrical_price
+        if not _format:
+            return total_price
+        return format_price(total_price)
+
     def get_price_with_discount(self, _format=True):
         if not self.discount:
             return self.get_price(_format)
@@ -296,22 +336,6 @@ class Product(models.Model):
             return final_price
 
         return format_price(final_price)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        self.uzs_price = convert_price(self.usd_price, _format=False)
-        self.uzs_electrical_price = convert_price(self.usd_electrical_price, _format=False)
-
-        super(Product, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Продукт"
-        verbose_name_plural = "Продукты"
 
 
 class ProductImageItem(models.Model):
