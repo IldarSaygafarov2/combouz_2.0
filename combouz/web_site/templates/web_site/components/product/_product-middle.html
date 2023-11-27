@@ -19,9 +19,7 @@
 {#<h4 class="single__content-price single__content-price--electrical" data-price="electro">#}
 {#    {% trans 'Цена' %}: {{ product.get_electrical_price }} сум за 1 м2#}
 {#</h4>#}
-<h4 class="single__content-price single__content-price--common" data-price="manual">
-    {% trans 'Цена' %}: {{ product.get_price }} сум за 1 м2
-</h4>
+<h4 class="single__content-price">{% trans 'Цена' %}: <span data-start-price="{{ product.uzs_price }}">{{ product.get_price }}</span> сум за 1 м2
 
 <p class="single__content-info">{{ product.body }}</p>
 <h3 class="single__content-characters">{% trans 'Характеристики' %}</h3>
