@@ -1,12 +1,12 @@
 {% load static %}
 
 <div class="swiper-slide gallery-projects__slide">
-  <img src="{{ project.image.url }}" alt="Combo.uz gallery projects" />
-  <div class="gallery-projects__text">
-    <p class="gallery-projects__excerpt">{{ idx }} - {{ project.title }}</p>
-    <h4 class="gallery-projects__name">{{ project.subtitle }}</h4>
-    <div class="gallery-projects__alternate darkBlueHover">
-      <img src="{% static 'images/icons/right-arrow.svg' %}" alt="" />
+    <img src="{{ project.image.url }}" alt="Combo.uz gallery projects"/>
+    <div class="gallery-projects__text">
+        <p class="gallery-projects__excerpt">{{ project.title }}</p>
+        <h4 class="gallery-projects__name">{{ project.subtitle }}</h4>
+        <div class="gallery-projects__alternate darkBlueHover">
+            <img src="{% static 'images/icons/right-arrow.svg' %}" alt="{{ project.title }}"/>
+        </div>
     </div>
-  </div>
 </div>

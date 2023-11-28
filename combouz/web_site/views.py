@@ -36,7 +36,7 @@ def __create_paginated_products(request, qs):
 
 def home_view(request):
     slides = HeroGallery.objects.all()
-    projects = enumerate(ProjectsGallery.objects.all(), start=1)
+
     home_categories = Category.objects.all()
     reviews = Feedback.objects.all()
     videos = Question.objects.all()
@@ -47,11 +47,13 @@ def home_view(request):
         for video in videos
     ]
 
-    bestsellers = list(Product.objects.all())
-    try:
-        bestsellers = random.sample(bestsellers, 4)
-    except Exception as e:
-        bestsellers = bestsellers
+    bestsellers = Product.objects.filter(is_bestseller=True)
+
+    projects = ProjectsGallery.objects.all()
+    projects_list = list(projects)
+    random.shuffle(projects_list)
+    print(projects_list)
+
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),

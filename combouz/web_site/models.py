@@ -257,6 +257,11 @@ class Product(models.Model):
         null=True,
         related_name="products",
     )
+    is_bestseller = models.BooleanField(
+        verbose_name="Хит продаж?",
+        blank=True,
+        default=False
+    )
     collection = models.ForeignKey("Collection", on_delete=models.CASCADE, null=True, related_name="products",
                                    verbose_name="Коллекция")
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now=True)

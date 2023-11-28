@@ -140,7 +140,7 @@ class ProductAdmin(TranslationAdmin):
         (
             "Общее",
             {
-                "fields": ['name', 'body', 'quantity', 'placeholder', 'discount', 'slug']
+                "fields": ['name', 'body', 'quantity', 'placeholder', 'discount', 'is_bestseller', 'slug']
             }
         ),
         (
@@ -181,19 +181,19 @@ class ProductAdmin(TranslationAdmin):
         "pk",
         "name",
         "usd_price",
-        "discount",
         "kind",
         "category",
-        "collection"
+        "collection",
+        "is_bestseller"
     )
     list_display_links = ("pk", "name")
     list_filter = ("kind", "category", "collection")
     list_editable = (
         "usd_price",
-        "discount",
         "kind",
         "category",
-        "collection"
+        "collection",
+        "is_bestseller"
     )
     prepopulated_fields = {"slug": ("name",)}
 
