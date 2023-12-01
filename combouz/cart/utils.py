@@ -31,6 +31,17 @@ class CartForAuthenticatedUser:
     def add_or_delete(self, product_id, action):
         order = self.get_cart_info()["order"]
         product = Product.objects.get(pk=product_id)
+
+        selected_width = self.request.POST.get('item-width')
+        selected_height = self.request.POST.get('item-length')
+
+        if selected_width or selected_height:
+            selected_width = int(''.join([i for i in self.request.POST.get('item-width') if i.isdigit()]))
+            selected_height = int(''.join([i for i in self.request.POST.get('item-length') if i.isdigit()]))
+        else:
+            selected_width = 0
+            selected_height = 0
+
         order_product, created = OrderProduct.objects.get_or_create(
             order=order,
             product=product,
@@ -39,8 +50,10 @@ class CartForAuthenticatedUser:
         # order_product.quantity = quantity
         # order_product.save()
         qty = self.request.POST.get('item-count')
-        if action == "add" and product.quantity > 0:
 
+        if action == "add" and product.quantity > 0:
+            order_product.product_selected_width = selected_width
+            order_product.product_selected_height = selected_height
             if not qty:
                 order_product.quantity += 1  # +1 в корзину
                 product.quantity -= 1  # -1 со склада

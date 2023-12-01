@@ -16,7 +16,7 @@
 </div>
 
 
-<form class="single__right" method="post">
+<form class="single__right" method="post" action="{{ product.add_to_cart }}">
     {% csrf_token %}
     <h2 class="single__right-title">{{ product.name }}</h2>
     <strong class="single__right-feature size" href="ссылка-на-изображение.jpg">{% trans 'Размер' %}</strong>

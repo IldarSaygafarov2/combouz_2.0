@@ -51,19 +51,29 @@ class Order(models.Model):
 
 
 class OrderProduct(models.Model):
-    product = models.ForeignKey(
-        Product, on_delete=models.SET_NULL, null=True, related_name="order_products"
-    )
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="order_products")
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0)
+    product_selected_width = models.PositiveIntegerField(default=0)
+    product_selected_height = models.PositiveIntegerField(default=0)
     added_at = models.DateTimeField(auto_now_add=True)
 
     # @property
     def get_total_price(self, _format=True):
+        width_size_price = self.product.get_size_price(size=self.product_selected_width)[0]
+        height_size_price = self.product.get_size_price(size=self.product_selected_height)[0]
+
+        cornice_type_price = self.product.get_cornice_type_price()
+        control_type_price = self.product.get_electrical_price()
+        print(cornice_type_price)
+        print(control_type_price)
+
+        total = width_size_price + height_size_price
+
         if not self.product.discount:
-            return int(self.product.uzs_price) * self.quantity
+            return (int(self.product.uzs_price) * self.quantity) + total
 
         if not _format:
-            return self.product.get_price_with_discount(_format=False) * self.quantity
+            return (self.product.get_price_with_discount(_format=False) * self.quantity) + total
 
-        return format_price(self.product.get_price_with_discount(_format=False) * self.quantity)
+        return format_price((self.product.get_price_with_discount(_format=False) * self.quantity) + total)

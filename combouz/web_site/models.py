@@ -314,16 +314,20 @@ class Product(models.Model):
         return format_price(self.uzs_price)
 
     def get_electrical_price(self, _format=True):
-        if not _format:
-            return self.uzs_electrical_price
+        price = self.uzs_price if self.category.control_type != 'electrically_driven' else self.uzs_electrical_price
 
-        return format_price(self.uzs_electrical_price)
+        if not _format:
+            return price
+
+        return format_price(price)
 
     def get_cornice_type_price(self, _format=True):
+        print(self.category.cornice_type != 'plastic')
+        price = self.uzs_price if self.category.cornice_type != 'plastic' else self.uzs_cornice_type_price
         if not _format:
-            return self.uzs_cornice_type_price
+            return price
 
-        return format_price(self.uzs_cornice_type_price)
+        return format_price(price)
 
     def get_total_types_price(self, _format=True):
         total_price = self.uzs_cornice_type_price + self.uzs_electrical_price
@@ -351,6 +355,17 @@ class Product(models.Model):
         range_price_list = list(map(lambda x, y: (x, y), width_list, _price_list))
         return range_price_list
 
+    def get_price_dict_by_size(self):
+        prices = self.get_price_list_by_size()
+        prices_dict = [{price[0]: price[1]} for price in prices]
+        return prices_dict
+
+    def get_size_price(self, size):
+        prices = self.get_price_dict_by_size()
+        prices = [price.get(size) for price in prices if price.get(size)]
+        if not prices:
+            return 0
+        return prices
 
 class ProductImageItem(models.Model):
     """ProductImageItem model."""

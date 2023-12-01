@@ -167,17 +167,18 @@ def product_detail(request, product_slug):
         data = request.POST
         images = request.FILES.getlist("img")
 
-        comment = Comment.objects.create(
-            author=request.user,
-            product=product,
-            body=data["user-comment"],
-        )
-        comment.save()
+        if data.get('user-comment'):
+            comment = Comment.objects.create(
+                author=request.user,
+                product=product,
+                body=data["user-comment"],
+            )
+            comment.save()
 
-        for image in images:
-            comment_item = CommentItem.objects.create(comment=comment, img=image)
-            comment_item.save()
-        return redirect("product_detail", product_slug=product_slug)
+            for image in images:
+                comment_item = CommentItem.objects.create(comment=comment, img=image)
+                comment_item.save()
+            return redirect("product_detail", product_slug=product_slug)
 
     context = {
         "registration_form": CustomUserCreationForm(),
