@@ -60,15 +60,13 @@ class OrderProduct(models.Model):
 
     # @property
     def get_total_price(self, _format=True):
-        width_size_price = self.product.get_size_price(size=self.product_selected_width)[0]
-        height_size_price = self.product.get_size_price(size=self.product_selected_height)[0]
+        width_size_price = self.product.get_size_price(size=self.product_selected_width)
+        height_size_price = self.product.get_size_price(size=self.product_selected_height)
 
-        cornice_type_price = self.product.get_cornice_type_price()
-        control_type_price = self.product.get_electrical_price()
-        print(cornice_type_price)
-        print(control_type_price)
+        cornice_type_price = self.product.get_cornice_type_price(_format=False)
+        control_type_price = self.product.get_electrical_price(_format=False)
 
-        total = width_size_price + height_size_price
+        total = width_size_price + height_size_price + cornice_type_price + control_type_price
 
         if not self.product.discount:
             return (int(self.product.uzs_price) * self.quantity) + total

@@ -13,14 +13,26 @@
                     class="busket-bottom__input" name="busket-name" required/>
             </div>
             <div class="busket-bottom__item">
-                <span class="busket-bottom__info">{% trans 'Почта' %}</span><input
-                    class="busket-bottom__input" type="email" name="busket-email" required/>
+                <span class="busket-bottom__info">{% trans 'Почта' %}</span>
+                {% if request.user.is_authenticated %}
+                    <input class="busket-bottom__input" type="email" name="busket-email"
+                           value="{{ request.user.email }}"
+                           required/>
+                {% else %}
+                    <input class="busket-bottom__input" type="email" name="busket-email" required/>
+                {% endif %}
             </div>
         </div>
         <div class="busket-bottom__sep">
             <div class="busket-bottom__item">
-                <span class="busket-bottom__info">{% trans 'Телефон' %}</span><input
-                    class="busket-bottom__input" type="number" name="busket-phone" required/>
+                <span class="busket-bottom__info">{% trans 'Телефон' %}</span>
+                {% if request.user.is_authenticated %}
+                    <input class="busket-bottom__input" type="number" name="busket-phone"
+                           value="{{ request.user.phone_number}}"
+                           required/>
+                {% else %}
+                    <input class="busket-bottom__input" type="number" name="busket-phone" required/>
+                {% endif %}
             </div>
             <div class="busket-bottom__item">
                 <span class="busket-bottom__info">{% trans 'Тип монтажа' %}</span><input

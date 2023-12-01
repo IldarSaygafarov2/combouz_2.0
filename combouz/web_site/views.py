@@ -52,7 +52,6 @@ def home_view(request):
     projects = ProjectsGallery.objects.all()
     projects_list = list(projects)
     random.shuffle(projects_list)
-    print(projects_list)
 
     context = {
         "registration_form": CustomUserCreationForm(),
