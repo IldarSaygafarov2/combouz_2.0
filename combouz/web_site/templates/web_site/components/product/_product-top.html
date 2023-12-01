@@ -22,16 +22,20 @@
     <strong class="single__right-feature size" href="ссылка-на-изображение.jpg">{% trans 'Размер' %}</strong>
     <div class="single__right-sep size">
         <div class="single__right-chose">
+
             <div class="single__right-hint-abs">
                 <p>{{ product.category.width_rounding }}</p>
             </div>
             <span class="single__right-info">{% trans 'Ширина' %}</span>
             <select class="single__right-select self-page__control" name="item-width">
-                <option value="2мм" selected="selected" data-price="1000">2мм</option>
-                <option value="4мм" data-price="2000">4мм</option>
-                <option value="6мм" data-price="3000">6мм</option>
-                <option value="8мм" data-price="4000">8мм</option>
-                <option value="10мм" data-price="5000">10мм</option>
+                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
+                        data-price="{{ product.get_price_list_by_size.0.1 }}">{{ product.get_price_list_by_size.0.0 }}см
+                </option>
+                {% for size, price in product.get_price_list_by_size %}
+                    {% if not forloop.counter == 1 %}
+                        <option value="{{ size }}см" data-price="{{ price }}">{{ size }}см</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
         <div class="single__right-chose">
@@ -40,11 +44,14 @@
             </div>
             <span class="single__right-info">{% trans 'Высота' %}</span>
             <select class="single__right-select self-page__control" name="item-length">
-                <option value="54мм" selected="selected" data-price="1000">54мм</option>
-                <option value="56мм" data-price="2000">56мм</option>
-                <option value="58мм" data-price="3000">58мм</option>
-                <option value="60мм" data-price="4000">60мм</option>
-                <option value="62мм" data-price="5000">60мм</option>
+                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
+                        data-price="{{ product.get_price_list_by_size.0.1 }}">{{ product.get_price_list_by_size.0.0 }}см
+                </option>
+                {% for size, price in product.get_price_list_by_size %}
+                    {% if not forloop.counter == 1 %}
+                        <option value="{{ size }}см" data-price="{{ price }}">{{ size }}см</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -60,8 +67,7 @@
             <span class="single__right-info">{% trans 'Справа' %}</span>
         </label>
     </div>
-    <strong
-            class="single__right-feature count">{% trans 'Кол-во' %}</strong>
+    <strong class="single__right-feature count">{% trans 'Кол-во' %}</strong>
     <div class="single__right-sep count">
         <select class="single__right-select self-page__control" name="item-count">
             {% for qty in product.generate_qty_range %}
@@ -81,7 +87,8 @@
                     <span class="single__right-info">{% trans 'Алюминевый' %}</span>
                 </label>
                 <label class="single__right-label">
-                    <input class="self-page__control" type="radio" value="plastic" name="item-cornice-type">
+                    <input class="self-page__control" type="radio" value="plastic" name="item-cornice-type"
+                           data-price="0">
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Пластиковый' %}</span>
                 </label>
@@ -90,7 +97,7 @@
             <div class="single__right-sep">
                 <label class="single__right-label">
                     <input class="self-page__control" type="radio" value="manual" name="item-control-type"
-                           data-price="{{ product.uzs_price }}">
+                           data-price="0">
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Ручной' %}</span>
                 </label>
