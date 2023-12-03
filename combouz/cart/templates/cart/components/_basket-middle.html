@@ -2,19 +2,8 @@
 
 <div class="container">
     <div class="busket-middle__content busket-middle__content--custom">
-{#        <div class="busket-middle__ways">#}
-{#            <strong>{% trans 'Варианты доставки' %}</strong><select class="busket-middle__select"#}
-{#                                                                    name="busket-delivery">#}
-{#            <option value="pickup" selected="selected">#}
-{#                {% trans 'Самовывоз' %}- 0{% trans 'сум' %}#}
-{#            </option>#}
-{#            <option value="takeaway">#}
-{#                {% trans 'Доставка курьером' %}#}
-{#            </option>#}
-{#        </select>#}
-{#        </div>#}
-        <div class="busket-middle__total">
-            {% trans 'Общая сумма заказа' %}-&nbsp;<output>{{ cart_total_price }}</output>
+        <div class="busket-middle__total"  >
+            {% trans 'Общая сумма заказа' %}-&nbsp;<output data-total="{{ cart_simple_total_price|floatformat }}">{{ cart_total_price }}</output>
             {% trans 'сум' %}
         </div>
     </div>

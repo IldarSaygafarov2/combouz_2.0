@@ -71,6 +71,7 @@ def basket_view(request):
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
+        "cart_simple_total_price": cart_info["cart_simple_total_price"],
         "order": cart_info["order"],
         "products": cart_info["products"],
         "category": category,

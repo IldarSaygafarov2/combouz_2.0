@@ -20,10 +20,12 @@ class CartForAuthenticatedUser:
         order_products = order.orderproduct_set.all()
         cart_total_quantity = order.get_cart_total_quantity
         cart_total_price = order.get_cart_total_price
+        cart_simple_total_price = order.get_simple_total_price
 
         return {
             "cart_total_quantity": cart_total_quantity,
             "cart_total_price": cart_total_price,
+            "cart_simple_total_price": cart_simple_total_price,
             "order": order,
             "products": order_products,
         }
@@ -191,6 +193,7 @@ def get_cart_data(request):
     return {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
+        "cart_simple_total_price": cart_info["cart_simple_total_price"],
         "order": cart_info["order"],
         "products": cart_info["products"],
     }

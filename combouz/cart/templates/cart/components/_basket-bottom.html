@@ -58,7 +58,7 @@
             <span>{% trans 'Установка, размер, доставка' %}</span>
         </label>
         <label class="busket-bottom__label">
-            <input type="radio" name="busket-delivery-type" value="install,delivery" required/>
+            <input type="radio" name="busket-delivery-type" value="install,delivery" data-percent="{{ config.PICKUP_DISCOUNT }}" required>
             <span class="busket-bottom__check"></span>
             <span>{% trans 'Самовывоз' %}</span>
         </label>

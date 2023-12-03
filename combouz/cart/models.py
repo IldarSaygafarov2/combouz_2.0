@@ -42,7 +42,13 @@ class Order(models.Model):
         order_products = self.orderproduct_set.all()
         total = sum([item.get_total_price(_format=False) for item in order_products])
         return format_price(total)
-        # return total
+
+    @property
+    def get_simple_total_price(self):
+        order_products = self.orderproduct_set.all()
+        total = sum([item.get_total_price(_format=False) for item in order_products])
+        return total
+
 
     @property
     def get_cart_total_quantity(self):

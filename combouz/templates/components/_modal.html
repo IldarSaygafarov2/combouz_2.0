@@ -75,7 +75,7 @@
             <img src="{% static 'images/icons/google-logo.svg' %}" alt="google logo" />
             <span>{% trans 'Войти через Google' %}</span>
           </a>
-          <a class="modal__form-login" href="">
+          <a class="modal__form-login" href="{% provider_login_url 'facebook' %}?next=/">
             <img src="{% static 'images/icons/facebook-logo.svg' %}" alt="google logo" />
             <span>{% trans 'Войти через Facebook' %}</span>
           </a>

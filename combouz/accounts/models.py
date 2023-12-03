@@ -20,7 +20,8 @@ class CustomUser(AbstractUser):
         return self.email
 
     def get_phone_number(self):
-        return self.phone_number.replace("+", "")
+        if self.phone_number:
+            return self.phone_number.replace("+", "")
 
     class Meta:
         verbose_name = "Пользователь"
