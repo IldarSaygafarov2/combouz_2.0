@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 01:33+0500\n"
+"POT-Creation-Date: 2023-12-03 15:51+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: .\blog\templates\blog\article_detail.html:5
 msgid "страница статьи"
 msgstr "maqola sahifasi"
@@ -38,74 +39,61 @@ msgid "Имя"
 msgstr "Ism"
 
 #: .\cart\templates\cart\components\_basket-bottom.html:16
-#: .\templates\components\_footer.html:24 .\templates\components\_modal.html:42
-#: .\web_site\templates\web_site\contacts.html:24
+#: .\templates\components\_footer.html:26 .\templates\components\_modal.html:42
+#: .\web_site\templates\web_site\contacts.html:27
 msgid "Почта"
 msgstr "Pochta"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:22
+#: .\cart\templates\cart\components\_basket-bottom.html:28
 msgid "Телефон"
 msgstr "Telefon"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:26
+#: .\cart\templates\cart\components\_basket-bottom.html:38
 msgid "Тип монтажа"
 msgstr "O'rnatish turi"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:30
-#: .\templates\components\_footer.html:36
-#: .\web_site\templates\web_site\contacts.html:16
+#: .\cart\templates\cart\components\_basket-bottom.html:42
+#: .\templates\components\_footer.html:38
+#: .\web_site\templates\web_site\contacts.html:18
 msgid "Адрес"
 msgstr "Manzil"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:36
+#: .\cart\templates\cart\components\_basket-bottom.html:48
 #: .\web_site\templates\web_site\components\product\_product-comments.html:4
 msgid "Комментарии"
 msgstr "Izohlar"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:41
+#: .\cart\templates\cart\components\_basket-bottom.html:53
 msgid "Тип доставки"
 msgstr "Yetkazib berish turi"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:46
+#: .\cart\templates\cart\components\_basket-bottom.html:58
 msgid "Установка, размер, доставка"
 msgstr "O'rnatish, o'lcham, yetkazib berish"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:50
-msgid "Доставка и установка"
-msgstr "Yetkazib berish va o'rnatish"
-
-#: .\cart\templates\cart\components\_basket-bottom.html:55
-msgid "Доставка по городу Ташкент"
-msgstr "Toshkent shahri bo'ylab yetkazib berish"
-
-#: .\cart\templates\cart\components\_basket-bottom.html:57
-msgid "Купить"
-msgstr "Sotib olish"
-
-#: .\cart\templates\cart\components\_basket-middle.html:6
-msgid "Варианты доставки"
-msgstr "Yetkazib berish imkoniyatlari"
-
-#: .\cart\templates\cart\components\_basket-middle.html:9
+#: .\cart\templates\cart\components\_basket-bottom.html:62
 msgid "Самовывоз"
 msgstr "Olib ketish; ko'tarish"
 
-#: .\cart\templates\cart\components\_basket-middle.html:9
-#: .\cart\templates\cart\components\_basket-middle.html:18
-#: .\cart\templates\cart\components\_basket-top.html:35
-#: .\cart\templates\cart\components\_basket-top.html:38
-#: .\cart\templates\cart\components\_basket-top.html:41
-#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:21
-msgid "сум"
-msgstr "so'm"
+#: .\cart\templates\cart\components\_basket-bottom.html:67
+msgid "Доставка по городу Ташкент"
+msgstr "Toshkent shahri bo'ylab yetkazib berish"
 
-#: .\cart\templates\cart\components\_basket-middle.html:12
-msgid "Доставка курьером"
-msgstr "Kuryer yetkazib berish"
+#: .\cart\templates\cart\components\_basket-bottom.html:69
+msgid "Купить"
+msgstr "Sotib olish"
 
 #: .\cart\templates\cart\components\_basket-middle.html:17
 msgid "Общая сумма заказа"
 msgstr "buyurtmaning umumiy miqdori"
+
+#: .\cart\templates\cart\components\_basket-middle.html:18
+#: .\cart\templates\cart\components\_basket-top.html:35
+#: .\cart\templates\cart\components\_basket-top.html:38
+#: .\cart\templates\cart\components\_basket-top.html:41
+#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:25
+msgid "сум"
+msgstr "so'm"
 
 #: .\cart\templates\cart\components\_basket-top.html:5
 #: .\cart\templates\cart\components\_breadcrumbs.html:27
@@ -115,7 +103,9 @@ msgstr "Savat"
 #: .\cart\templates\cart\components\_basket-top.html:7
 #, python-format
 msgid "Изделия на заказ по размерам покупателя, предоплата от 20%%"
-msgstr "Mahsulotlar xaridorning oʻlchamiga koʻra buyurtma asosida tayyorlanadi, 20%% dan avans toʻlovi"
+msgstr ""
+"Mahsulotlar xaridorning oʻlchamiga koʻra buyurtma asosida tayyorlanadi, 20%% "
+"dan avans toʻlovi"
 
 #: .\cart\templates\cart\components\_basket-top.html:12
 msgid "Наименование товара"
@@ -126,9 +116,9 @@ msgid "Количество"
 msgstr "Miqdori"
 
 #: .\cart\templates\cart\components\_basket-top.html:14
-#: .\web_site\templates\web_site\components\categories\_cassete-item.html:14
-#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:21
-#: .\web_site\templates\web_site\components\product\_product-middle.html:19
+#: .\web_site\templates\web_site\components\categories\_cassete-item.html:15
+#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:25
+#: .\web_site\templates\web_site\components\product\_product-middle.html:22
 msgid "Цена"
 msgstr "Narxi"
 
@@ -137,111 +127,96 @@ msgid "Итого"
 msgstr "Jami"
 
 #: .\cart\templates\cart\components\_breadcrumbs.html:7
-#: .\web_site\templates\web_site\components\categories\_breadcrumbs.html:6
+#: .\web_site\templates\web_site\components\categories\_breadcrumbs.html:7
 #: .\web_site\templates\web_site\components\portfolio\_breadcrumbs.html:7
-#: .\web_site\templates\web_site\components\product\_breadcrumbs.html:6
+#: .\web_site\templates\web_site\components\product\_breadcrumbs.html:7
 #: .\web_site\templates\web_site\components\reviews\_breadcrumbs.html:6
 msgid "Главная"
 msgstr "Uy"
 
-#: .\templates\components\_footer.html:12
-#: .\web_site\templates\web_site\contacts.html:30
+#: .\templates\components\_footer.html:13
+#: .\web_site\templates\web_site\contacts.html:34
 msgid "Телефоны"
 msgstr "Telefonlar"
 
-#: .\templates\components\_footer.html:18
-#: .\templates\components\_footer.html:54
-msgid "с "
-msgstr "dan "
-
-#: .\templates\components\_footer.html:18
-#: .\templates\components\_footer.html:54
-msgid " до "
-msgstr " gacha "
-
-#: .\templates\components\_footer.html:30
-#: .\web_site\templates\web_site\contacts.html:24
+#: .\templates\components\_footer.html:32
+#: .\web_site\templates\web_site\contacts.html:27
 msgid "Отдел продаж"
 msgstr "Savdo bo'limi"
 
-#: .\templates\components\_footer.html:41
-#: .\web_site\templates\web_site\contacts.html:21
-msgid "г.Ташкент, Алмазарский район, ул.Сагбан 37/1"
-msgstr "Toshkent shahri, Olmazor tumani, Sag‘bon ko‘chasi 37/1"
-
-#: .\templates\components\_footer.html:44
-#: .\web_site\templates\web_site\contacts.html:16
+#: .\templates\components\_footer.html:46
+#: .\web_site\templates\web_site\contacts.html:18
 msgid "Офис"
 msgstr "Idora"
 
-#: .\templates\components\_footer.html:50
-#: .\web_site\templates\web_site\contacts.html:36
+#: .\templates\components\_footer.html:52
+#: .\web_site\templates\web_site\contacts.html:42
 msgid "Режим работы"
 msgstr "Ish tartibi"
 
-#: .\templates\components\_footer.html:58
-#: .\web_site\templates\web_site\contacts.html:36
+#: .\templates\components\_footer.html:60
+#: .\web_site\templates\web_site\contacts.html:42
 msgid "Пн-Пт"
 msgstr "Dushanba-Jum"
 
-#: .\templates\components\_footer.html:65
+#: .\templates\components\_footer.html:67
 msgid "Ссылки"
 msgstr "Havolalar"
 
-#: .\templates\components\_footer.html:69
-#: .\templates\components\_header.html:16
+#: .\templates\components\_footer.html:71
+#: .\templates\components\_header.html:17
 #: .\web_site\templates\web_site\about.html:5
 msgid "О компании"
 msgstr "Kompaniya haqida"
 
-#: .\templates\components\_footer.html:72
-#: .\templates\components\_footer.html:127
-#: .\templates\components\_header.html:19
-#: .\web_site\templates\web_site\contacts.html:5
+#: .\templates\components\_footer.html:74
+#: .\templates\components\_footer.html:130
+#: .\templates\components\_header.html:20
+#: .\web_site\templates\web_site\contacts.html:6
 msgid "Контакты"
 msgstr "Kontaktlar"
 
-#: .\templates\components\_footer.html:77
+#: .\templates\components\_footer.html:79
 msgid "Появились вопросы?"
 msgstr "Savollaringiz bormi?"
 
-#: .\templates\components\_footer.html:78
+#: .\templates\components\_footer.html:80
 msgid "Позвони"
 msgstr "Qo'ng'iroq qiling"
 
-#: .\templates\components\_footer.html:81
+#: .\templates\components\_footer.html:83
 msgid "Разработано"
 msgstr "Ishlab chiqilgan"
 
-#: .\templates\components\_footer.html:118
+#: .\templates\components\_footer.html:121
 msgid "Остальные"
 msgstr "Dam olish"
 
-#: .\templates\components\_footer.html:121
+#: .\templates\components\_footer.html:124
 msgid "О нас"
 msgstr "Biz haqimizda"
 
-#: .\templates\components\_footer.html:124
-#: .\templates\components\_header.html:22
+#: .\templates\components\_footer.html:127
+#: .\templates\components\_header.html:23
 #: .\web_site\templates\web_site\components\portfolio\_breadcrumbs.html:13
 msgid "Портфолио"
 msgstr "Portfel"
 
-#: .\templates\components\_footer.html:130
+#: .\templates\components\_footer.html:133
 msgid "Статьи"
 msgstr "Maqolalar"
 
-#: .\templates\components\_footer.html:133
+#: .\templates\components\_footer.html:136
 #: .\web_site\templates\web_site\components\reviews\_breadcrumbs.html:11
-#: .\web_site\templates\web_site\reviews.html:4
+#: .\web_site\templates\web_site\reviews.html:5
 msgid "Отзывы"
 msgstr "Sharhlar"
 
-#: .\templates\components\_footer.html:136
+#: .\templates\components\_footer.html:139
 msgid "Дилерам"
 msgstr "Dilerlar uchun"
 
-#: .\templates\components\_footer.html:141
+#: .\templates\components\_footer.html:144
 msgid "Виды"
 msgstr "Turlari"
 
@@ -258,15 +233,21 @@ msgstr "Bosh sahifa"
 msgid "Лучшие шторы в Узбекистане"
 msgstr "O'zbekistondagi eng zo'r pardalar"
 
-#: .\templates\components\_header.html:39
+#: .\templates\components\_header.html:26
+#, fuzzy
+#| msgid "Производитель"
+msgid "Дополнительно"
+msgstr "Ishlab chiqaruvchi"
+
+#: .\templates\components\_header.html:35
 msgid "Заказать звонок"
 msgstr "Qo'ng'iroqni talab qiling"
 
-#: .\templates\components\_header.html:43
+#: .\templates\components\_header.html:38
 msgid "Авторизация / Регистрация"
 msgstr "Avtorizatsiya / Ro'yxatdan o'tish"
 
-#: .\templates\components\_header.html:45
+#: .\templates\components\_header.html:41
 msgid "Выйти"
 msgstr "Tashqariga chiqish"
 
@@ -311,7 +292,7 @@ msgstr "Facebook bilan tizimga kiring"
 msgid "Категории"
 msgstr "Kategoriyalar"
 
-#: .\web_site\templates\web_site\categories.html:15
+#: .\web_site\templates\web_site\categories.html:16
 msgid "Фильтры"
 msgstr "Filtrlar"
 
@@ -327,30 +308,26 @@ msgstr "Bizning mijozlarimiz"
 msgid "Среди наших клиентов, такие уважаемые компании"
 msgstr "Bizning mijozlarimiz orasida shunday nufuzli kompaniyalar ham bor"
 
-#: .\web_site\templates\web_site\components\categories\_breadcrumbs.html:14
-msgid "Все"
-msgstr "Hammasi"
-
-#: .\web_site\templates\web_site\components\categories\_cassete-item.html:11
-#: .\web_site\templates\web_site\components\categories\_filters-left.html:29
-#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:12
+#: .\web_site\templates\web_site\components\categories\_cassete-item.html:12
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:31
+#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:16
 msgid "Цвет"
 msgstr "Rang"
 
-#: .\web_site\templates\web_site\components\categories\_cassete-item.html:12
-#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:15
-#: .\web_site\templates\web_site\components\product\_product-middle.html:13
+#: .\web_site\templates\web_site\components\categories\_cassete-item.html:13
+#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:19
+#: .\web_site\templates\web_site\components\product\_product-middle.html:12
 msgid "Свойство"
 msgstr "Mulk"
 
-#: .\web_site\templates\web_site\components\categories\_cassete-item.html:13
-#: .\web_site\templates\web_site\components\categories\_filters-left.html:44
-#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:18
-#: .\web_site\templates\web_site\components\product\_product-middle.html:16
+#: .\web_site\templates\web_site\components\categories\_cassete-item.html:14
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:46
+#: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:22
+#: .\web_site\templates\web_site\components\product\_product-middle.html:15
 msgid "Затемнение"
 msgstr "Qorong'ilik"
 
-#: .\web_site\templates\web_site\components\categories\_cassete-item.html:24
+#: .\web_site\templates\web_site\components\categories\_cassete-item.html:21
 #: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:32
 msgid "Добавить в корзину"
 msgstr "Savatga qo'shish"
@@ -371,10 +348,10 @@ msgid "По наименованию"
 msgstr "Nomi bo'yicha"
 
 #: .\web_site\templates\web_site\components\categories\_filters-left.html:12
-msgid "Каталог"
-msgstr "Katalog"
+msgid "Коллекции"
+msgstr ""
 
-#: .\web_site\templates\web_site\components\categories\_filters-left.html:59
+#: .\web_site\templates\web_site\components\categories\_filters-left.html:62
 msgid "Производитель"
 msgstr "Ishlab chiqaruvchi"
 
@@ -389,7 +366,9 @@ msgstr "Savollaringiz bor, sizga yordam bera olamizmi?"
 
 #: .\web_site\templates\web_site\components\index\_feedback.html:6
 msgid "Оставьте номер телефона, и мы вам перезвоним в ближашее время."
-msgstr "Telefon raqamingizni qoldiring va biz sizga imkon qadar tezroq qo'ng'iroq qilamiz."
+msgstr ""
+"Telefon raqamingizni qoldiring va biz sizga imkon qadar tezroq qo'ng'iroq "
+"qilamiz."
 
 #: .\web_site\templates\web_site\components\index\_feedback.html:10
 #: .\web_site\templates\web_site\components\product\_product-comments.html:14
@@ -402,7 +381,8 @@ msgstr "Loyiha galereyasi"
 
 #: .\web_site\templates\web_site\components\index\_gallery-projects.html:9
 msgid "Здесь вы можете посмотреть проекты, которые выполнены с нашими жалюзями"
-msgstr "Bu erda siz bizning jalyuzimiz bilan qilingan loyihalarni ko'rishingiz mumkin"
+msgstr ""
+"Bu erda siz bizning jalyuzimiz bilan qilingan loyihalarni ko'rishingiz mumkin"
 
 #: .\web_site\templates\web_site\components\index\_reviews.html:5
 msgid "Что говорят о нас"
@@ -412,11 +392,11 @@ msgstr "Biz haqimizda nima deyishadi"
 msgid "Все отзывы"
 msgstr "Barcha sharhlar"
 
-#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:10
+#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:8
 msgid "СКИДКА"
 msgstr "CHEGIRMA"
 
-#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:14
+#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:12
 #, python-format
 msgid "Скидка до 15%%"
 msgstr "15%% gacha chegirma"
@@ -441,95 +421,83 @@ msgstr "Bizning ishimiz fotosuratini ilova qiling"
 msgid "Загрузить еще"
 msgstr "Ko'proq yuklang"
 
-#: .\web_site\templates\web_site\components\product\_product-middle.html:7
+#: .\web_site\templates\web_site\components\product\_product-middle.html:6
 msgid "Страна производитель"
 msgstr "Ishlab chiqaruvchi mamlakat"
 
-#: .\web_site\templates\web_site\components\product\_product-middle.html:10
+#: .\web_site\templates\web_site\components\product\_product-middle.html:9
 msgid "Тип ткани"
 msgstr "Mato turi"
 
-#: .\web_site\templates\web_site\components\product\_product-middle.html:21
+#: .\web_site\templates\web_site\components\product\_product-middle.html:25
 msgid "Характеристики"
 msgstr "Xususiyatlari"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:20
+#: .\web_site\templates\web_site\components\product\_product-top.html:22
 msgid "Размер"
 msgstr "Hajmi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:28
-msgid "ширина"
+#: .\web_site\templates\web_site\components\product\_product-top.html:29
+#, fuzzy
+#| msgid "ширина"
+msgid "Ширина"
 msgstr "kengligi"
 
 #: .\web_site\templates\web_site\components\product\_product-top.html:45
-msgid "Длина"
-msgstr "Uzunlik"
+msgid "Высота"
+msgstr ""
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:54
+#: .\web_site\templates\web_site\components\product\_product-top.html:58
 msgid "Управление"
 msgstr "Boshqaruv"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:59
+#: .\web_site\templates\web_site\components\product\_product-top.html:62
 msgid "Слева"
 msgstr "Chapga"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:64
+#: .\web_site\templates\web_site\components\product\_product-top.html:67
 msgid "Справа"
 msgstr "O'ngda"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:67
+#: .\web_site\templates\web_site\components\product\_product-top.html:70
 msgid "Кол-во"
 msgstr "Miqdor"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:73
+#: .\web_site\templates\web_site\components\product\_product-top.html:77
 msgid "штук"
 msgstr "dona"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:77
+#: .\web_site\templates\web_site\components\product\_product-top.html:81
 msgid "Тип карниза"
 msgstr "Korniş turi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:82
+#: .\web_site\templates\web_site\components\product\_product-top.html:87
 msgid "Алюминевый"
 msgstr "Alyuminiy"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:87
+#: .\web_site\templates\web_site\components\product\_product-top.html:93
 msgid "Пластиковый"
 msgstr "Plastik"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:90
+#: .\web_site\templates\web_site\components\product\_product-top.html:96
 msgid "Тип управления"
 msgstr "Nazorat turi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:95
+#: .\web_site\templates\web_site\components\product\_product-top.html:102
 msgid "Ручной"
 msgstr "Qo'llanma"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:100
+#: .\web_site\templates\web_site\components\product\_product-top.html:108
 msgid "С электроприводом"
 msgstr "Elektr bilan boshqariladigan"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:105
+#: .\web_site\templates\web_site\components\product\_product-top.html:113
 msgid "В корзину"
 msgstr "Savatchaga qo'shish"
 
-#: .\web_site\templates\web_site\contacts.html:11
+#: .\web_site\templates\web_site\contacts.html:13
 msgid "Контактная информация"
 msgstr "Bog'lanish uchun ma'lumot"
-
-#: .\web_site\templates\web_site\contacts.html:14
-msgid "Описание для этой страницы"
-msgstr "Ushbu sahifa uchun tavsif"
-
-#: .\web_site\templates\web_site\contacts.html:30
-#: .\web_site\templates\web_site\contacts.html:39
-msgid "с"
-msgstr "dan"
-
-#: .\web_site\templates\web_site\contacts.html:30
-#: .\web_site\templates\web_site\contacts.html:39
-msgid "до"
-msgstr "gacha"
 
 #: .\web_site\templates\web_site\portfolio.html:5
 msgid "страница портфолио"
@@ -542,3 +510,39 @@ msgstr "Qarang"
 #: .\web_site\templates\web_site\product_detail.html:7
 msgid "Страница товара"
 msgstr "Mahsulot sahifasi"
+
+#~ msgid "Доставка и установка"
+#~ msgstr "Yetkazib berish va o'rnatish"
+
+#~ msgid "Варианты доставки"
+#~ msgstr "Yetkazib berish imkoniyatlari"
+
+#~ msgid "Доставка курьером"
+#~ msgstr "Kuryer yetkazib berish"
+
+#~ msgid "с "
+#~ msgstr "dan "
+
+#~ msgid " до "
+#~ msgstr " gacha "
+
+#~ msgid "г.Ташкент, Алмазарский район, ул.Сагбан 37/1"
+#~ msgstr "Toshkent shahri, Olmazor tumani, Sag‘bon ko‘chasi 37/1"
+
+#~ msgid "Все"
+#~ msgstr "Hammasi"
+
+#~ msgid "Каталог"
+#~ msgstr "Katalog"
+
+#~ msgid "Длина"
+#~ msgstr "Uzunlik"
+
+#~ msgid "Описание для этой страницы"
+#~ msgstr "Ushbu sahifa uchun tavsif"
+
+#~ msgid "с"
+#~ msgstr "dan"
+
+#~ msgid "до"
+#~ msgstr "gacha"

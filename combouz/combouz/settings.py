@@ -225,7 +225,8 @@ CONSTANCE_CONFIG = OrderedDict([
     ("ABOUT_PAGE_DESCRIPTION", ("", "Описание страницы 'О компании'")),
     ("PRODUCTS_ON_PAGE", (3, "Количество продуктов на странице")),
     ("SHOW_SLIDER", (True, "Скрыть/показать слайдер на главной странице")),
-    ("CONTACTS_PAGE_DESCRIPTION", ("", "Описание страницы 'Контакты'"))
+    ("CONTACTS_PAGE_DESCRIPTION", ("", "Описание страницы 'Контакты'")),
+    ("PICKUP_DISCOUNT", (0, "Размер скидки для самовывоза"))
 ])
 
 CONSTANCE_CONFIG_FIELDSETS = {
@@ -236,7 +237,8 @@ CONSTANCE_CONFIG_FIELDSETS = {
         "WORKING_TIME",
         "CALLING_TIME",
         "PRODUCTS_ON_PAGE",
-        "SHOW_SLIDER"
+        "SHOW_SLIDER",
+        "PICKUP_DISCOUNT"
     ),
     "Страница 'О компании'": ("ABOUT_PAGE_TITLE", "ABOUT_PAGE_DESCRIPTION", "ADVANTAGE_1", "ADVANTAGE_2", "ADVANTAGE_3"),
     "Страница 'Контакты'": ("CONTACTS_PAGE_DESCRIPTION",)

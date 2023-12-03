@@ -19,6 +19,9 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
+    def get_phone_number(self):
+        return self.phone_number.replace("+", "")
+
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"

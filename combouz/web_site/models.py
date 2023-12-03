@@ -364,7 +364,9 @@ class Product(models.Model):
         prices = [price.get(size) for price in prices if price.get(size)]
         if not prices:
             return 0
-        return prices
+
+        if len(prices) > 0:
+            return prices[0]
 
 class ProductImageItem(models.Model):
     """ProductImageItem model."""
