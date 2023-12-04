@@ -42,7 +42,7 @@ def convert_price(product_price):
 @register.simple_tag()
 def get_cart_qty(request):
     cart = get_cart_data(request)
-    return cart["cart_total_quantity"]
+    return cart["cart_total_quantity"] if not cart["order"].is_completed else 0
 
 
 @register.simple_tag()

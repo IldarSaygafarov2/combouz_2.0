@@ -125,9 +125,14 @@ class CartForAnonymousUser:
 
     def get_cart_info(self):
         products = []
-        order = {"get_cart_total_price": 0, "get_cart_total_quantity": 0}
+        order = {
+            "get_cart_total_price": 0,
+            "get_cart_total_quantity": 0,
+            "get_cart_simple_total_price": 0
+        }
         cart_total_quantity = order["get_cart_total_quantity"]
         cart_total_price = order["get_cart_total_price"]
+        cart_simple_total_price = order["get_cart_simple_total_price"]
         for key in self.cart:
             if self.cart[key]["quantity"] > 0:
                 product_quantity = self.cart[key]["quantity"]
@@ -152,14 +157,17 @@ class CartForAnonymousUser:
                 }
                 products.append(cart_product)
                 order["get_cart_total_price"] += cart_product["get_total_price"]
+                order["get_cart_simple_total_price"] += cart_product["get_total_price"]
                 order["get_cart_total_quantity"] += cart_product["quantity"]
                 cart_total_price = order["get_cart_total_price"]
+                cart_simple_total_price = order["get_cart_simple_total_price"]
 
         self.save()
 
         return {
             "cart_total_quantity": cart_total_quantity,
             "cart_total_price": cart_total_price,
+            "cart_simple_total_price": cart_simple_total_price,
             "order": order,
             "products": products,
         }

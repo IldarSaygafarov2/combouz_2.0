@@ -18,7 +18,6 @@ DELIVERY_TYPES = {
 
 def __make_basket_products_msg(basket_data):
     return f"""
-Вариант Доставки: {DELIVERY_TYPES[basket_data['busket-delivery']]}
 Фамилия: {basket_data['busket-surname']}
 Имя: {basket_data['busket-name']}
 Почта: {basket_data['busket-email']}
@@ -56,6 +55,9 @@ def basket_view(request):
                 text=product_names,
             )
         )
+        cart_info["order"].is_completed = True
+        cart_info["order"].save()
+
     if request.user.is_authenticated:
         category = cart_info["products"].last()
         category = category.product.category if category else None
@@ -68,12 +70,13 @@ def basket_view(request):
         else:
             category = ""
             last_product = ""
+
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
-        "cart_total_price": cart_info["cart_total_price"],
+        "cart_total_price": cart_info["cart_total_price"] if not cart_info["order"].is_completed else 0,
         "cart_simple_total_price": cart_info["cart_simple_total_price"],
-        "order": cart_info["order"],
-        "products": cart_info["products"],
+        "order": cart_info["order"] ,
+        "products": cart_info["products"] if not cart_info["order"].is_completed else [],
         "category": category,
         "last_product": last_product,
         "registration_form": CustomUserCreationForm(),

@@ -97,13 +97,13 @@
             <div class="single__right-sep">
                 <label class="single__right-label">
                     <input class="self-page__control" type="radio" value="manual" name="item-control-type"
-                           data-price="{{ product.get_electrical_price }}">
+                           data-price="0">
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Ручной' %}</span>
                 </label>
                 <label class="single__right-label">
                     <input class="self-page__control" type="radio" value="electro" name="item-control-type"
-                           data-price="{{ product.uzs_electrical_price }}">
+                           data-price="{{ product.get_electrical_price }}">
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'С электроприводом' %}</span>
                 </label>

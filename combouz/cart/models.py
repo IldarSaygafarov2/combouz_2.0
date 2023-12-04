@@ -72,7 +72,7 @@ class OrderProduct(models.Model):
         cornice_type_price = self.product.get_cornice_type_price(_format=False)
         control_type_price = self.product.get_electrical_price(_format=False)
 
-        print(width_size_price, height_size_price, control_type_price, cornice_type_price)
+        # print(width_size_price, height_size_price, control_type_price, cornice_type_price)
 
         total = width_size_price + height_size_price + cornice_type_price + control_type_price
 
