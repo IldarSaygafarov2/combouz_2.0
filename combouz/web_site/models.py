@@ -13,6 +13,7 @@ from helpers.functions import convert_price, format_price
 
 CONTROL_CHOICES = (
     ('left', "Слева"),
+    ('center', "По середине"),
     ('right', "Справа"),
 )
 
@@ -60,10 +61,14 @@ class Category(models.Model):
         default="",
         help_text="Данное поле заполнять не нужно",
     )
-    category_common_price_usd = models.SmallIntegerField(verbose_name="Цена (y.e) от", default=0,
-                                                         help_text="Данное поле используется чтобы отобразить среднюю стоимость продуктов данной категории на Главной странице")
-    category_common_price_uzs = models.IntegerField(verbose_name="Цена (сум) от", default=0,
-                                                    help_text="Данное поле заполнять не нужно. Оно заполнится само при сохранении данного продукта")
+    category_common_price_usd = models.SmallIntegerField(
+        verbose_name="Цена (y.e) от",
+        default=0,
+        help_text="Данное поле используется чтобы отобразить среднюю стоимость продуктов данной категории на Главной странице")
+    category_common_price_uzs = models.IntegerField(
+        verbose_name="Цена (сум) от",
+        default=0,
+        help_text="Данное поле заполнять не нужно. Оно заполнится само при сохранении данного продукта")
     kind = models.ForeignKey(Kind, on_delete=models.CASCADE, verbose_name="Вид", related_name="subcategories")
     image = models.ImageField(verbose_name="Фото категории", upload_to="subcategories/", null=True)
     width_rounding = models.CharField(verbose_name="Округление по ширине для всех товаров категории", max_length=150,
@@ -314,7 +319,8 @@ class Product(models.Model):
         return format_price(self.uzs_price)
 
     def get_electrical_price(self, _format=False):
-        price = self.uzs_price if self.category.control_type != 'electrically_driven' else self.uzs_electrical_price
+        electrical_price = self.uzs_electrical_price - self.uzs_price
+        price = self.uzs_price if self.category.control_type != 'electrically_driven' else electrical_price
 
         if not _format:
             return price
@@ -322,7 +328,12 @@ class Product(models.Model):
         return format_price(price)
 
     def get_cornice_type_price(self, _format=False):
-        price = self.uzs_price if self.category.cornice_type != 'plastic' else self.uzs_cornice_type_price
+        print(self.uzs_cornice_type_price)
+        print(self.uzs_price)
+        print(self.uzs_cornice_type_price - self.uzs_price)
+        cornice_price = self.uzs_cornice_type_price - self.uzs_price
+        print()
+        price = self.uzs_price if self.category.cornice_type != 'aluminium' else cornice_price
         if not _format:
             return price
 
@@ -346,10 +357,8 @@ class Product(models.Model):
         return format_price(final_price)
 
     def get_price_list_by_size(self):
-        """"""
         width_list = list(range(self.category.product_width_from, self.category.product_width_to + 1))
-        length_list = list(range(self.category.product_length_from, self.category.product_length_to + 1))
-        _price_list = map(lambda x, y: round(((x / 100) * (y / 100)) * self.uzs_price), width_list, length_list)
+        _price_list = map(lambda x: round((x / 100) * self.uzs_price), width_list)
         _price_list = map(lambda x: x - self.uzs_price, _price_list)
         range_price_list = list(map(lambda x, y: (x, y), width_list, _price_list))
         return range_price_list
@@ -367,6 +376,7 @@ class Product(models.Model):
 
         if len(prices) > 0:
             return prices[0]
+
 
 class ProductImageItem(models.Model):
     """ProductImageItem model."""

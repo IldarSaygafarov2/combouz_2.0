@@ -73,10 +73,10 @@ def basket_view(request):
 
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
-        "cart_total_price": cart_info["cart_total_price"] if not cart_info["order"].is_completed else 0,
+        "cart_total_price": cart_info["cart_total_price"],
         "cart_simple_total_price": cart_info["cart_simple_total_price"],
-        "order": cart_info["order"] ,
-        "products": cart_info["products"] if not cart_info["order"].is_completed else [],
+        "order": cart_info["order"],
+        "products": cart_info["products"],
         "category": category,
         "last_product": last_product,
         "registration_form": CustomUserCreationForm(),

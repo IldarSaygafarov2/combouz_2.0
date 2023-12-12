@@ -2,7 +2,7 @@
 
 
 <div class="single__left">
-    <div class="single__left-images">
+    <div class="single__left-images single__left-images--custom">
         {% for img in product.images.all %}
             <div class="single__left-item">
                 <img src="{{ img.image.url }}" alt="{{ product.name }}"/>
@@ -19,15 +19,15 @@
 <form class="single__right" method="post" action="{{ product.add_to_cart }}">
     {% csrf_token %}
     <h2 class="single__right-title">{{ product.name }}</h2>
-    <strong class="single__right-feature size" href="ссылка-на-изображение.jpg">{% trans 'Размер' %}</strong>
+    {# product sizes start #}
+    <strong class="single__right-feature size">{% trans 'Размер' %}</strong>
     <div class="single__right-sep size">
         <div class="single__right-chose">
-
             <div class="single__right-hint-abs">
                 <p>{{ product.category.width_rounding }}</p>
             </div>
             <span class="single__right-info">{% trans 'Ширина' %}</span>
-            <select class="single__right-select self-page__control" name="item-width">
+            <select class="single__right-select self-page__control" name="item-width" id="width-select">
                 <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
                         data-price="{{ product.get_price_list_by_size.0.1 }}">{{ product.get_price_list_by_size.0.0 }}см
                 </option>
@@ -43,7 +43,7 @@
                 <p>{{ product.category.length_rounding }}</p>
             </div>
             <span class="single__right-info">{% trans 'Высота' %}</span>
-            <select class="single__right-select self-page__control" name="item-length">
+            <select class="single__right-select self-page__control" name="item-length" id="length-select">
                 <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
                         data-price="{{ product.get_price_list_by_size.0.1 }}">{{ product.get_price_list_by_size.0.0 }}см
                 </option>
@@ -55,18 +55,30 @@
             </select>
         </div>
     </div>
+    {# product sizes end #}
+
+    {# product control start #}
     <strong class="single__right-feature control">{% trans 'Управление' %}</strong>
-    <div class="single__right-sep control"><label class="single__right-label">
-        <input type="radio" value="left" name="item-control">
-        <span class="single__right-check"></span>
-        <span class="single__right-info">{% trans 'Слева' %}</span>
-    </label>
+    <div class="single__right-sep control">
+        <label class="single__right-label">
+            <input type="radio" value="left" name="item-control">
+            <span class="single__right-check"></span>
+            <span class="single__right-info">{% trans 'Слева' %}</span>
+        </label>
+        <label class="single__right-label">
+            <input type="radio" value="center" name="item-control">
+            <span class="single__right-check"></span>
+            <span class="single__right-info">{% trans 'По середине' %}</span>
+        </label>
         <label class="single__right-label">
             <input type="radio" value="right" name="item-control">
             <span class="single__right-check"></span>
             <span class="single__right-info">{% trans 'Справа' %}</span>
         </label>
     </div>
+    {# product control end #}
+
+    {#  product quantity start  #}
     <strong class="single__right-feature count">{% trans 'Кол-во' %}</strong>
     <div class="single__right-sep count">
         <select class="single__right-select self-page__control" name="item-count">
@@ -76,13 +88,17 @@
         </select>
         <span class="single__right-info">{% trans 'штук' %}</span>
     </div>
+    {#  product quantity end  #}
+
+
     <div class="single__right-flex">
         <div class="single__right-flex-left">
+            {# product cornice type start #}
             <strong class="single__right-feature type-cornise">{% trans 'Тип карниза' %}</strong>
             <div class="single__right-sep">
                 <label class="single__right-label">
                     <input class="self-page__control" type="radio" value="aluminium" name="item-cornice-type"
-                           data-price="{{ product.uzs_cornice_type_price }}">
+                           data-price="{{ product.get_cornice_type_price }}">
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Алюминевый' %}</span>
                 </label>
@@ -93,6 +109,9 @@
                     <span class="single__right-info">{% trans 'Пластиковый' %}</span>
                 </label>
             </div>
+            {# product cornice type end #}
+
+            {# product control type start #}
             <strong class="single__right-feature type-control">{% trans 'Тип управления' %}</strong>
             <div class="single__right-sep">
                 <label class="single__right-label">
@@ -108,6 +127,7 @@
                     <span class="single__right-info">{% trans 'С электроприводом' %}</span>
                 </label>
             </div>
+            {# product control type end #}
         </div>
         <button class="single__right-btn darkBlueHover" type="submit">
             <strong>{% trans 'В корзину' %}</strong>
@@ -116,4 +136,7 @@
             </span>
         </button>
     </div>
+    <h4 class="single__content-price">{% trans 'Общая стоимость' %}:
+        <span data-start-price="{{ product.uzs_price }}">{{ product.get_price }}</span> сум
+    </h4>
 </form>
