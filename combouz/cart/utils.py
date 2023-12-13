@@ -14,6 +14,21 @@ class CartForAuthenticatedUser:
         if product_id and action:
             self.add_or_delete(product_id, action)
 
+    def _get_product_options(self):
+        selected_width = self.request.POST.get('item-width')
+        selected_height = self.request.POST.get('item-length')
+        selected_control = self.request.POST.get('item-control')
+        selected_cornice_type = self.request.POST.get('item-cornice-type')
+        selected_control_type = self.request.POST.get('item-control-type')
+
+        return {
+            "product_selected_width": selected_width,
+            "product_selected_height": selected_height,
+            "product_selected_control": selected_control,
+            "product_selected_cornice_type": selected_cornice_type,
+            "product_selected_control_type": selected_control_type,
+        }
+
     def get_cart_info(self):
         customer, created = Customer.objects.get_or_create(user=self.user)
         order, created = Order.objects.get_or_create(user=customer)
@@ -33,11 +48,10 @@ class CartForAuthenticatedUser:
     def add_or_delete(self, product_id, action):
         order = self.get_cart_info()["order"]
         product = Product.objects.get(pk=product_id)
+        options = self._get_product_options()
+        qty = self.request.POST.get('item-count')
 
-        selected_width = self.request.POST.get('item-width')
-        selected_height = self.request.POST.get('item-length')
-
-        if selected_width or selected_height:
+        if options.get('product_selected_width') or options.get('product_selected_length'):
             selected_width = int(''.join([i for i in self.request.POST.get('item-width') if i.isdigit()]))
             selected_height = int(''.join([i for i in self.request.POST.get('item-length') if i.isdigit()]))
         else:
@@ -47,11 +61,8 @@ class CartForAuthenticatedUser:
         order_product, created = OrderProduct.objects.get_or_create(
             order=order,
             product=product,
+            **self._get_product_options()
         )
-
-        # order_product.quantity = quantity
-        # order_product.save()
-        qty = self.request.POST.get('item-count')
 
         if action == "add" and product.quantity > 0:
             order_product.product_selected_width = selected_width

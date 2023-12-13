@@ -49,7 +49,6 @@ class Order(models.Model):
         total = sum([item.get_total_price(_format=False) for item in order_products])
         return total
 
-
     @property
     def get_cart_total_quantity(self):
         order_products = self.orderproduct_set.all()
@@ -62,6 +61,9 @@ class OrderProduct(models.Model):
     quantity = models.IntegerField(default=0)
     product_selected_width = models.PositiveIntegerField(default=0)
     product_selected_height = models.PositiveIntegerField(default=0)
+    product_selected_control = models.CharField(default='', blank=True, max_length=150)
+    product_selected_cornice_type = models.CharField(default='', blank=True, max_length=150)
+    product_selected_control_type = models.CharField(default='', blank=True, max_length=150)
     added_at = models.DateTimeField(auto_now_add=True)
 
     # @property
@@ -83,3 +85,10 @@ class OrderProduct(models.Model):
             return (self.product.get_price_with_discount(_format=False) * self.quantity) + total
 
         return format_price((self.product.get_price_with_discount(_format=False) * self.quantity) + total)
+
+    def __str__(self):
+        return str(self.product)
+
+    class Meta:
+        verbose_name = 'Продукт в корзине'
+        verbose_name_plural = 'Продукты в корзине'
