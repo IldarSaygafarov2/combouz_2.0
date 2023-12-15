@@ -110,6 +110,7 @@ class CartForAuthenticatedUser:
 class CartForAnonymousUser:
     def __init__(self, request, product_id=None, action=None):
         self.session = request.session
+        self.request = request
         self.cart = self.get_cart()
 
         if product_id and action:
@@ -157,6 +158,8 @@ class CartForAnonymousUser:
                         "pk": product.pk,
                         "name": product.name,
                         "uzs_price": product.get_price(_format=False),
+                        "get_price": product.get_price(_format=False),
+                        "get_price_with_discount": product.get_price_with_discount(_format=False),
                         "get_first_photo": product.get_first_img(),
                         "quantity": product.quantity,
                         "get_absolute_url": product.get_absolute_url(),
@@ -184,6 +187,7 @@ class CartForAnonymousUser:
         }
 
     def add(self):
+        print(self.request.POST)
         if self.cart_product:
             self.cart_product["quantity"] += 1
         else:
@@ -196,6 +200,9 @@ class CartForAnonymousUser:
 
         if self.cart_product["quantity"] <= 0:
             del self.cart[self.key]
+
+    # def remove_from_cart(self):
+    #     del self.cart[self.key]
 
     def clear(self):
         self.cart = {}

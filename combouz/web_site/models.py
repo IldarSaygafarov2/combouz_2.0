@@ -328,11 +328,7 @@ class Product(models.Model):
         return format_price(price)
 
     def get_cornice_type_price(self, _format=False):
-        print(self.uzs_cornice_type_price)
-        print(self.uzs_price)
-        print(self.uzs_cornice_type_price - self.uzs_price)
         cornice_price = self.uzs_cornice_type_price - self.uzs_price
-        print()
         price = self.uzs_price if self.category.cornice_type != 'aluminium' else cornice_price
         if not _format:
             return price

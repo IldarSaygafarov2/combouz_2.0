@@ -1,11 +1,14 @@
 import requests as req
 from constance import config
+from django.db.models import QuerySet
 from django.shortcuts import redirect, render
 
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
 from web_site.models import Product
 from .utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
+from .models import OrderProduct
+
 
 DELIVERY_TYPES = {
     "takeaway": "Доставка курьером",
@@ -18,6 +21,9 @@ DELIVERY_TYPES = {
 
 def __make_basket_products_msg(basket_data):
     return f"""
+
+Дополнительные данные:
+
 Фамилия: {basket_data['busket-surname']}
 Имя: {basket_data['busket-name']}
 Почта: {basket_data['busket-email']}
@@ -27,6 +33,22 @@ def __make_basket_products_msg(basket_data):
 Комментарий: {basket_data['busket-comment']}
 Тип доставки: {DELIVERY_TYPES[basket_data['busket-delivery-type']]}
 """
+
+
+def __make_basket_products_message(order_products: QuerySet[OrderProduct], basket_data):
+    msg = ""
+    for order_product in order_products:
+        msg += f"""
+Название продукта: {order_product.product.name}
+Ширина: {order_product.product_selected_width}
+Длина: {order_product.product_selected_height}
+Управление: {order_product.product_selected_control}
+Тип карниза: {order_product.product_selected_cornice_type}
+Тип управления: {order_product.product_selected_control_type}
+Количество: {order_product.quantity}
+"""
+    msg += __make_basket_products_msg(basket_data)
+    return msg
 
 
 # Create your views here.
@@ -41,22 +63,17 @@ def to_cart(request, product_id, action):
 
 def basket_view(request):
     cart_info = get_cart_data(request)
-    if request.method == "POST":
-        basket_msg = __make_basket_products_msg(request.POST)
-        product_names = ""
-        for product in cart_info["products"]:
-            product_names += f"Продукт: {product.product.name}\n"
 
-        product_names += basket_msg
+    if request.method == "POST":
+        basket_msg = __make_basket_products_message(cart_info['products'], request.POST)
         req.post(
             settings.CHANNEL_API_LINK.format(
                 token=settings.BOT_TOKEN,
                 channel_id=settings.CHANNEL_ID,
-                text=product_names,
+                text=basket_msg,
             )
         )
-        cart_info["order"].is_completed = True
-        cart_info["order"].save()
+        cart_info["order"].delete()
 
     if request.user.is_authenticated:
         category = cart_info["products"].last()
