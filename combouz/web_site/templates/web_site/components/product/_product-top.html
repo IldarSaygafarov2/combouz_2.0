@@ -29,11 +29,11 @@
             </div>
             <span class="single__right-info">{% trans 'Ширина' %}</span>
             <select class="single__right-select self-page__control" name="item-width" id="width-select">
-                <option value="{{ product.get_anayniski.0.0 }}см" selected="selected"
-                        data-price="{{ product.get_anayniski.0.1 }}">
-                    {{ product.get_anayniski.0.0 }}см
+                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
+                        data-price="{{ product.get_price_list_by_size.0.1 }}">
+                    {{ product.get_price_list_by_size.0.0 }}см
                 </option>
-                {% for size, price in product.get_anayniski %}
+                {% for size, price in product.get_price_list_by_size %}
                     {% if not forloop.counter == 1 %}
                         <option value="{{ size }}см" data-price="{{ price }}">{{ size }}см</option>
                     {% endif %}
@@ -46,11 +46,11 @@
             </div>
             <span class="single__right-info">{% trans 'Высота' %}</span>
             <select class="single__right-select self-page__control" name="item-length" id="length-select"
-                    data-price="{{ product.get_anayniski.0.1 }}">
-                <option value="{{ product.get_anayniski.0.0 }}см" selected="selected">
-                    {{ product.get_anayniski.0.0 }}см
+                    data-price="{{ product.get_price_list_by_size.0.1 }}">
+                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected">
+                    {{ product.get_price_list_by_size.0.0 }}см
                 </option>
-                {% for size, price in product.get_anayniski %}
+                {% for size, price in product.get_price_list_by_size %}
                     {% if not forloop.counter == 1 %}
                         <option value="{{ size }}см" data-price="{{ price }}">{{ size }}см</option>
                     {% endif %}
