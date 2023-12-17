@@ -367,6 +367,24 @@ class Product(models.Model):
         range_price_list = list(map(lambda x, y: (x, y), width_list, _price_list))
         return range_price_list
 
+    def get_anayniski(self):
+        height_list = self.get_list_by_height_size()
+        width_list = self.get_list_by_width_size()
+        prices = []
+        size_list = list(map(lambda x, y: ((x / 100) * (y / 100)) / 2, width_list, height_list))
+        for item in size_list:
+            if item < 0.5:
+                price = self.get_price(_format=False) // 2
+            elif 0.5 < item < 1.0:
+                price = self.get_price(_format=False)
+            else:
+                price = int(self.get_price(_format=False) * item)
+
+            prices.append(price)
+
+        result = list(map(lambda x, y: (x, y), width_list, prices))
+        return result
+
     def get_price_dict_by_size(self):
         prices = self.get_price_list_by_size()
         prices_dict = [{price[0]: price[1]} for price in prices]
