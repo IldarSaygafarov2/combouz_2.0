@@ -352,6 +352,14 @@ class Product(models.Model):
 
         return format_price(final_price)
 
+    def get_list_by_width_size(self):
+        width_list = list(range(self.category.product_width_from, self.category.product_width_to + 1))
+        return width_list
+
+    def get_list_by_height_size(self):
+        height_list = list(range(self.category.product_length_from, self.category.product_length_to + 1))
+        return height_list
+
     def get_price_list_by_size(self):
         width_list = list(range(self.category.product_width_from, self.category.product_width_to + 1))
         _price_list = map(lambda x: round((x / 100) * self.uzs_price), width_list)

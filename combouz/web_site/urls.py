@@ -15,5 +15,7 @@ urlpatterns = [
     ),
     path("products/<slug:product_slug>/", views.product_detail, name="product_detail"),
     path("send_email/", views.send_phone_number_to_telegram, name="send_email"),
-    path('reviews/', views.reviews_view, name="reviews")
+    path('reviews/', views.reviews_view, name="reviews"),
+
+    path('sizes/', views.get_sizes, name='sizes')
 ]

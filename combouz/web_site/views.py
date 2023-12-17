@@ -1,8 +1,10 @@
+import json
 import random
 
 import requests as req
 from constance import config
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
@@ -212,3 +214,9 @@ def reviews_view(request):
         "config": config
     }
     return render(request, "web_site/reviews.html", context)
+
+
+def get_sizes(request):
+    print(request.method)
+    print(request.body)
+    return JsonResponse({"status": "ok"})

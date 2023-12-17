@@ -74,6 +74,7 @@ def basket_view(request):
             )
         )
         cart_info["order"].delete()
+        return redirect('cart')
 
     if request.user.is_authenticated:
         category = cart_info["products"].last()

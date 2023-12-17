@@ -3,6 +3,12 @@ from combouz import settings
 from .models import Customer, Order, OrderProduct, Product
 
 
+def _convert_to_int(data):
+    if not data:
+        return 0
+    return int(''.join([i for i in data if i.isdigit()]))
+
+
 class CartForAuthenticatedUser:
     def __init__(self, request, product_id=None, action=None):
         self.user = request.user
@@ -22,8 +28,8 @@ class CartForAuthenticatedUser:
         selected_control_type = self.request.POST.get('item-control-type')
 
         return {
-            "product_selected_width": selected_width,
-            "product_selected_height": selected_height,
+            "product_selected_width": _convert_to_int(selected_width),
+            "product_selected_height": _convert_to_int(selected_height),
             "product_selected_control": selected_control,
             "product_selected_cornice_type": selected_cornice_type,
             "product_selected_control_type": selected_control_type,
@@ -51,13 +57,6 @@ class CartForAuthenticatedUser:
         options = self._get_product_options()
         qty = self.request.POST.get('item-count')
 
-        if options.get('product_selected_width') or options.get('product_selected_length'):
-            selected_width = int(''.join([i for i in self.request.POST.get('item-width') if i.isdigit()]))
-            selected_height = int(''.join([i for i in self.request.POST.get('item-length') if i.isdigit()]))
-        else:
-            selected_width = 0
-            selected_height = 0
-
         order_product, created = OrderProduct.objects.get_or_create(
             order=order,
             product=product,
@@ -65,8 +64,8 @@ class CartForAuthenticatedUser:
         )
 
         if action == "add" and product.quantity > 0:
-            order_product.product_selected_width = selected_width
-            order_product.product_selected_height = selected_height
+            order_product.product_selected_width = options.get('product_selected_width')
+            order_product.product_selected_height = options.get('product_selected_height')
             if not qty:
                 order_product.quantity += 1  # +1 в корзину
                 product.quantity -= 1  # -1 со склада

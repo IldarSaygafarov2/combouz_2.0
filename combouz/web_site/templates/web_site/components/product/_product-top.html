@@ -15,6 +15,8 @@
     </div>
 </div>
 
+{{ product.get_price_list }}
+
 
 <form class="single__right" method="post" action="{{ product.add_to_cart }}">
     {% csrf_token %}
@@ -29,7 +31,8 @@
             <span class="single__right-info">{% trans 'Ширина' %}</span>
             <select class="single__right-select self-page__control" name="item-width" id="width-select">
                 <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
-                        data-price="{{ product.get_price_list_by_size.0.1 }}">{{ product.get_price_list_by_size.0.0 }}см
+                        data-price="{{ product.get_price_list_by_size.0.1 }}">
+                    {{ product.get_price_list_by_size.0.0 }}см
                 </option>
                 {% for size, price in product.get_price_list_by_size %}
                     {% if not forloop.counter == 1 %}
@@ -43,9 +46,10 @@
                 <p>{{ product.category.length_rounding }}</p>
             </div>
             <span class="single__right-info">{% trans 'Высота' %}</span>
-            <select class="single__right-select self-page__control" name="item-length" id="length-select">
-                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
-                        data-price="{{ product.get_price_list_by_size.0.1 }}">{{ product.get_price_list_by_size.0.0 }}см
+            <select class="single__right-select self-page__control" name="item-length" id="length-select"
+                    data-price="{{ product.get_price_list_by_size.0.1 }}">
+                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected">
+                    {{ product.get_price_list_by_size.0.0 }}см
                 </option>
                 {% for size, price in product.get_price_list_by_size %}
                     {% if not forloop.counter == 1 %}
@@ -137,6 +141,51 @@
         </button>
     </div>
     <h4 class="single__content-price">{% trans 'Общая стоимость' %}:
-        <span data-start-price="{{ product.uzs_price }}">{{ product.get_price }}</span> сум
+        <span data-start-price="">{{ product.get_price }}</span> сум
     </h4>
 </form>
+
+
+<script>
+    {#let csrftoken = document.querySelector('[name="csrfmiddlewaretoken"]').value;#}
+    {##}
+    {##}
+    {#function getSelectedWidthValue() {#}
+    {#    let selectElement = document.getElementById('width-select');#}
+    {#    let selectedOption = selectElement.options[selectElement.selectedIndex];#}
+    {#    let selectedValue = selectedOption.value;#}
+    {#    localStorage.setItem('width', selectedValue);#}
+    {#    return selectedValue;#}
+    {#}#}
+        {##}
+        {#function getSelectedHeightValue() {#}
+        {#    let selectElement = document.getElementById('length-select');#}
+        {#    let selectedOption = selectElement.options[selectElement.selectedIndex];#}
+        {#    let selectedValue = selectedOption.value;#}
+        {#    localStorage.setItem('height', selectedValue);#}
+        {#    if (localStorage.getItem('width') && localStorage.getItem('height')) {#}
+        {#        fetch("{{ request.scheme }}://{{ request.get_host }}/api/get_something/", {#}
+        {#            method: "POST",#}
+        {#            body: JSON.stringify({#}
+        {#                'width': localStorage.getItem('width'),#}
+        {#                'height': localStorage.getItem('height'),#}
+        {#                'productId': {{ product.pk }}#}
+        {#            }),#}
+        {#            headers: {#}
+        {#                "Content-type": "application/json; charset=UTF-8",#}
+        {#                'X-CSRFToken': csrftoken#}
+        {#            }#}
+        {#        })#}
+        {#            .then((response) => response.json())#}
+        {#            .then((json) => {#}
+        {#                let price = document.querySelector('[data-start-price]')#}
+        {#                price.setAttribute('data-start-price', json['price'])#}
+        {#                price.textContent = json['price']#}
+        {#            });#}
+        {#    }#}
+        {#    return selectedValue;#}
+        {
+    #}#}
+
+
+</script>

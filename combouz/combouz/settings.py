@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    'rest_framework',
+
     "django_dump_load_utf8",
     "django.contrib.sites",
 
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
     "web_site.apps.WebSiteConfig",
     "cart.apps.CartConfig",
     "blog.apps.BlogConfig",
+    "api.apps.ApiConfig",
 
 
     "allauth",
@@ -45,13 +48,15 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "constance",
-    "debug_toolbar"
+    "debug_toolbar",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -249,3 +254,4 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # FACEBOOK LOGIN SETTINGS
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+CORS_ALLOW_ALL_ORIGINS = True
