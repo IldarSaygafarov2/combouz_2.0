@@ -36,6 +36,7 @@ def get_price_by_options(request):
         return Response(status=status.HTTP_404_NOT_FOUND, data={
             'description': 'Product with id={} not found'.format(data['product_id'])
         })
+    product = product.first()
     product_price = product.get_price(_format=False)
 
     cornice_price = product.uzs_cornice_type_price if data['cornice_type'] == 'aluminium' else product_price
