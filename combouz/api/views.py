@@ -1,8 +1,8 @@
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from web_site.models import Product
-
 
 # @api_view(['POST'])
 # def get_something(request):
@@ -31,7 +31,11 @@ from web_site.models import Product
 @api_view(['POST'])
 def get_price_by_options(request):
     data = request.data
-    product = Product.objects.get(pk=data['product_id'])
+    product = Product.objects.filter(pk=data['product_id'])
+    if not product.exists():
+        return Response(status=status.HTTP_404_NOT_FOUND, data={
+            'description': 'Product with id={} not found'.format(data['product_id'])
+        })
     product_price = product.get_price(_format=False)
 
     cornice_price = product.uzs_cornice_type_price if data['cornice_type'] == 'aluminium' else product_price
