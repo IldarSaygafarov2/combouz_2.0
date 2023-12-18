@@ -1,29 +1,72 @@
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from web_site.models import Product
-from helpers.functions import format_price
+
+
+# @api_view(['POST'])
+# def get_something(request):
+#     data = request.data
+#     # product data
+#     product = Product.objects.get(pk=data['productId'])
+#     product_price = product.get_price(_format=False)
+#
+#     # width and height
+#     width = int(''.join([i for i in data['width'] if i.isdigit()]))
+#     height = int(''.join([i for i in data['height'] if i.isdigit()]))
+#     decimal_size = (width / 100) * (height / 100)
+#     price = product_price
+#     if decimal_size < 0.5:
+#         price = product_price / 2
+#     elif 0.5 < decimal_size < 1.0:
+#         price = product_price
+#     elif decimal_size > 1.0:
+#         price = decimal_size * product_price
+#
+#     print('PRICE', price)
+#     print('DECIMAL SIZE', decimal_size)
+#     return JsonResponse({"price": price})
 
 
 @api_view(['POST'])
-def get_something(request):
+def get_price_by_options(request):
     data = request.data
-    # product data
-    product = Product.objects.get(pk=data['productId'])
+    product = Product.objects.get(pk=data['product_id'])
     product_price = product.get_price(_format=False)
 
-    # width and height
+    cornice_price = product.uzs_cornice_type_price if data['cornice_type'] == 'aluminium' else product_price
+    control_price = product.uzs_electrical_price if data['control_type'] == 'electro' else product_price
+
     width = int(''.join([i for i in data['width'] if i.isdigit()]))
     height = int(''.join([i for i in data['height'] if i.isdigit()]))
     decimal_size = (width / 100) * (height / 100)
-    price = product_price
-    if decimal_size < 0.5:
-        price = product_price / 2
-    elif 0.5 < decimal_size < 1.0:
-        price = product_price
-    elif decimal_size > 1.0:
-        price = decimal_size * product_price
 
-    print('PRICE', price)
-    print('DECIMAL SIZE', decimal_size)
-    return JsonResponse({"price": price})
+    size_price = product_price
+    if decimal_size < 0.5:
+        size_price = product_price / 2
+    elif 0.5 < decimal_size < 1.0:
+        size_price = product_price
+    elif decimal_size > 1.0:
+        size_price = decimal_size * product_price
+
+    total_price = int(
+        (size_price + (cornice_price - product_price) + (control_price - product_price)) * data['quantity']
+    )
+
+    return Response(
+        {
+            'price': total_price
+        }
+    )
+
+
+# 1 527 956
+# 271 089
+# {
+#     "product_id": 4,
+#     "width": "105см",
+#     "height": "105см",
+#     "quantity": 2,
+#     "cornice_type": "plastic",
+#     "control_type": "manual"
+# }

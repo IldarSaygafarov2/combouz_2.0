@@ -320,7 +320,7 @@ class Product(models.Model):
 
     def get_electrical_price(self, _format=False):
         electrical_price = self.uzs_electrical_price - self.uzs_price
-        price = self.uzs_price if self.category.control_type != 'electrically_driven' else electrical_price
+        price = 0 if self.category.control_type != 'electrically_driven' else electrical_price
 
         if not _format:
             return price
@@ -329,7 +329,7 @@ class Product(models.Model):
 
     def get_cornice_type_price(self, _format=False):
         cornice_price = self.uzs_cornice_type_price - self.uzs_price
-        price = self.uzs_price if self.category.cornice_type != 'aluminium' else cornice_price
+        price = 0 if self.category.cornice_type != 'aluminium' else cornice_price
         if not _format:
             return price
 
