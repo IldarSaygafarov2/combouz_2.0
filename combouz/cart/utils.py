@@ -57,6 +57,8 @@ class CartForAuthenticatedUser:
         options = self._get_product_options()
         qty = self.request.POST.get('item-count')
 
+        print(options)
+
         order_product, created = OrderProduct.objects.get_or_create(
             order=order,
             product=product,

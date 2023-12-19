@@ -25,7 +25,7 @@ def get_price_by_options(request):
 
     size_price = product_price
     if decimal_size < 0.5:
-        size_price = int() / 2
+        size_price = int(product_price) / 2
     elif 0.5 < decimal_size < 1.0:
         size_price = product_price
     elif decimal_size > 1.0:
