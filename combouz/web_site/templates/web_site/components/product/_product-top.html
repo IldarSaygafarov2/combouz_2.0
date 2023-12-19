@@ -16,7 +16,6 @@
 </div>
 
 
-
 <form class="single__right" method="post" action="{{ product.add_to_cart }}">
     {% csrf_token %}
     <h2 class="single__right-title">{{ product.name }}</h2>
@@ -35,7 +34,14 @@
                 </option>
                 {% for size, price in product.get_price_list_by_size %}
                     {% if not forloop.counter == 1 %}
-                        <option value="{{ size }}см" data-price="{{ price }}">{{ size }}см</option>
+                        <option
+                                value="{{ size }}см"
+                                data-price="{{ price }}"
+                                data-name="width"
+                                data-value="{{ size }}см"
+                        >
+                            {{ size }}см
+                        </option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -52,7 +58,14 @@
                 </option>
                 {% for size, price in product.get_price_list_by_size %}
                     {% if not forloop.counter == 1 %}
-                        <option value="{{ size }}см" data-price="{{ price }}">{{ size }}см</option>
+                        <option
+                                value="{{ size }}см"
+                                data-value="{{ size }}см"
+                                data-price="{{ price }}"
+                                data-name="height"
+                        >
+                            {{ size }}см
+                        </option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -86,7 +99,13 @@
     <div class="single__right-sep count">
         <select class="single__right-select self-page__control" name="item-count">
             {% for qty in product.generate_qty_range %}
-                <option value="{{ qty }}" data-count="{{ qty }}">{{ qty }}</option>
+                <option
+                        value="{{ qty }}"
+                        data-value="{{ qty }}"
+                        data-name="quantity"
+                >
+                    {{ qty }}
+                </option>
             {% endfor %}
         </select>
         <span class="single__right-info">{% trans 'штук' %}</span>
@@ -100,14 +119,28 @@
             <strong class="single__right-feature type-cornise">{% trans 'Тип карниза' %}</strong>
             <div class="single__right-sep">
                 <label class="single__right-label">
-                    <input class="self-page__control" type="radio" value="aluminium" name="item-cornice-type"
-                           data-price="{{ product.get_cornice_type_price }}">
+                    <input
+                            class="self-page__control"
+                            type="radio"
+                            value="aluminium"
+                            data-value="aluminium"
+                            name="item-cornice-type"
+                            data-price="{{ product.get_cornice_type_price }}"
+                            data-name="cornice_type"
+                    >
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Алюминевый' %}</span>
                 </label>
                 <label class="single__right-label">
-                    <input class="self-page__control" type="radio" value="plastic" name="item-cornice-type"
-                           data-price="0">
+                    <input
+                            class="self-page__control"
+                            data-name="cornice_type"
+                            type="radio"
+                            value="plastic"
+                            data-value="plastic"
+                            name="item-cornice-type"
+                            data-price="0"
+                    >
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Пластиковый' %}</span>
                 </label>
@@ -118,14 +151,28 @@
             <strong class="single__right-feature type-control">{% trans 'Тип управления' %}</strong>
             <div class="single__right-sep">
                 <label class="single__right-label">
-                    <input class="self-page__control" type="radio" value="manual" name="item-control-type"
-                           data-price="0">
+                    <input
+                            class="self-page__control"
+                            type="radio"
+                            value="manual"
+                            data-value="manual"
+                            name="item-control-type"
+                            data-price="0"
+                            data-name="control_type"
+                    >
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Ручной' %}</span>
                 </label>
                 <label class="single__right-label">
-                    <input class="self-page__control" type="radio" value="electro" name="item-control-type"
-                           data-price="{{ product.get_electrical_price }}">
+                    <input
+                            class="self-page__control"
+                            type="radio"
+                            value="electro"
+                            data-value="electro"
+                            name="item-control-type"
+                            data-price="{{ product.get_electrical_price }}"
+                            data-name="control_type"
+                    >
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'С электроприводом' %}</span>
                 </label>
@@ -139,52 +186,12 @@
             </span>
         </button>
     </div>
-    <h4 class="single__content-price">{% trans 'Общая стоимость' %}:
-        <span data-start-price="{{ product.uzs_price }}">{{ product.get_price }}</span> сум
+    <h4 class="single__content-price common-price">{% trans 'Общая стоимость' %}:
+        <span
+                data-start-price="{{ product.uzs_price }}"
+                data-product-id="{{ product.pk }}"
+        >
+            {{ product.get_price }}
+        </span> сум
     </h4>
 </form>
-
-
-<script>
-    {#let csrftoken = document.querySelector('[name="csrfmiddlewaretoken"]').value;#}
-    {##}
-    {##}
-    {#function getSelectedWidthValue() {#}
-    {#    let selectElement = document.getElementById('width-select');#}
-    {#    let selectedOption = selectElement.options[selectElement.selectedIndex];#}
-    {#    let selectedValue = selectedOption.value;#}
-    {#    localStorage.setItem('width', selectedValue);#}
-    {#    return selectedValue;#}
-    //}
-        {##}
-        {#function getSelectedHeightValue() {#}
-        {#    let selectElement = document.getElementById('length-select');#}
-        {#    let selectedOption = selectElement.options[selectElement.selectedIndex];#}
-        {#    let selectedValue = selectedOption.value;#}
-        {#    localStorage.setItem('height', selectedValue);#}
-        {#    if (localStorage.getItem('width') && localStorage.getItem('height')) {#}
-        {#        fetch("{{ request.scheme }}://{{ request.get_host }}/api/get_something/", {#}
-        {#            method: "POST",#}
-        {#            body: JSON.stringify({#}
-        {#                'width': localStorage.getItem('width'),#}
-        {#                'height': localStorage.getItem('height'),#}
-        {#                'productId': {{ product.pk }}#}
-        {#            }),#}
-        {#            headers: {#}
-        {#                "Content-type": "application/json; charset=UTF-8",#}
-        {#                'X-CSRFToken': csrftoken#}
-        {#            }#}
-        {#        })#}
-        {#            .then((response) => response.json())#}
-        {#            .then((json) => {#}
-        {#                let price = document.querySelector('[data-start-price]')#}
-        {#                price.setAttribute('data-start-price', json['price'])#}
-        {#                price.textContent = json['price']#}
-        {#            });#}
-        {#    }#}
-        {#    return selectedValue;#}
-        //{
-    //}
-
-
-</script>
