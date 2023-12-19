@@ -28,8 +28,12 @@
             </div>
             <span class="single__right-info">{% trans 'Ширина' %}</span>
             <select class="single__right-select self-page__control" name="item-width" id="width-select">
-                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected"
-                        data-price="{{ product.get_price_list_by_size.0.1 }}">
+                <option
+                        value="{{ product.get_price_list_by_size.0.0 }}см"
+                        selected="selected"
+                        data-name="width"
+                        data-value="{{ product.get_price_list_by_size.0.0 }}см"
+                >
                     {{ product.get_price_list_by_size.0.0 }}см
                 </option>
                 {% for size, price in product.get_price_list_by_size %}
@@ -51,9 +55,18 @@
                 <p>{{ product.category.length_rounding }}</p>
             </div>
             <span class="single__right-info">{% trans 'Высота' %}</span>
-            <select class="single__right-select self-page__control" name="item-length" id="length-select"
-                    data-price="{{ product.get_price_list_by_size.0.1 }}">
-                <option value="{{ product.get_price_list_by_size.0.0 }}см" selected="selected">
+            <select
+                    class="single__right-select self-page__control"
+                    name="item-length"
+                    id="length-select"
+            >
+                <option
+                        value="{{ product.get_price_list_by_size.0.0 }}см"
+                        selected="selected"
+                        data-value="{{ product.get_price_list_by_size.0.0 }}"
+                        data-name="height"
+                        data-price="{{ product.get_price_list_by_size.0.1 }}"
+                >
                     {{ product.get_price_list_by_size.0.0 }}см
                 </option>
                 {% for size, price in product.get_price_list_by_size %}
