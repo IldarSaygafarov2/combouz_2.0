@@ -172,3 +172,11 @@
 .single__left-images--custom {
     gap: 25px;
 }
+
+.roll-curtains__discount--custom {
+    margin-bottom: 0;
+}
+
+.roll-curtains__name--custom {
+    margin-bottom: 13px;
+}

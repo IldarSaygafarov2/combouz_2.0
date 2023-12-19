@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-03 15:51+0500\n"
+"POT-Creation-Date: 2023-12-18 13:38+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,26 +71,26 @@ msgstr "Yetkazib berish turi"
 msgid "Установка, размер, доставка"
 msgstr "O'rnatish, o'lcham, yetkazib berish"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:62
+#: .\cart\templates\cart\components\_basket-bottom.html:63
 msgid "Самовывоз"
 msgstr "Olib ketish; ko'tarish"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:67
+#: .\cart\templates\cart\components\_basket-bottom.html:68
 msgid "Доставка по городу Ташкент"
 msgstr "Toshkent shahri bo'ylab yetkazib berish"
 
-#: .\cart\templates\cart\components\_basket-bottom.html:69
+#: .\cart\templates\cart\components\_basket-bottom.html:70
 msgid "Купить"
 msgstr "Sotib olish"
 
-#: .\cart\templates\cart\components\_basket-middle.html:17
+#: .\cart\templates\cart\components\_basket-middle.html:6
 msgid "Общая сумма заказа"
 msgstr "buyurtmaning umumiy miqdori"
 
-#: .\cart\templates\cart\components\_basket-middle.html:18
+#: .\cart\templates\cart\components\_basket-middle.html:7
+#: .\cart\templates\cart\components\_basket-top.html:32
 #: .\cart\templates\cart\components\_basket-top.html:35
 #: .\cart\templates\cart\components\_basket-top.html:38
-#: .\cart\templates\cart\components\_basket-top.html:41
 #: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:25
 msgid "сум"
 msgstr "so'm"
@@ -118,9 +118,13 @@ msgstr "Miqdori"
 #: .\cart\templates\cart\components\_basket-top.html:14
 #: .\web_site\templates\web_site\components\categories\_cassete-item.html:15
 #: .\web_site\templates\web_site\components\index\_cassette-combo-item.html:25
-#: .\web_site\templates\web_site\components\product\_product-middle.html:22
+#: .\web_site\templates\web_site\components\product\_product-middle.html:20
 msgid "Цена"
 msgstr "Narxi"
+
+#: .\cart\templates\cart\components\_basket-top.html:15
+msgid "Цена со скидкой"
+msgstr ""
 
 #: .\cart\templates\cart\components\_basket-top.html:16
 msgid "Итого"
@@ -396,16 +400,16 @@ msgstr "Barcha sharhlar"
 msgid "СКИДКА"
 msgstr "CHEGIRMA"
 
-#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:12
+#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:15
 #, python-format
 msgid "Скидка до 15%%"
 msgstr "15%% gacha chegirma"
 
-#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:16
+#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:17
 msgid "От"
 msgstr "dan"
 
-#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:16
+#: .\web_site\templates\web_site\components\index\_roll-curtains-card.html:17
 msgid "сум за"
 msgstr "uchun so'm"
 
@@ -429,71 +433,79 @@ msgstr "Ishlab chiqaruvchi mamlakat"
 msgid "Тип ткани"
 msgstr "Mato turi"
 
-#: .\web_site\templates\web_site\components\product\_product-middle.html:25
+#: .\web_site\templates\web_site\components\product\_product-middle.html:23
 msgid "Характеристики"
 msgstr "Xususiyatlari"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:22
+#: .\web_site\templates\web_site\components\product\_product-top.html:24
 msgid "Размер"
 msgstr "Hajmi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:29
+#: .\web_site\templates\web_site\components\product\_product-top.html:30
 #, fuzzy
 #| msgid "ширина"
 msgid "Ширина"
 msgstr "kengligi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:45
+#: .\web_site\templates\web_site\components\product\_product-top.html:47
 msgid "Высота"
 msgstr ""
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:58
+#: .\web_site\templates\web_site\components\product\_product-top.html:64
 msgid "Управление"
 msgstr "Boshqaruv"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:62
+#: .\web_site\templates\web_site\components\product\_product-top.html:69
 msgid "Слева"
 msgstr "Chapga"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:67
+#: .\web_site\templates\web_site\components\product\_product-top.html:74
+msgid "По середине"
+msgstr ""
+
+#: .\web_site\templates\web_site\components\product\_product-top.html:79
 msgid "Справа"
 msgstr "O'ngda"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:70
+#: .\web_site\templates\web_site\components\product\_product-top.html:85
 msgid "Кол-во"
 msgstr "Miqdor"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:77
+#: .\web_site\templates\web_site\components\product\_product-top.html:92
 msgid "штук"
 msgstr "dona"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:81
+#: .\web_site\templates\web_site\components\product\_product-top.html:100
 msgid "Тип карниза"
 msgstr "Korniş turi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:87
+#: .\web_site\templates\web_site\components\product\_product-top.html:106
 msgid "Алюминевый"
 msgstr "Alyuminiy"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:93
+#: .\web_site\templates\web_site\components\product\_product-top.html:112
 msgid "Пластиковый"
 msgstr "Plastik"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:96
+#: .\web_site\templates\web_site\components\product\_product-top.html:118
 msgid "Тип управления"
 msgstr "Nazorat turi"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:102
+#: .\web_site\templates\web_site\components\product\_product-top.html:124
 msgid "Ручной"
 msgstr "Qo'llanma"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:108
+#: .\web_site\templates\web_site\components\product\_product-top.html:130
 msgid "С электроприводом"
 msgstr "Elektr bilan boshqariladigan"
 
-#: .\web_site\templates\web_site\components\product\_product-top.html:113
+#: .\web_site\templates\web_site\components\product\_product-top.html:136
 msgid "В корзину"
 msgstr "Savatchaga qo'shish"
+
+#: .\web_site\templates\web_site\components\product\_product-top.html:142
+msgid "Общая стоимость"
+msgstr ""
 
 #: .\web_site\templates\web_site\contacts.html:13
 msgid "Контактная информация"

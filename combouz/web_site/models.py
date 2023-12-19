@@ -291,7 +291,7 @@ class Product(models.Model):
         self.uzs_electrical_price = convert_price(self.usd_electrical_price, _format=False)
         self.uzs_cornice_type_price = convert_price(self.usd_cornice_type_price, _format=False)
 
-        super(Product, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})

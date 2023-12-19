@@ -9,9 +9,10 @@
         {% endif %}
     </a>
     <div class="roll-curtains__text">
-        <span class="roll-curtains__discount">{% trans 'Скидка до 15%' %}</span>
+
+        <h3 class="roll-curtains__name roll-curtains__name--custom">{{ category.name }}</h3>
         <div class="roll-curtains__sep">
-            <h3 class="roll-curtains__name">{{ category.name }}</h3>
+            <span class="roll-curtains__discount roll-curtains__discount--custom">{% trans 'Скидка до 15%' %}</span>
             <strong class="roll-curtains__price">
                 {% trans 'От' %} {{ category.get_price }} {% trans 'сум за' %} м<sup>2</sup>
             </strong>
