@@ -37,7 +37,7 @@
                     <p class="busket-top__control total">
                         {{ cart_product.get_total_price }} {% trans 'сум' %}
                     </p>
-                    <a class="busket-top__remove" href="{{ cart_product.product.remove_from_cart }}">
+                    <a class="busket-top__remove" href="{{ cart_product.remove_from_cart }}">
                         <img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon"/>
                     </a>
                 </div>

@@ -7,6 +7,7 @@ from web_site.models import Product
 
 @api_view(['POST'])
 def get_price_by_options(request):
+    print('AAAAAAAAAAAAAA')
     data = request.data
     product = Product.objects.filter(pk=data['product_id'])
     if not product.exists():
@@ -16,12 +17,19 @@ def get_price_by_options(request):
     product = product.first()
     product_price = product.get_price(_format=False)
 
-    cornice_price = product.uzs_cornice_type_price if data['cornice_type'] == 'aluminium' else product_price
-    control_price = product.uzs_electrical_price if data['control_type'] == 'electro' else product_price
+    cornice_price = product.uzs_cornice_type_price if data['product_selected_cornice_type'] == 'aluminium' else product_price
+    control_price = product.uzs_electrical_price if data['product_selected_cornice_type'] == 'electro' else product_price
 
     width = int(''.join([i for i in data['width'] if i.isdigit()]))
     height = int(''.join([i for i in data['height'] if i.isdigit()]))
     decimal_size = (width / 100) * (height / 100)
+
+
+
+    # print(data)
+    # print(f'{control_price=}')
+    # print(f'{cornice_price=}')
+    # print(f'{decimal_size=}')
 
     size_price = product_price
     if decimal_size < 0.5:

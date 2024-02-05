@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from accounts.models import CustomUser
 from helpers.functions import format_price
 from web_site.models import Product
+from django.urls import reverse
 
 
 # Create your models here.
@@ -65,6 +66,12 @@ class OrderProduct(models.Model):
     product_selected_control_type = models.CharField(default='', blank=True, max_length=150, null=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
+    def remove_from_cart(self):
+        return reverse(
+            'cart:remove',
+            kwargs={'order_product_id': self.pk}
+        )
+
     # @property
     def get_total_price(self, _format=True):
 
@@ -75,6 +82,7 @@ class OrderProduct(models.Model):
         product_price = self.product.get_price(_format=False)
 
         size_price = product_price
+
         if decimal_size < 0.5:
             size_price = int(product_price) / 2
         elif 0.5 < decimal_size < 1.0:
@@ -84,6 +92,7 @@ class OrderProduct(models.Model):
 
         control_price = self.product.get_electrical_price()
         cornice_price = self.product.get_cornice_type_price()
+
         if not self.product_selected_control_type:
             control_price = 0
         if not self.product_selected_cornice_type:
@@ -96,27 +105,6 @@ class OrderProduct(models.Model):
             return total
 
         return format_price(total)
-        # width_size_price = self.product.get_size_price(size=self.product_selected_width)
-        # height_size_price = self.product.get_size_price(size=self.product_selected_height)
-        #
-        # # cornice type price
-        # cornice_type_price = self.product.get_cornice_type_price(_format=False)
-        # cornice_type_price = cornice_type_price if self.product_selected_cornice_type else 0
-        #
-        # # control type price
-        # control_type_price = self.product.get_electrical_price(_format=False)
-        # control_type_price = control_type_price if self.product_selected_control_type else 0
-        #
-        # total = width_size_price + height_size_price + cornice_type_price + control_type_price
-        # print(width_size_price, height_size_price)
-        #
-        # if not self.product.discount:
-        #     return (int(self.product.uzs_price) * self.quantity) + total
-        #
-        # if not _format:
-        #     return (self.product.get_price_with_discount(_format=False) * self.quantity) + total
-        #
-        # return format_price((self.product.get_price_with_discount(_format=False) * self.quantity) + total)
 
     def __str__(self):
         return str(self.product)

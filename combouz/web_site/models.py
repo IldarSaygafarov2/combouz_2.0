@@ -299,11 +299,11 @@ class Product(models.Model):
     def add_to_cart(self):
         return reverse("cart:to_cart", kwargs={"product_id": self.pk, "action": "add"})
 
-    def remove_from_cart(self):
-        return reverse(
-            "cart:to_cart",
-            kwargs={"product_id": self.pk, "action": "delete"},
-        )
+    # def remove_from_cart(self):
+    #     return reverse(
+    #         "cart:to_cart",
+    #         kwargs={"product_id": self.pk, "action": "delete_product"},
+    #     )
 
     def get_first_img(self):
         images = self.images.all()

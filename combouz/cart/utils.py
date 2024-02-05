@@ -57,7 +57,7 @@ class CartForAuthenticatedUser:
         options = self._get_product_options()
         qty = self.request.POST.get('item-count')
 
-        print(options)
+        # print(options)
 
         order_product, created = OrderProduct.objects.get_or_create(
             order=order,
@@ -92,6 +92,8 @@ class CartForAuthenticatedUser:
         product = Product.objects.get(pk=product_id)
 
         order_product = OrderProduct.objects.get(order=order, product=product)
+
+        print(order_product)
 
         # возвращаем продукту то количество, которое было удалено из корзины
         product.quantity = order_product.quantity

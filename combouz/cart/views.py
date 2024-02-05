@@ -102,3 +102,12 @@ def basket_view(request):
         "config": config
     }
     return render(request, "cart/basket.html", context)
+
+
+def remove_from_cart(request, order_product_id):
+    order_product = OrderProduct.objects.get(pk=order_product_id)
+    order_product.product.quantity += order_product.quantity
+    order_product.product.save()
+    order_product.delete()
+
+    return redirect('cart:cart')
