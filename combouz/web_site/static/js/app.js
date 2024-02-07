@@ -670,7 +670,7 @@
                 return z().wrap((function (t) {
                     for (; ;) switch (t.prev = t.next) {
                         case 0:
-                            return i = (null === (o = document.querySelector("input[name=csrfmiddlewaretoken]")) || void 0 === o ? void 0 : o.getAttribute("value")) || "", t.next = 4, fetch("".concat("https://combouz.pythonanywhere.com").concat(e), U(U({method: r}, n), {}, {headers: {"X-CSRFToken": i}}));
+                            return i = (null === (o = document.querySelector("input[name=csrfmiddlewaretoken]")) || void 0 === o ? void 0 : o.getAttribute("value")) || "", t.next = 4, fetch("".concat("http://127.0.0.1:8000").concat(e), U(U({method: r}, n), {}, {headers: {"X-CSRFToken": i}}));
                         case 4:
                             if (!(a = t.sent).ok) {
                                 t.next = 11;

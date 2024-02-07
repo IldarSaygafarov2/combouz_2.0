@@ -1,3 +1,6 @@
+from rest_framework import status
+from rest_framework.response import Response
+
 from combouz import settings
 
 from .models import Customer, Order, OrderProduct, Product
@@ -59,11 +62,19 @@ class CartForAuthenticatedUser:
 
         # print(options)
 
-        order_product, created = OrderProduct.objects.get_or_create(
-            order=order,
-            product=product,
-            **self._get_product_options()
-        )
+        items = list(filter(lambda x: x, options.values()))
+
+        if items:
+            order_product, created = OrderProduct.objects.get_or_create(
+                order=order,
+                product=product,
+                **options
+            )
+        else:
+            order_product, created = OrderProduct.objects.get_or_create(
+                order=order,
+                product=product
+            )
 
         if action == "add" and product.quantity > 0:
             order_product.product_selected_width = options.get('product_selected_width')
@@ -226,3 +237,5 @@ def get_cart_data(request):
         "order": cart_info["order"],
         "products": cart_info["products"],
     }
+
+

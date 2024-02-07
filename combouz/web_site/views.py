@@ -216,7 +216,3 @@ def reviews_view(request):
     return render(request, "web_site/reviews.html", context)
 
 
-def get_sizes(request):
-    print(request.method)
-    print(request.body)
-    return JsonResponse({"status": "ok"})

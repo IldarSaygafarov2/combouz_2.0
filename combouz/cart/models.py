@@ -1,10 +1,10 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser
-from helpers.functions import format_price
+from helpers.functions import format_price, calculate_price
 from web_site.models import Product
-from django.urls import reverse
 
 
 # Create your models here.
@@ -74,37 +74,16 @@ class OrderProduct(models.Model):
 
     # @property
     def get_total_price(self, _format=True):
-
-        width = self.product_selected_width
-        height = self.product_selected_height
-
-        decimal_size = (width / 100) * (height / 100)
-        product_price = self.product.get_price(_format=False)
-
-        size_price = product_price
-
-        if decimal_size < 0.5:
-            size_price = int(product_price) / 2
-        elif 0.5 < decimal_size < 1.0:
-            size_price = product_price
-        elif decimal_size > 1.0:
-            size_price = decimal_size * product_price
-
-        control_price = self.product.get_electrical_price()
-        cornice_price = self.product.get_cornice_type_price()
-
-        if not self.product_selected_control_type:
-            control_price = 0
-        if not self.product_selected_cornice_type:
-            cornice_price = 0
-
-        total = int((size_price + control_price + cornice_price) * self.quantity)
-        if not self.product.discount:
-            return total
-        if not _format:
-            return total
-
-        return format_price(total)
+        total_price = calculate_price(
+            obj=Product,
+            product_id=self.product.pk,
+            cornice_type=self.product_selected_cornice_type,
+            control_type=self.product_selected_control_type,
+            width=self.product_selected_width,
+            height=self.product_selected_height,
+            quantity=self.quantity
+        )
+        return total_price
 
     def __str__(self):
         return str(self.product)
@@ -112,3 +91,6 @@ class OrderProduct(models.Model):
     class Meta:
         verbose_name = 'Продукт в корзине'
         verbose_name_plural = 'Продукты в корзине'
+
+# 1 239 946
+# 2 975 870
