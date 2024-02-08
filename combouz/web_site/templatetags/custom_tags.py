@@ -36,7 +36,9 @@ def get_products_by_category(category=None):
 
 @register.simple_tag()
 def convert_price(product_price):
-    return func.format_price(product_price)
+    price = func.format_price(product_price)
+    print(price)
+    return price
 
 
 @register.simple_tag()

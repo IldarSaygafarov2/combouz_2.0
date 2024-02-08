@@ -17,6 +17,7 @@
         </div>
         <div class="busket-top__items">
             {% for cart_product in products %}
+                {% convert_price cart_product.get_total_price as total_price %}
                 <div class="busket-top__elem">
                     <p class="busket-top__name">{{ cart_product.product.name }}</p>
                     <div class="busket-top__controls">
@@ -35,7 +36,7 @@
                         {{ cart_product.product.get_price_with_discount }} {% trans 'сум' %}
                     </p>
                     <p class="busket-top__control total">
-                        {{ cart_product.get_total_price }} {% trans 'сум' %}
+                        {{ total_price }} {% trans 'сум' %}
                     </p>
                     <a class="busket-top__remove" href="{{ cart_product.remove_from_cart }}">
                         <img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon"/>
