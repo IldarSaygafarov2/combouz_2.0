@@ -3,7 +3,6 @@ from rest_framework import status
 from rest_framework.response import Response
 
 
-
 def format_price(price):
     return f"{price:,d}".replace(',', ' ')
 
@@ -60,3 +59,25 @@ def calculate_price(obj, **kwargs):
     )
 
     return total_price
+
+
+# def _convert_to_int(data):
+#     if not data:
+#         return 0
+#     return int(''.join([i for i in data if i.isdigit()]))
+
+
+def get_product_options(request):
+    selected_width = request.POST.get('item-width', 0)
+    selected_height = request.POST.get('item-length', 0)
+    selected_control = request.POST.get('item-control')
+    selected_cornice_type = request.POST.get('item-cornice-type')
+    selected_control_type = request.POST.get('item-control-type')
+
+    return {
+        "product_selected_width": selected_width,
+        "product_selected_height": selected_height,
+        "product_selected_control": selected_control,
+        "product_selected_cornice_type": selected_cornice_type,
+        "product_selected_control_type": selected_control_type,
+    }

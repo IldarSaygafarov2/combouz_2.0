@@ -1,15 +1,7 @@
-from rest_framework import status
-from rest_framework.response import Response
-
 from combouz import settings
+from helpers.functions import get_product_options
 
 from .models import Customer, Order, OrderProduct, Product
-
-
-def _convert_to_int(data):
-    if not data:
-        return 0
-    return int(''.join([i for i in data if i.isdigit()]))
 
 
 class CartForAuthenticatedUser:
@@ -22,21 +14,6 @@ class CartForAuthenticatedUser:
 
         if product_id and action:
             self.add_or_delete(product_id, action)
-
-    def _get_product_options(self):
-        selected_width = self.request.POST.get('item-width')
-        selected_height = self.request.POST.get('item-length')
-        selected_control = self.request.POST.get('item-control')
-        selected_cornice_type = self.request.POST.get('item-cornice-type')
-        selected_control_type = self.request.POST.get('item-control-type')
-
-        return {
-            "product_selected_width": _convert_to_int(selected_width),
-            "product_selected_height": _convert_to_int(selected_height),
-            "product_selected_control": selected_control,
-            "product_selected_cornice_type": selected_cornice_type,
-            "product_selected_control_type": selected_control_type,
-        }
 
     def get_cart_info(self):
         customer, created = Customer.objects.get_or_create(user=self.user)
@@ -56,9 +33,15 @@ class CartForAuthenticatedUser:
 
     def add_or_delete(self, product_id, action):
         order = self.get_cart_info()["order"]
-        product = Product.objects.get(pk=product_id)
-        options = self._get_product_options()
+
+        options = get_product_options(request=self.request)
         qty = self.request.POST.get('item-count')
+        print(options)
+
+        product = Product.objects.get(
+            pk=product_id,
+
+        )
 
         # print(options)
 
@@ -103,8 +86,6 @@ class CartForAuthenticatedUser:
         product = Product.objects.get(pk=product_id)
 
         order_product = OrderProduct.objects.get(order=order, product=product)
-
-        print(order_product)
 
         # возвращаем продукту то количество, которое было удалено из корзины
         product.quantity = order_product.quantity
@@ -237,5 +218,3 @@ def get_cart_data(request):
         "order": cart_info["order"],
         "products": cart_info["products"],
     }
-
-

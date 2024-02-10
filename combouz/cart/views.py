@@ -6,9 +6,9 @@ from django.shortcuts import redirect, render
 from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from combouz import settings
 from web_site.models import Product
+from .models import OrderProduct, Customer, Order
 from .utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
-from .models import OrderProduct
-
+from helpers import functions as func
 
 DELIVERY_TYPES = {
     "takeaway": "Доставка курьером",
@@ -111,3 +111,18 @@ def remove_from_cart(request, order_product_id):
     order_product.delete()
 
     return redirect('cart:cart')
+
+
+def add(request, order_product_id):
+    customer, created = Customer.objects.get_or_create(user=request.user)
+    order, created = Order.objects.get_or_create(user=customer)
+    order_product = OrderProduct.objects.get(pk=order_product_id, order=order)
+    print(order_product)
+    product = order_product.product
+    options = func.get_product_options(request)
+
+    return redirect('cart:cart')
+
+
+def delete(request, order_product_id):
+    pass
