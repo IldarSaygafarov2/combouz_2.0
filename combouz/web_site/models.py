@@ -205,16 +205,6 @@ class Product(models.Model):
         default=0,
         help_text="Данное поле заполнять не нужно, цена будет рассчитываться от цены элекртопривода в долларах",
     )
-    # цена продукта с типом карниза 'Алюминевый'
-    usd_cornice_type_price = models.PositiveIntegerField(
-        verbose_name="Цена в долларах типа карниза 'Алюминевый'",
-        default=0
-    )
-    uzs_cornice_type_price = models.PositiveIntegerField(
-        verbose_name="Цена в суммах типа карниза 'Алюминевый'",
-        default=0,
-        help_text="Данное поле заполнять не нужно, цена будет рассчитываться от цены карниза 'Алюминевый' в долларах",
-    )
     body = models.TextField(verbose_name="Описание продукта", default="")
     placeholder = models.ImageField(
         verbose_name="Заставка",
@@ -235,6 +225,8 @@ class Product(models.Model):
         choices=CONTROL_CHOICES,
         default="left",
     )
+    has_center_control = models.BooleanField(verbose_name='Есть ли управление по центру', default=False)
+    has_rounding = models.BooleanField(verbose_name='Есть ли округление до пол квадрата', default=False)
     quantity = models.SmallIntegerField(verbose_name="Количество продукта", default=0)
     color = models.ForeignKey(
         ProductColorItem,
@@ -289,7 +281,6 @@ class Product(models.Model):
 
         self.uzs_price = convert_price(self.usd_price, _format=False)
         self.uzs_electrical_price = convert_price(self.usd_electrical_price, _format=False)
-        self.uzs_cornice_type_price = convert_price(self.usd_cornice_type_price, _format=False)
 
         super().save(*args, **kwargs)
 
@@ -298,12 +289,6 @@ class Product(models.Model):
 
     def add_to_cart(self):
         return reverse("cart:to_cart", kwargs={"product_id": self.pk, "action": "add"})
-
-    # def remove_from_cart(self):
-    #     return reverse(
-    #         "cart:to_cart",
-    #         kwargs={"product_id": self.pk, "action": "delete_product"},
-    #     )
 
     def get_first_img(self):
         images = self.images.all()
@@ -327,20 +312,6 @@ class Product(models.Model):
 
         return format_price(price)
 
-    def get_cornice_type_price(self, _format=False):
-        cornice_price = self.uzs_cornice_type_price - self.uzs_price
-        price = 0 if self.category.cornice_type != 'aluminium' else cornice_price
-        if not _format:
-            return price
-
-        return format_price(price)
-
-    def get_total_types_price(self, _format=True):
-        total_price = self.uzs_cornice_type_price + self.uzs_electrical_price
-        if not _format:
-            return total_price
-        return format_price(total_price)
-
     def get_price_with_discount(self, _format=True):
         if not self.discount:
             return self.get_price(_format)
@@ -359,45 +330,6 @@ class Product(models.Model):
     def get_list_by_height_size(self):
         height_list = list(range(self.category.product_length_from, self.category.product_length_to + 1))
         return height_list
-
-    def get_price_list_by_size(self):
-        width_list = list(range(self.category.product_width_from, self.category.product_width_to + 1))
-        _price_list = map(lambda x: round((x / 100) * self.uzs_price), width_list)
-        _price_list = map(lambda x: x - self.uzs_price, _price_list)
-        range_price_list = list(map(lambda x, y: (x, y), width_list, _price_list))
-        return range_price_list
-
-    def get_anayniski(self):
-        height_list = self.get_list_by_height_size()
-        width_list = self.get_list_by_width_size()
-        prices = []
-        size_list = list(map(lambda x, y: ((x / 100) * (y / 100)) / 2, width_list, height_list))
-        for item in size_list:
-            if item < 0.5:
-                price = self.get_price(_format=False) // 2
-            elif 0.5 < item < 1.0:
-                price = self.get_price(_format=False)
-            else:
-                price = int(self.get_price(_format=False) * item)
-
-            prices.append(price)
-
-        result = list(map(lambda x, y: (x, y), width_list, prices))
-        return result
-
-    def get_price_dict_by_size(self):
-        prices = self.get_price_list_by_size()
-        prices_dict = [{price[0]: price[1]} for price in prices]
-        return prices_dict
-
-    def get_size_price(self, size):
-        prices = self.get_price_dict_by_size()
-        prices = [price.get(size) for price in prices if price.get(size)]
-        if not prices:
-            return 0
-
-        if len(prices) > 0:
-            return prices[0]
 
 
 class ProductImageItem(models.Model):

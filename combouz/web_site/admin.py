@@ -152,6 +152,8 @@ class ProductAdmin(TranslationAdmin):
                     'collection',
                     'manufacturer_country',
                     'control',
+                    'has_center_control',
+                    'has_rounding',
                     'fabric_type',
                     'property',
                     'dimming',
@@ -167,8 +169,6 @@ class ProductAdmin(TranslationAdmin):
                     'uzs_price',
                     'usd_electrical_price',
                     'uzs_electrical_price',
-                    'usd_cornice_type_price',
-                    'uzs_cornice_type_price',
                 ]
             }
         )

@@ -23,9 +23,11 @@
     <strong class="single__right-feature size">{% trans 'Размер' %}</strong>
     <div class="single__right-sep size">
         <div class="single__right-chose">
-            <div class="single__right-hint-abs">
-                <p>{{ product.category.width_rounding }}</p>
-            </div>
+            {% comment %}
+                <div class="single__right-hint-abs">
+                    <p>{{ product.category.width_rounding }}</p>
+                </div>
+            {% endcomment %}
             <span class="single__right-info">{% trans 'Ширина' %}</span>
             <select class="single__right-select self-page__control" name="item-width" id="width-select">
                 <option
@@ -34,7 +36,7 @@
                         data-name="width"
                         data-value="{{ product.get_list_by_width_size.0 }}см"
                 >
-                    {{ product.get_price_list_by_size.0.0 }}см
+                    {{ product.get_list_by_width_size.0 }}см
                 </option>
                 {% for size in product.get_list_by_width_size %}
                     {% if not forloop.counter == 1 %}
@@ -51,9 +53,11 @@
             </select>
         </div>
         <div class="single__right-chose">
-            <div class="single__right-hint-abs">
-                <p>{{ product.category.length_rounding }}</p>
-            </div>
+            {% comment %}
+                <div class="single__right-hint-abs">
+                    <p>{{ product.category.length_rounding }}</p>
+                </div>
+            {% endcomment %}
             <span class="single__right-info">{% trans 'Высота' %}</span>
             <select
                     class="single__right-select self-page__control"
@@ -66,7 +70,6 @@
                         data-value="{{ product.get_list_by_height_size.0 }}"
                         data-name="height"
                 >
-{#                        data-price="{{ product.get_price_list_by_size.0.1 }}"#}
                     {{ product.get_list_by_height_size.0 }}см
                 </option>
                 {% for size in product.get_list_by_height_size %}
@@ -90,15 +93,17 @@
     <strong class="single__right-feature control">{% trans 'Управление' %}</strong>
     <div class="single__right-sep control">
         <label class="single__right-label">
-            <input type="radio" value="left" name="item-control">
+            <input type="radio" value="left" name="item-control" checked>
             <span class="single__right-check"></span>
             <span class="single__right-info">{% trans 'Слева' %}</span>
         </label>
-        <label class="single__right-label">
-            <input type="radio" value="center" name="item-control">
-            <span class="single__right-check"></span>
-            <span class="single__right-info">{% trans 'По середине' %}</span>
-        </label>
+        {% if product.has_center_control %}
+            <label class="single__right-label">
+                <input type="radio" value="center" name="item-control">
+                <span class="single__right-check"></span>
+                <span class="single__right-info">{% trans 'По середине' %}</span>
+            </label>
+        {% endif %}
         <label class="single__right-label">
             <input type="radio" value="right" name="item-control">
             <span class="single__right-check"></span>
@@ -138,8 +143,9 @@
                             value="aluminium"
                             data-value="aluminium"
                             name="item-cornice-type"
-                            data-price="{{ product.get_cornice_type_price }}"
+                            data-price="0"
                             data-name="cornice_type"
+                            checked
                     >
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Алюминевый' %}</span>
@@ -172,6 +178,7 @@
                             name="item-control-type"
                             data-price="0"
                             data-name="control_type"
+                            checked
                     >
                     <span class="single__right-check"></span>
                     <span class="single__right-info">{% trans 'Ручной' %}</span>
@@ -199,6 +206,7 @@
             </span>
         </button>
     </div>
+
     <h4 class="single__content-price common-price">{% trans 'Общая стоимость' %}:
         <span
                 data-start-price="{{ product.uzs_price }}"

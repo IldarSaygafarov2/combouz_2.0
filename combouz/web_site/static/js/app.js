@@ -751,6 +751,7 @@
                     tt.forEach((function (t) {
                         if (t.selectedOptions) {
                             var r = t.selectedOptions[0];
+
                             if (r) {
                                 var n = r.getAttribute("data-name"), o = r.getAttribute("data-value");
                                 n && o && e.append(n, o)

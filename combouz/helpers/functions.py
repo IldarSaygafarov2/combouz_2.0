@@ -30,9 +30,9 @@ def calculate_price(obj, **kwargs):
         })
 
     product = product.first()
-    product_price = product.get_price(_format=False)
+    product_price = product.get_price_with_discount(_format=False)
     # addon price
-    cornice_price = product.uzs_cornice_type_price if kwargs['cornice_type'] == 'aluminium' else 0
+    # cornice_price = product.uzs_cornice_type_price if kwargs['cornice_type'] == 'aluminium' else 0
     control_price = product.uzs_electrical_price if kwargs['control_type'] == 'electro' else 0
 
     # sizes
@@ -48,19 +48,29 @@ def calculate_price(obj, **kwargs):
 
     size_price = product_price
 
-    if decimal_size < 0.5:
-        size_price = int(product_price) / 2
-    elif 0.5 < decimal_size < 1.0:
-        size_price = product_price
+    if product.has_rounding:
+        if decimal_size < 0.5:
+            size_price = int(product_price) / 2
+        elif 0.5 < decimal_size < 1.0:
+            size_price = product_price
+        elif decimal_size > 1.0:
+            size_price = decimal_size * product_price
     elif decimal_size > 1.0:
         size_price = decimal_size * product_price
+    else:
+        size_price = product_price
 
     total_price = int(size_price)*int(kwargs['quantity'])
-
-    if cornice_price == 0:
+    print(total_price, control_price)
+    if control_price == 0:
         return total_price
-    elif cornice_price != 0:
-        return int(total_price) + (int(cornice_price * int(kwargs['quantity'])) - (size_price * int(kwargs['quantity'])))
+    elif control_price != 0:
+        return total_price + (control_price * int(kwargs['quantity']))
+
+    # if cornice_price == 0:
+    #     return total_price
+    # elif cornice_price != 0:
+    #     return int(total_price) + (int(cornice_price * int(kwargs['quantity'])) - (size_price * int(kwargs['quantity'])))
 
     if control_price == 0:
         return total_price
@@ -69,7 +79,6 @@ def calculate_price(obj, **kwargs):
     # total_price = int(
     #     (size_price * int(kwargs['quantity'])) + cornice_price + control_price
     # )
-
 
 
     return total_price
