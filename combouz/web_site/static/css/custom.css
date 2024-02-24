@@ -180,3 +180,10 @@
 .roll-curtains__name--custom {
     margin-bottom: 13px;
 }
+
+/*.single__right-btn:disabled {*/
+/*    cursor: default;*/
+/*}*/
+/*.single__right-btn:disabled:hover {*/
+/*    background-color: var(--primaryColor)*/
+/*}*/

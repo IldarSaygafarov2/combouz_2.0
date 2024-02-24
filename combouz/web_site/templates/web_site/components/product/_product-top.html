@@ -199,7 +199,7 @@
             </div>
             {# product control type end #}
         </div>
-        <button class="single__right-btn darkBlueHover" type="submit">
+        <button class="single__right-btn darkBlueHover {% if not request.user.is_authenticated %}header__link-sp{% endif %}" type="submit">
             <strong>{% trans 'В корзину' %}</strong>
             <span class="single__right-icon">
                 <img src="{% static 'images/icons/work-light.svg' %}" alt="">

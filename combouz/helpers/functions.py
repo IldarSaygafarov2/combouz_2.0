@@ -61,7 +61,6 @@ def calculate_price(obj, **kwargs):
         size_price = product_price
 
     total_price = int(size_price)*int(kwargs['quantity'])
-    print(total_price, control_price)
     if control_price == 0:
         return total_price
     elif control_price != 0:
