@@ -1,14 +1,16 @@
 import requests as req
+from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
+from combouz import settings
 from constance import config
 from django.db.models import QuerySet
 from django.shortcuts import redirect, render
-
-from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
-from combouz import settings
-from web_site.models import Product
-from .models import OrderProduct, Customer, Order
-from .utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 from helpers import functions as func
+from helpers.sms_sender import send_sms_message
+from web_site.models import Product
+import requests
+from .models import Customer, Order, OrderProduct
+from .utils import (CartForAnonymousUser, CartForAuthenticatedUser,
+                    get_cart_data)
 
 DELIVERY_TYPES = {
     "takeaway": "Доставка курьером",
@@ -65,7 +67,21 @@ def basket_view(request):
     cart_info = get_cart_data(request)
 
     if request.method == "POST":
-        basket_msg = __make_basket_products_message(cart_info['products'], request.POST)
+        basket_msg = __make_basket_products_message(
+            cart_info['products'], request.POST)
+        # send_sms_message(
+        #     recipient=request.POST.get('busket-phone'),
+        #     message=basket_msg
+        # )
+        # ?api_id=[зарегистрируйтесь, чтобы получить api_id]&to=79255070602,74993221627&msg=hello+world&json=1
+        r = requests.post(f'https://sms.ru/sms/send?api_id=0648C2E6-C513-C788-F355-84D053A0A362&to=998900375350&msg={basket_msg}&json=1',
+                          #   data={
+                          #       'api_id': '0648C2E6-C513-C788-F355-84D053A0A362',
+                          #       'to': [request.POST.get('busket-phone')],
+                          #       'msg': basket_msg,
+                          #       'json': 1}
+                          )
+        print(r)
         req.post(
             settings.CHANNEL_API_LINK.format(
                 token=settings.BOT_TOKEN,
@@ -73,16 +89,19 @@ def basket_view(request):
                 text=basket_msg,
             )
         )
+
         cart_info["order"].delete()
-        return redirect('cart')
+        return redirect('cart:cart')
 
     if request.user.is_authenticated:
         category = cart_info["products"].last()
         category = category.product.category if category else None
-        last_product = cart_info["products"].last().product if category else None
+        last_product = cart_info["products"].last(
+        ).product if category else None
     else:
         if cart_info["products"]:
-            product = Product.objects.get(pk=cart_info["products"][-1]["product"]["pk"])
+            product = Product.objects.get(
+                pk=cart_info["products"][-1]["product"]["pk"])
             category = product.category
             last_product = product
         else:
@@ -117,12 +136,44 @@ def add(request, order_product_id):
     customer, created = Customer.objects.get_or_create(user=request.user)
     order, created = Order.objects.get_or_create(user=customer)
     order_product = OrderProduct.objects.get(pk=order_product_id, order=order)
-    print(order_product)
-    product = order_product.product
-    options = func.get_product_options(request)
+
+    order_product.quantity += 1
+    order_product.product.quantity -= 1
+    order_product.save()
+    order.save()
+    order_product.product.save()
 
     return redirect('cart:cart')
 
 
 def delete(request, order_product_id):
-    pass
+    customer, created = Customer.objects.get_or_create(user=request.user)
+    order, created = Order.objects.get_or_create(user=customer)
+    order_product = OrderProduct.objects.get(pk=order_product_id, order=order)
+
+    order_product.quantity -= 1
+    order_product.product.quantity += 1
+    order_product.save()
+    order.save()
+    order_product.product.save()
+    return redirect('cart:cart')
+
+
+def add_or_delete(request, order_product_id, action):
+    customer, created = Customer.objects.get_or_create(user=request.user)
+    order, created = Order.objects.get_or_create(user=customer)
+    order_product = OrderProduct.objects.get(pk=order_product_id, order=order)
+
+    if action == 'add':
+        order_product.quantity += 1
+        order_product.product.quantity -= 1
+
+    else:
+        order_product.quantity -= 1
+        order_product.product.quantity += 1
+
+    order_product.save()
+    order.save()
+    order_product.product.save()
+
+    return redirect('cart:cart')

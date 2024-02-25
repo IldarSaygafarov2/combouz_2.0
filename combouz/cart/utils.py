@@ -36,6 +36,9 @@ class CartForAuthenticatedUser:
 
         options = get_product_options(request=self.request)
         qty = self.request.POST.get('item-count')
+        # print(options['product_selected_height'])
+        # print(options['product_selected_width'])
+        # return
         options['product_selected_height'] = int(''.join([i for i in options['product_selected_height'] if i.isdigit()]))
         options['product_selected_width'] = int(''.join([i for i in options['product_selected_width'] if i.isdigit()]))
 

@@ -8,7 +8,7 @@ from web_site.models import Product
 def get_price_by_options(request):
 
     data = request.data
-    print(data)
+    # print(data)
 
     total_price = calculate_price(
         Product,

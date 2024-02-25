@@ -21,11 +21,11 @@
                 <div class="busket-top__elem">
                     <p class="busket-top__name">{{ cart_product.product.name }}</p>
                     <div class="busket-top__controls">
-                        <a class="busket-top__minus" href="{{ cart_product.product.remove_from_cart }}">
+                        <a class="busket-top__minus" href="{% url 'cart:add_or_delete' cart_product.pk 'delete' %}">
                             <img src="{% static 'images/icons/minus.svg' %}" alt=""/>
                         </a>
                         <output class="busket-top__count">{{ cart_product.quantity }}</output>
-                        <a class="busket-top__plus" href="{{ cart_product.product.add_to_cart }}">
+                        <a class="busket-top__plus" href="{% url 'cart:add_or_delete' cart_product.pk 'add' %}">
                             <img src="{% static 'images/icons/plus.svg' %}" alt=""/>
                         </a>
                     </div>

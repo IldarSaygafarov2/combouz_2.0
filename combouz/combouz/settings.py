@@ -1,6 +1,10 @@
 import os
-from pathlib import Path
 from collections import OrderedDict
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -255,3 +259,8 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 # FACEBOOK LOGIN SETTINGS
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 CORS_ALLOW_ALL_ORIGINS = True
+
+SMS_API_KEY = os.getenv('SMS_API_KEY')
+SMS_SENDER = 'Combouz'
+SMS_HOST = 'qyypgm.api.infobip.com'
+

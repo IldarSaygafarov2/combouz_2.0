@@ -44,7 +44,7 @@ def calculate_price(obj, **kwargs):
         height = int(''.join([i for i in kwargs['height'] if i.isdigit()]))
 
     decimal_size = (width / 100) * (height / 100)
-    print(decimal_size)
+    # print(decimal_size)
 
     size_price = product_price
 
