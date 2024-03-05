@@ -39,7 +39,7 @@
                     </div>
                     <div class="contact-info__item">
                         <img src="{% static 'images/icons/clock.svg' %}"
-                             alt=""/><strong>{% trans 'Режим работы' %}</strong><span>{% trans 'Пн-Пт' %}</span>
+                             alt=""/><strong>{% trans 'Режим работы' %}</strong><span>{{ config.WORKING_DAYS }}</span>
                     </div>
                     <div class="contact-info__item">
                         <span class="contact-info__link-sp">{{ config.WORKING_TIME  }}</span>

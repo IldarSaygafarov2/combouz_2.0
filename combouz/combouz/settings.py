@@ -227,6 +227,7 @@ CONSTANCE_CONFIG = OrderedDict([
     ("OFFICE_ADDRESS", ("г.Ташкент, Алмазарский район, ул.Сагбан 37/1", "Локация офиса")),
     ("WORKING_TIME", ("с 9:00 до 19:00", "Режим работы")),
     ("CALLING_TIME", ("с 8:00 до 20:00", "Режим звонков")),
+    ("WORKING_DAYS", ("Пн-Пт", "Дни работы")),
     ("ADVANTAGE_1", ("", "Первое преимущество")),
     ("ADVANTAGE_2", ("", "Второе преимущество")),
     ("ADVANTAGE_3", ("", "Третье преимущество")),
@@ -247,10 +248,11 @@ CONSTANCE_CONFIG_FIELDSETS = {
         "CALLING_TIME",
         "PRODUCTS_ON_PAGE",
         "SHOW_SLIDER",
-        "PICKUP_DISCOUNT"
+        "PICKUP_DISCOUNT",
+        "WORKING_DAYS"
     ),
     "Страница 'О компании'": ("ABOUT_PAGE_TITLE", "ABOUT_PAGE_DESCRIPTION", "ADVANTAGE_1", "ADVANTAGE_2", "ADVANTAGE_3"),
-    "Страница 'Контакты'": ("CONTACTS_PAGE_DESCRIPTION",)
+    "Страница 'Контакты'": ("CONTACTS_PAGE_DESCRIPTION", "WORKING_DAYS")
 }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

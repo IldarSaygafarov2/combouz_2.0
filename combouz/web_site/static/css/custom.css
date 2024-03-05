@@ -157,12 +157,12 @@
 
 .roll-curtains__img--custom {
     padding: 0;
+
 }
 
 .roll-curtains__img--custom img {
     max-width: 100%;
-    aspect-ratio: auto;
-    height: 100%;
+    max-height: 490px;
 }
 
 .busket-middle__content--custom {
@@ -187,3 +187,10 @@
 /*.single__right-btn:disabled:hover {*/
 /*    background-color: var(--primaryColor)*/
 /*}*/
+
+.roll-curtains__sep--custom {
+    justify-content: flex-end;
+}
+.roll-curtains__price--custom {
+    text-transform: lowercase;
+}

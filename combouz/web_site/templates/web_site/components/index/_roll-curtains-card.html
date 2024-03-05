@@ -4,16 +4,12 @@
 <div class="roll-curtains__card">
     <a class="roll-curtains__img roll-curtains__img--custom" href="{{ category.get_absolute_url }}">
         <img src="{{ category.get_first_img }}" alt="{{ category.name }} Combo.uz" loading="lazy"/>
-        {% if category.has_discount %}
-            <span class="roll-curtains__discount-abs">{% trans 'СКИДКА' %} {{ category.discount }}%</span>
-        {% endif %}
     </a>
     <div class="roll-curtains__text">
 
         <h3 class="roll-curtains__name roll-curtains__name--custom">{{ category.name }}</h3>
-        <div class="roll-curtains__sep">
-            <span class="roll-curtains__discount roll-curtains__discount--custom">{% trans 'Скидка до 15%' %}</span>
-            <strong class="roll-curtains__price">
+        <div class="roll-curtains__sep roll-curtains__sep--custom">
+            <strong class="roll-curtains__price roll-curtains__price--custom">
                 {% trans 'От' %} {{ category.get_price }} {% trans 'сум за' %} м<sup>2</sup>
             </strong>
         </div>
