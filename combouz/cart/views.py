@@ -37,8 +37,9 @@ def __make_basket_products_msg(basket_data):
 """
 
 
-def __make_basket_products_message(order_products: QuerySet[OrderProduct], basket_data):
+def __make_basket_products_message(order_products: QuerySet[OrderProduct], basket_data, order):
     msg = ""
+    total_price = order.get_cart_total_price
     for order_product in order_products:
         msg += f"""
 Название продукта: {order_product.product.name}
@@ -49,6 +50,7 @@ def __make_basket_products_message(order_products: QuerySet[OrderProduct], baske
 Тип управления: {order_product.product_selected_control_type}
 Количество: {order_product.quantity}
 """
+    msg += f"\nОбщая сумма: {total_price} сум"
     msg += __make_basket_products_msg(basket_data)
     return msg
 
@@ -68,7 +70,7 @@ def basket_view(request):
 
     if request.method == "POST":
         basket_msg = __make_basket_products_message(
-            cart_info['products'], request.POST)
+            cart_info['products'], request.POST, cart_info['order'])
         # send_sms_message(
         #     recipient=request.POST.get('busket-phone'),
         #     message=basket_msg

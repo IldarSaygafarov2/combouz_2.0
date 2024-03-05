@@ -5,8 +5,8 @@
     <div class="gallery-projects__text">
         <p class="gallery-projects__excerpt">{{ project.title }}</p>
         <h4 class="gallery-projects__name">{{ project.subtitle }}</h4>
-        <div class="gallery-projects__alternate darkBlueHover">
+        <a href="{{ project.get_absolute_url }}" class="gallery-projects__alternate darkBlueHover">
             <img src="{% static 'images/icons/right-arrow.svg' %}" alt="{{ project.title }}"/>
-        </div>
+        </a>
     </div>
 </div>
