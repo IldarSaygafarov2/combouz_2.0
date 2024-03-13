@@ -46,3 +46,10 @@ Fancybox.bind(commentsCarousel, "[data-fancybox]", {});
 // sendPostRequest()
 
 
+// let authButton = document.querySelector('[data-auth]');
+// let modal = document.querySelector('.modal');
+//
+// authButton.addEventListener('click', () => {
+//     modal.classList.add('active', 'zIndex');
+//     document.body.style.overflow = 'hidden'
+// });

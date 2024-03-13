@@ -1,13 +1,12 @@
+import requests
 import requests as req
-from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
-from combouz import settings
 from constance import config
 from django.db.models import QuerySet
 from django.shortcuts import redirect, render
-from helpers import functions as func
-from helpers.sms_sender import send_sms_message
+
+from accounts.forms import CustomUserAuthenticationForm, CustomUserCreationForm
+from combouz import settings
 from web_site.models import Product
-import requests
 from .models import Customer, Order, OrderProduct
 from .utils import (CartForAnonymousUser, CartForAuthenticatedUser,
                     get_cart_data)

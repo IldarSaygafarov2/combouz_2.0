@@ -163,7 +163,7 @@ class CartForAnonymousUser:
                         "quantity": product.quantity,
                         "get_absolute_url": product.get_absolute_url(),
                         "add_to_cart": product.add_to_cart(),
-                        "remove_from_cart": product.remove_from_cart(),
+                        # "remove_from_cart": product.remove_from_cart(),
                     },
                     "quantity": product_quantity,
                     "get_total_price": get_total_price,
@@ -199,9 +199,6 @@ class CartForAnonymousUser:
 
         if self.cart_product["quantity"] <= 0:
             del self.cart[self.key]
-
-    # def remove_from_cart(self):
-    #     del self.cart[self.key]
 
     def clear(self):
         self.cart = {}

@@ -199,12 +199,21 @@
             </div>
             {# product control type end #}
         </div>
-        <button class="single__right-btn darkBlueHover {% if not request.user.is_authenticated %}header__link-sp{% endif %}" type="submit">
-            <strong>{% trans 'В корзину' %}</strong>
-            <span class="single__right-icon">
-                <img src="{% static 'images/icons/work-light.svg' %}" alt="">
-            </span>
-        </button>
+        {% if request.user.is_authenticated %}
+            <button class="single__right-btn darkBlueHover" type="submit">
+                <strong>{% trans 'В корзину' %}</strong>
+                <span class="single__right-icon">
+                    <img src="{% static 'images/icons/work-light.svg' %}" alt="">
+                </span>
+            </button>
+        {% else %}
+            <button class="single__right-btn darkBlueHover no-auth-link" type="button" data-auth>
+                <strong>{% trans 'В корзину' %}</strong>
+                <span class="single__right-icon">
+                    <img src="{% static 'images/icons/work-light.svg' %}" alt="">
+                </span>
+            </button>
+        {% endif %}
     </div>
 
     <h4 class="single__content-price common-price">{% trans 'Общая стоимость' %}:
