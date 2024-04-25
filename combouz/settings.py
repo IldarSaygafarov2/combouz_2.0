@@ -14,7 +14,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "combouz.pythonanywhere.com",
-    "127.0.0.1"
+    "127.0.0.1",
+    '95.130.227.98'
 ]
 
 INTERNAL_IPS = [
