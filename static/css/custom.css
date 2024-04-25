@@ -53,6 +53,7 @@
     background: transparent;
     border: none;
 }
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #fff;
 }
@@ -74,19 +75,24 @@
     width: 100%;
     /* z-index: -1; */
 }
+
 .select2-container .select2-selection--single .select2-selection__rendered {
     padding-left: 0;
 }
+
 .select2-container--default .select2-results__option--selected {
     background: transparent !important;
 }
+
 .select2-results__option--highlighted {
     color: var(--textPrimary);
 }
+
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
     background: transparent;
     color: var(--textPrimary);
 }
+
 .select2-results__option {
     color: var(--textWhite);
     display: block;
@@ -100,6 +106,91 @@
     display: none;
 }
 
-.about__title  {
+.about__title {
     line-height: 1.2;
+}
+
+.article-single__content  {
+    -webkit-font-feature-settings: "clig" off, "liga" off;
+    font-feature-settings: "clig" off, "liga" off;
+    color: var(--mainTitleText);
+    font-size: 18px;
+    line-height: 150%;
+}
+
+.article-single__content  img {
+    margin: 30px 0;
+    display: inline-block;
+}
+
+.portfolio-special__content p {
+    display: inline-flex;
+    gap: 30px;
+    margin: 15px 0;
+    color: #616161;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.wrap {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.wrap > a {
+    background: var(--primaryColor);
+    color: var(--textWhite);
+    font-size: 16px;
+    padding: 8px 19px;
+}
+
+.header-top__right-item--mod > a {
+    color: var(--textPrimary);
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 15px;
+    position: relative
+}
+
+.roll-curtains__img--custom {
+    padding: 0;
+
+}
+
+.roll-curtains__img--custom img {
+    max-width: 100%;
+    max-height: 490px;
+}
+
+.busket-middle__content--custom {
+    justify-content: flex-end;
+}
+
+.single__left-images--custom {
+    gap: 25px;
+}
+
+.roll-curtains__discount--custom {
+    margin-bottom: 0;
+}
+
+.roll-curtains__name--custom {
+    margin-bottom: 13px;
+}
+
+/*.single__right-btn:disabled {*/
+/*    cursor: default;*/
+/*}*/
+/*.single__right-btn:disabled:hover {*/
+/*    background-color: var(--primaryColor)*/
+/*}*/
+
+.roll-curtains__sep--custom {
+    justify-content: flex-end;
+}
+.roll-curtains__price--custom {
+    text-transform: lowercase;
 }
