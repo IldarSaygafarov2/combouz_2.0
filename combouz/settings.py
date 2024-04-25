@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-3ne8dybq!dxbz3da9=4ss9##z=h0n!i=a51fdt$0@+vd$66l&^"
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "combouz.pythonanywhere.com",
